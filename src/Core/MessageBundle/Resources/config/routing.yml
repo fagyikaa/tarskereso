@@ -1,0 +1,8 @@
+core_message_show_conversations:
+    path:     /show/conversations/{userId}
+    defaults: { _controller: CoreMessageBundle:Conversation:showConversations }
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true  

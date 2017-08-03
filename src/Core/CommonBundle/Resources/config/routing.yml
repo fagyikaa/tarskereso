@@ -1,0 +1,38 @@
+core_common_homepage:
+    path:   /
+    defaults: { _controller: CoreCommonBundle:Layout:index }
+    methods: [GET]
+    options:
+        expose: true
+
+core_common_header:
+    path:     /header
+    defaults: { _controller: CoreCommonBundle:Layout:header }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods: [GET]
+    options:
+        expose: true
+
+core_common_sidebar:
+    path:     /sidebar
+    defaults: { _controller: CoreCommonBundle:Layout:sidebar }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods: [GET]
+    options:
+        expose: true
+
+core_common_page_head:
+    path:     /page/head
+    defaults: { _controller: CoreCommonBundle:Layout:pageHead }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods: [GET]
+    options:
+        expose: true
+
+core_common_page_footer:
+    path:     /page/footer
+    defaults: { _controller: CoreCommonBundle:Layout:pageFooter }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'" 
+    methods: [GET]
+    options:
+        expose: true  

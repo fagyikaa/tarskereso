@@ -1,0 +1,11 @@
+common:
+    basic:
+        string: This field has to be text!
+        integer: This field has to be integer!
+        range_min: This value is too low!
+        range_max: This value is too high!
+        invalid_value: This value is invalid!    
+        too_long: This value is too long!
+        date_time: This field has to be a type of DateTime!
+        bool: This field has to be a type of boolean!
+        not_blank: This field can't be blank!

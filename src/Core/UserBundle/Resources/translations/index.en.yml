@@ -1,0 +1,23 @@
+content:
+    registered_members: are searching for their life partner
+form:
+    login: 
+        title: Login
+        forgot_password: 
+            email: Email address
+            title: Forgot my password
+            back_to_login: Back
+    resetting:
+        not_found: No user has registered with this e-mail!
+        non_expired: An e-mail has been already sent to this e-mail address! 
+        success: An e-mail has been sent to this e-mail address. With the link inside you can change your password.
+resetting:
+    invalid_token: No user was found for this link!
+email:
+    resetting:
+        subject: Password resetting
+        dear: Dear %username%,
+        message: click the link below to reset your password. If you didn't requested this reset, please ignore this mail.    
+header:
+    best_dating_site: the best dating site
+

@@ -1,0 +1,153 @@
+#conversation-search-input {
+    background: #fff;
+    margin: 0;
+    padding: 10px;
+}
+
+#conversation-search-input .search-query {
+    background: #fff;
+    border-radius: 4px;
+    height: 33px;
+    margin-bottom: 0;
+    padding-left: 7px;
+    padding-right: 7px;
+}
+
+#conversation-search-input button {
+    background: rgba(0, 0, 0, 0);
+    border: 0 none;
+    border-radius: 3px;
+    color: #666666;
+    left: auto;
+    margin-bottom: 0;
+    margin-top: 5px;
+    padding: 2px 5px;
+    position: absolute;
+    right: 0;
+    z-index: 9999;
+}
+
+.search-query:focus + button {
+    z-index: 3;   
+}
+
+.conversation-list .chat-body {
+    margin-left: 47px;
+    margin-top: 0;
+}
+
+.top_nav {
+    overflow: visible;
+}
+
+.conversation-list .contact-sec {
+    margin-top: 3px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-height: 40px;
+}
+
+.conversation-list li {
+    padding: 6px;
+    background-color: #fff;
+}
+
+.conversation-list ul {
+    border-top: 1px solid #dddddd;
+}
+
+.chat-img img {
+    height: 34px;
+    width: 34px;
+}
+
+.conversation-list li {
+    border-bottom: 1px solid #dddddd;
+    padding: 6px;
+}
+
+.conversation-list li:last-child {
+    border-bottom:none;
+}
+
+.conversation-list {
+    max-height: 600px;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.chat-container {
+    max-height: 600px;
+}
+
+.chat-unread {
+    font-weight: 600;
+}
+
+li.chat-active {
+    background-color: #f2f6f9;
+}
+
+.chat-area {
+    float: left;
+    min-height: 300px;
+    max-height: 415px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 100%;
+    border-bottom: 1px solid #dddddd;
+}
+
+.chat-area li {
+    padding: 14px 14px 0;
+}
+
+.chat-area li .chat-img1 img {
+    height: 40px;
+    width: 40px;
+    cursor: pointer;
+}
+
+.chat-area .chat-body {
+    margin-left: 50px;
+}
+
+.chat-body p {
+    background: #e9ecf3;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.chat-area .self-chat .chat-body {
+    margin-left: 0;
+    margin-right: 50px;
+}
+
+.chat-area li:last-child {
+    padding-bottom: 10px;
+}
+
+.message-write {
+    background: #fff;
+    float: left;
+    padding: 15px;
+    width: 100%;
+}
+
+.message-write textarea.form-control {
+    height: 70px;
+    padding: 10px;
+}
+
+.chat-bottom {
+    float: left;
+    margin-top: 13px;
+    width: 100%;
+}
+
+.conversation-list li:hover {
+    background: #5b9bd1;
+    color: #fff;
+    cursor:pointer;
+}
+

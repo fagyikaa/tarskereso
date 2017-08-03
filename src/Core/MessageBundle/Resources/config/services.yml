@@ -1,0 +1,8 @@
+services:
+    core_message.conversation_manager:
+        class: Core\MessageBundle\Managers\ConversationManager  
+        arguments: [@doctrine.orm.entity_manager, @translator] 
+        
+    core_message.message_manager:
+        class: Core\MessageBundle\Managers\MessageManager  
+        arguments: [@doctrine.orm.entity_manager, @translator, @core_message.conversation_manager, @validator, @event_dispatcher]     

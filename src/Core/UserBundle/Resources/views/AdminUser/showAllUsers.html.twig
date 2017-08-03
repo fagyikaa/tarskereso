@@ -1,0 +1,25 @@
+<div class="page-head">
+    <div class="page-title">
+        <h1>{{ 'all_users.page_title'|trans([], 'admin_users') }} <small>{{ 'all_users.page_subtitle'|trans([], 'admin_users') }}</small></h1>
+    </div>
+</div>
+<ul class="page-breadcrumb breadcrumb">
+    <li>
+        <a href="javascript:;" ui-sref="search">{{ 'breadcrumb.search'|trans([], 'profile') }}</a><i class="fa fa-circle"></i>
+    </li>
+    <li class="active">
+    <li>
+        {{ 'all_users.page_title'|trans([], 'admin_users') }}
+    </li>
+</ul>   
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="board">
+            <div class="board-body">
+                <table class="table table-hover table-light table-striped table-vertical-align" datatable="" dt-options="dtOptions" dt-columns="dtColumns" dt-column-defs="dtColumnDefs" width="100%">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

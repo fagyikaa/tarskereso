@@ -1,0 +1,49 @@
+<div class="row" ng-init="init()">
+    <div class="col-md-12">
+        <div class="board profile-edit">
+            <div class="board-title">
+                <div class="caption">
+                    <i class="fa"></i>
+                    <span class="caption-subject"> {{ 'role.edit.board_title'|trans([], 'role') }}</span>
+                </div>
+            </div>
+            <div class="board-body">
+                <div class="margin-bottom-20"> 
+                    <div ng-repeat="(roleSet, rolesAndId) in roleSets">                                     
+                        <input id="roleSet{{ '{{ $index }}' }}" type="checkbox" ng-model="selectedRoleSets[roleSet]" ng-change="selectedRoleSetsChanged(roleSet)" ng-init="checkRoleSetWhichIsSelected(roleSet, rolesAndId)"> 
+                        <i class="fa fa-info-circle font-blue roleset-info" ng-click="openShowDetailedRoleSetModal(rolesAndId)"></i>
+                        <label for="roleSet{{ '{{ $index }}' }}">{{ '{{ roleSet }}' }}</label>
+                    </div>
+                </div>
+
+                <div ng-show="roleTreeLoading"><i class="fa fa-spinner fa-spin fa-fw font-blue"></i></div>    
+                <div ng-hide="roleTreeLoading" id="tree_3">
+                    <input id="ivh-tree-filter" type="text" class="form-control input-medium margin-bottom-20" placeholder="{{ 'role_set.create_modal.tree.filter_label' | trans([], 'role') }}" ng-model="roleSearch">
+                    <div ivh-treeview="roleTree" ivh-treeview-filter="roleSearch" ivh-treeview-expand-to-depth="0" ivh-treeview-validate="false" 
+                         ivh-treeview-on-cb-change="treeChanged(ivhNode, ivhIsSelected, ivhTree)" ivh-treeview-use-checkboxes="true">
+                    </div>
+                </div> 
+                <div class="alert alert-warning" ng-show="superAdminWarning">
+                    {{ 'role.edit.super_admin_warning' | trans([], 'role') }}
+                </div>
+
+                <div>
+                    <label class="control-label" ng-if="selectedRolesLabel.length">{{ 'role_set.form.label.set' | trans([], 'role') }} ({{ '{{ selectedRolesLabel.length }}' }})</label>
+                    <ul>
+                        <li ng-repeat="roleLabel in selectedRolesLabel">
+                            {{ '{{ roleLabel }}' }}
+                        </li>
+                    </ul>
+                </div>
+                <div class="margin-top-10">
+                    <button class="btn btn-primary" ng-disabled="isSelectedRolesPristine" ng-click="submit()">
+                        {{ 'role.edit.save_button' | trans([], 'role') }}
+                    </button>                        
+                </div>
+                <div class="margin-top-10">
+                    <div ng-show="showSuccessMessage" class="alert alert-success">{{ 'role.edit.notification.successful_editing' | trans([], 'role') }}</div>                       
+                </div>                            
+            </div>
+        </div>
+    </div>
+</div>

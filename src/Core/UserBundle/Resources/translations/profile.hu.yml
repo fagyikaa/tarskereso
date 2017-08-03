@@ -1,0 +1,125 @@
+breadcrumb:
+    search: Keresés
+    profile: Adatlap
+page_titles:
+    introduction: Bemutatkozás
+    settings: Beállítások
+    ideal: Ideál
+    gallery: 
+        main: Galéria
+        public: Publikus képek
+        private: Privát képek   
+    friends: Ismerősök
+    edit_role: Jogosultságok szerkesztése
+sidebar:
+    admin: Adminisztrátor  
+    introduction: Bemutatkozás
+    gallery: Galéria
+    friends: Ismerősök
+    settings: Beállítások
+    ideal: Ideál
+    admin_section: Admin szekció
+user:
+    gender:
+        male: Férfi
+        female: Nő   
+ideal:
+    field_titles:
+        body_shape: Testalkat
+        eye_color: Szemszín
+        hair_color: Hajszín
+        hair_length: Hajhossz
+        height: Magasság (cm)
+        searching_for: Kit keres
+        want_to: Mit akar
+        weight: Súly (kg)   
+        address: Lakhely
+        gender: Nem
+        age: Életkor 
+    gender:
+        male: Férfi
+        female: Nő   
+introduction:
+    field_titles:
+        body_shape: Testalkat
+        eye_color: Szemszín
+        hair_color: Hajszín
+        hair_length: Hajhossz
+        height: Magasság (cm)
+        introduction: Bemutatkozás
+        motto: Mottó
+        searching_for: Kit keres
+        want_to: Mit akar
+        weight: Súly (kg) 
+        birth_date: Születési idő
+personal:
+    want_to:
+        relationship: Kapcsolat
+        sex: Szex
+        friendship: Barátság
+    searching_for: 
+        man: Férfi
+        woman: Nő
+        both: Mindegy  
+        female: Nő
+        male: Férfi
+    body_shape:
+        skinny: Vékony
+        average: Átlagos  
+        sport: Sportos 
+        muscular: Izmos
+        chubby: Mackós
+        obese: Túlsúlyos    
+    eye_color:
+        green: Zöld
+        blue: Kék
+        brown: Barna
+        other: Egyéb   
+    hair_color:
+        green: Zöld
+        blue: Kék
+        brown: Barna
+        other: Egyéb
+        blond: Szőke
+        gray: Ősz
+        red: Vörös
+        pink: Rózsaszín
+        black: Fekete   
+    hair_length:
+        bald: Kopasz
+        short: Rövid  
+        middle: Közepes
+        long: Hosszú   
+x_edit:
+    empty_data: Nincs megadva
+    range_from: %html_snippet%-tól
+    range_to: %html_snippet%-ig 
+gallery:
+    upload:
+        button: Kép feltöltése    
+    no_images: Nincsenek még képek feltöltve.
+    pagination:
+        next: Következő
+        prev: Előző
+settings:
+    change_password:
+        submit: Megváltoztat
+    delete:
+        self: Törlöm magamat
+        user: Felhasználó törlése   
+        confirm_modal:
+            header: Profil törlése
+            msg: Biztos vagy a törlésben?
+    enabled:
+        label: Felhasználó engedélyezve
+        enabled: Engedélyezve
+        disabled: Felfüggesztve
+    email:
+        label: E-mail cím
+admin:
+    impersonation:
+        button: Felhasználó megszemélyesítése
+    edit_role:
+        title: Jogosultságkezelés
+    view_friendships:
+        title: Felhasználó kapcsolatai

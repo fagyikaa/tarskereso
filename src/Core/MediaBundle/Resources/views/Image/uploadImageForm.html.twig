@@ -1,0 +1,41 @@
+<form {{ form_enctype(form) }} ng-controller="UploadImageFormController" novalidate name="{{ form.vars.name }}" ng-submit="" method="post" ng-init="init({{isProfile}})">
+    {{ form_widget(form._token, {'attr': {'ng-init': 'data[\'' ~ form._token.vars.full_name ~ '\'] = \'' ~ form._token.vars.value ~ '\'' }}) }}
+    <div class="alert alert-danger" ng-show="errors.global.length > 0">
+        <p ng-repeat="error in errors.global">
+            {{ '{{ error }}' }}
+        </p>
+    </div>
+
+    {% if isProfile == 'false' %}    
+        <div ng-class="{'has-error': errors.fields.isPrivate.errors.length > 0 || {{ form.vars.name }}['{{ form.isPrivate.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.isPrivate.vars.full_name }}'].$pristine}" class="form-group">
+            {{ form_widget(form.isPrivate, {'attr': {'ng-disabled': 'data[\'' ~ form.isProfile.vars.full_name ~ '\']', 'ng-model': 'data[\'' ~ form.isPrivate.vars.full_name ~ '\']', 'ng-init': 'data[\'' ~ form.isPrivate.vars.full_name ~ '\']=false', 'value': '' }}) }}
+            <span class="help-block" ng-repeat="error in errors.fields.isPrivate.errors">
+                {{ '{{ error }}' }}
+            </span>
+        </div>
+    {% endif %}
+
+    <div ng-hide="{{isProfile}}" ng-class="{'has-error': errors.fields.isProfile.errors.length > 0 || {{ form.vars.name }}['{{ form.isProfile.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.isProfile.vars.full_name }}'].$pristine}" class="form-group">
+        {{ form_widget(form.isProfile, {'attr': {'ng-disabled': 'data[\'' ~ form.isPrivate.vars.full_name ~ '\']', 'ng-model': 'data[\'' ~ form.isProfile.vars.full_name ~ '\']', 'ng-init': 'data[\'' ~ form.isProfile.vars.full_name ~ '\']=' ~ isProfile, 'value': '' }}) }}
+        <span class="help-block" ng-repeat="error in errors.fields.isProfile.errors">
+            {{ '{{ error }}' }}
+        </span>
+    </div>
+
+    <div class="form-group" ng-class="{'has-error': errors.fields.about.errors.length > 0 || {{ form.vars.name }}['{{ form.about.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.about.vars.full_name }}'].$pristine}">
+        <label class="control-label visible-ie8 visible-ie9">{{ 'form.email.label' | trans({}, 'registration') }}</label>
+        {{ form_widget(form.about, {'attr': {'placeholder': 'upload_image.form.about.label' | trans({}, 'gallery'), 'ng-model': 'data[\'' ~ form.about.vars.full_name ~ '\']', 'ng-maxlength': '255' }}) }}
+        <span class="help-block" ng-repeat="error in errors.fields.about.errors">
+            {{ '{{ error }}' }}
+        </span>
+        <div ng-show="!{{ form.vars.name }}['{{ form.about.vars.full_name }}'].$pristine && !(errors.fields.about.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.about.vars.full_name }}'].$error">
+            {# Display error messages #}
+            <div ng-message="maxlength">{{ 'media.image.about.length' | trans([], 'validators') }}</div>
+        </div>
+    </div>
+</form>
+
+

@@ -1,0 +1,64 @@
+<div class="row" ng-init="init({{ user.id }})">
+    <div class="col-md-12">
+        <div class="board profile-edit">
+            <div class="board-title">
+                <div class="caption">
+                    <span class="caption-subject">{{ 'sidebar.gallery'|trans([], 'profile') }}</span>
+                     {% if user == app.user %}<a ng-click="openUploadModal()" class="btn btn-rounded btn-upload"><i class="fa fa-plus"></i> {{ 'gallery.upload.button' | trans([], 'profile') }}</a>{% endif %}
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-target="#tab-gallery-public" data-toggle="tab">
+                            {{ ('page_titles.gallery.public')|trans([], 'profile') }}
+                        </a>
+                    </li>
+                    {% if user == app.user or is_granted('ROLE_ADMIN_CAN_VIEW_PRIVATE_IMAGES') or user.isFriendWith(app.user) %}
+                        <li>
+                            <a data-target="#tab-gallery-private" data-toggle="tab">
+                                {{ ('page_titles.gallery.private')|trans([], 'profile') }}
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="board-body">
+                <div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-gallery-public" ng-controller="UserProfileGalleryPublicController" ng-init="init({{ user.id }})">
+                            <div class="alert alert-info text-center" ng-if="publicPhotos.length === 0">
+                                <span class="text text-bold">{{ 'gallery.no_images' | trans([], 'profile') }}</span>
+                            </div>
+                            <div class="row" ng-if="publicPhotos.length > 0">
+                                <div class="col-lg-3 col-md-4 col-xs-6" ng-repeat="photo in publicPhotos[pagination.currentPage]">
+                                    <a class="thumbnail" href="#" ng-click="$parent.openViewImageModal(photo.id)">
+                                        <img class="img-responsive" ng-src="{{ '{{ photo.thumbnailUrl }}' }}" alt="">
+                                    </a>
+                                </div>                                
+                            </div> 
+                            <div class="row text-center" ng-if="pagination.countOfPhotos > 12">
+                                <ul uib-pagination next-text="{{ '{{pagination.nextText}}' }}" previous-text="{{ '{{pagination.previousText}}' }}" total-items="pagination.countOfPhotos" items-per-page="pagination.photosPerPage" max-size="pagination.maxSize" boundary-link-numbers="pagination.showFirstLast" ng-model="pagination.currentPage" class="pagination"></ul>
+                            </div>
+                        </div>
+                        {% if user == app.user or is_granted('ROLE_ADMIN_CAN_VIEW_PRIVATE_IMAGES') or user.isFriendWith(app.user) %}    
+                            <div class="tab-pane" id="tab-gallery-private" ng-controller="UserProfileGalleryPrivateController" ng-init="init({{ user.id }})">
+                                <div class="alert alert-info text-center" ng-if="privatePhotos.length === 0">
+                                    <span class="text text-bold">{{ 'gallery.no_images' | trans([], 'profile') }}</span>
+                                </div>
+                                <div class="row" ng-if="privatePhotos.length > 0">
+                                    <div class="col-lg-3 col-md-4 col-xs-6" ng-repeat="photo in privatePhotos[pagination.currentPage]">
+                                        <a class="thumbnail" href="#" ng-click="$parent.openViewImageModal(photo.id)">
+                                            <img class="img-responsive" ng-src="{{ '{{ photo.thumbnailUrl }}' }}" alt="">
+                                        </a>
+                                    </div>                                
+                                </div> 
+                                <div class="row text-center" ng-if="pagination.countOfPhotos > 12">
+                                    <ul uib-pagination next-text="{{ '{{pagination.nextText}}' }}" previous-text="{{ '{{pagination.previousText}}' }}" total-items="pagination.countOfPhotos" items-per-page="pagination.photosPerPage" max-size="pagination.maxSize" boundary-link-numbers="pagination.showFirstLast" ng-model="pagination.currentPage" class="pagination"></ul>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

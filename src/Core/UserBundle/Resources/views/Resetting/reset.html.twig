@@ -1,0 +1,49 @@
+{% extends "CoreUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block forms %}
+    {% if form is defined %}
+        <form class="reset-form" name="addNewPassword" novalidate action="{{ path('fos_user_resetting_reset', {'token': token}) }}" {{ form_enctype(form) }} method="POST" class="fos_user_resetting_reset">
+            {{ form_widget(form._token) }}
+            <h3 class="form-title">{{ 'resetting.reset.submit'|trans }}</h3>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">{{ 'form.new_password'|trans }}</label>
+                <div class="input-icon">
+                    <i class="fa fa-lock"></i> 
+                    {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': 'form.new_password'|trans , 'autocomplete': 'off', 'ng-model': 'newPassword', 'ng-minlength': '6', 'ng-maxlength': '32' }}) }}
+                </div>                   
+            </div>
+            <div class="form-group">
+                <label class="control-label visible-ie8 visible-ie9">{{ 'form.new_password_confirmation'|trans }}</label>
+                <div class="input-icon">
+                    <i class="fa fa-lock"></i> 
+                    {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': 'form.new_password_confirmation'|trans, 'autocomplete': 'off', 'ng-model': 'repeatPassword', 'password-verify': 'newPassword' }}) }}
+                </div>
+                <div class="has-error">
+                    {{ form_errors(form.plainPassword.first) }}
+                    {{ form_errors(form.plainPassword.second) }}
+                    <div class="help-block" ng-messages="addNewPassword.$error">
+                        {# Display error messages #}
+                        <div ng-message="passwordVerify">{{ 'user.password.not_match' | trans([], 'validators') }}</div>
+                        <div ng-message="minlength">{{ 'user.password.min_length' | trans([], 'validators') }}</div>
+                        <div ng-message="maxlength">{{ 'user.password.max_length' | trans([], 'validators') }}</div>
+                    </div>
+                </div>            
+            </div>
+            {{ form_widget(form._token) }}
+            <div class="form-actions">
+                <button type="submit" ng-disabled="addNewPassword.$invalid" class="btn btn-success pull-right">
+                    {{ 'resetting.reset.submit'|trans }} <i class="m-icon-swapright m-icon-white"></i>
+                </button>
+            </div>
+        </form>
+    {% else %}
+        <div class="text-center">
+        <h3>{{ 'resetting.invalid_token' | trans([], 'index') | raw}}</h3>
+        </div>
+    {% endif %}
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

@@ -1,0 +1,182 @@
+<div class="page-head">
+    <div class="page-title">
+        <h1>
+            {{ '{{ $state.current.data.pageTitle }}' }}
+            <small>{{ '{{ pageSubTitle }}' }}</small>
+        </h1>
+    </div>
+</div>
+<ul class="page-breadcrumb breadcrumb">
+    <li>
+        <a href="javascript:;" ui-sref="search">{{ 'breadcrumb.search'|trans([], 'profile') }}</a><i class="fa fa-circle"></i>
+    </li>
+    <li class="active">
+        {{ 'breadcrumb.profile'|trans([], 'profile') }}
+    </li>
+</ul>
+
+<div class="row" ng-init="init({{user.id}}, {{ user.getUserFriendshipWith(app.user) | json_encode() }}, {{ 'Core\\UserBundle\\Entity\\UserFriendship' | constants | json_encode() }}, {{ user.birthDate | json_encode()}})">
+    <div class="col-md-12">
+        <div class="profile-sidebar">
+            <div class="profile-sidebar-portlet">
+                {% if is_granted('ROLE_ADMIN') %}
+                    <div class="user-status" ng-if="getStatus('show')" ng-class="getStatus('label')">
+                        <i ng-class="getStatus('icon')"></i> {{ '{{ getStatus("title") }}' }}
+                    </div>
+                {% endif %}
+
+                <div class="userpic {% if (user == app.user) %}userpic-upload{% endif %}" ng-click="{% if (user == app.user) %} openUploadModal() {% elseif user.hasProfileImage %} openViewImageModal() {% endif %}">
+                    <img ng-init="initProfileImageSrc()" class="img-responsive" ng-src="{{ '{{ profileImageSrc }}' }}" alt="">
+                </div>
+
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        {{ user.username }}
+                    </div>
+                    <div class="profile-usertitle-data">
+                        {% if user|is_admin %}
+                            {{ 'sidebar.admin'|trans([], 'profile') }}
+                        {% else %}
+                            ({{ '{{age}}' }})
+                        {% endif %}                       
+                    </div>
+
+                    <div class="profile-userbuttons row">                        
+                        {% if is_granted('ROLE_ALLOWED_TO_SWITCH') and not (user|is_admin) %}
+                            <div class="col-md-12">
+                                <a href="{{ path('core_common_homepage', {'_switch_user': user.username }) }}" class="btn btn-rounded btn-bg-green-blue color-white">{{ 'admin.impersonation.button'|trans([], 'profile') }}</a>
+                                <hr>
+                            </div>                                                         
+                        {% endif %}    
+                        {% if not (app.user == user) %}
+                            {# Blocked #}
+                            <div class="profile-usertitle-data" ng-if="friendship.status === friendshipConstants.STATUS_BLOCKED">
+                                <div class="col-md-12 font-red margin-top-10">
+                                    {{ 'friendship.status.blocked' | trans([], 'friendship') }}
+                                </div>
+                                <div class="col-md-12 margin-top-10" ng-if="requestedBySelf()">
+                                    <button class="btn btn-user-action btn-rounded" ng-click="removeBlock()"><i class="fa fa-ban"></i> {{ 'common.user_action.remove_block' | trans([], 'messages') }}</button>
+                                </div>
+                            </div>
+                            {# Not friends #}
+                            <div class="profile-usertitle-data" ng-if="friendship === false || friendship.status === friendshipConstants.STATUS_DECLINED">
+                                <div class="col-md-12 margin-top-10">
+                                    <button class="btn btn-user-action btn-rounded" ng-click="addFriend()"><i class="fa fa-user-plus"></i> {{ 'common.user_action.add_friend' | trans([], 'messages') }}</button>
+                                </div> 
+                                {% if not (user|is_admin) %}
+                                    <div class="col-md-12 margin-top-10">
+                                        <button class="btn btn-user-action btn-rounded btn-bg-red" ng-click="block()"><i class="fa fa-ban"></i> {{ 'common.user_action.block' | trans([], 'messages') }}</button>
+                                    </div> 
+                                {% endif %}
+                                <div class="col-md-12 margin-top-10">
+                                    <button class="btn btn-user-action btn-rounded" ng-click="writeMessage({{user.id}})"><i class="fa fa-comment"></i> {{ 'common.user_action.write_message' | trans([], 'messages') }}</button>
+                                </div>
+                            </div> 
+                            {# Friends #}    
+                            <div class="profile-usertitle-data" ng-if="friendship.status === friendshipConstants.STATUS_ACCEPTED">
+                                <div class="col-md-12 margin-top-10">
+                                    {{ 'friendship.friend' | trans([], 'friendship') }}
+                                </div>
+                                <div class="col-md-12 margin-top-10">
+                                    <button class="btn btn-user-action btn-rounded" ng-click="declineFriend()"><i class="fa fa-user-times"></i> {{ 'common.user_action.remove_friend' | trans([], 'messages') }}</button>
+                                </div>     
+                                {% if not (user|is_admin) %}
+                                    <div class="col-md-12 margin-top-10">
+                                        <button class="btn btn-user-action btn-rounded btn-bg-red" ng-click="block()"><i class="fa fa-ban"></i> {{ 'common.user_action.block' | trans([], 'messages') }}</button>
+                                    </div> 
+                                {% endif %}
+                                <div class="col-md-12 margin-top-10">
+                                    <button class="btn btn-user-action btn-rounded" ng-click="writeMessage({{user.id}})"><i class="fa fa-comment"></i> {{ 'common.user_action.write_message' | trans([], 'messages') }}</button>
+                                </div>
+                            </div>     
+                            {# Pending #}    
+                            <div class="profile-usertitle-data" ng-if="friendship.status === friendshipConstants.STATUS_PENDING">
+                                <div class="col-md-12 margin-top-10">
+                                    {{ 'friendship.status.pending' | trans([], 'friendship') }}
+                                </div>
+                                <div class="col-md-12 margin-top-10">
+                                    <button class="btn btn-user-action btn-rounded" ng-click="declineFriend()"><i class="fa fa-minus-circle"></i> 
+                                        <span ng-if="requestedBySelf()"> {{ 'common.user_action.cancel_request' | trans([], 'messages') }}</span>
+                                        <span ng-if="!requestedBySelf()"> {{ 'common.user_action.decline_request' | trans([], 'messages') }}</span>
+                                    </button>
+                                </div>  
+                                <div ng-if="!requestedBySelf()" class="col-md-12 margin-top-10">
+                                    <button class="btn btn-user-action btn-rounded btn-bg-green" ng-click="acceptFriend()"><i class="fa fa-check-circle"></i> {{ 'common.user_action.accept_friend' | trans([], 'messages') }}</button>
+                                </div>  
+                                {% if not (user|is_admin) %}
+                                    <div class="col-md-12 margin-top-10">
+                                        <button class="btn btn-user-action btn-rounded btn-bg-red" ng-click="block()"><i class="fa fa-ban"></i> {{ 'common.user_action.block' | trans([], 'messages') }}</button>
+                                    </div>
+                                {% endif %}
+                                <div class="col-md-12 margin-top-10">
+                                    <button class="btn btn-user-action btn-rounded" ng-click="writeMessage({{user.id}})"><i class="fa fa-comment"></i> {{ 'common.user_action.write_message' | trans([], 'messages') }}</button>
+                                </div>
+                            </div>                                    
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="profile-usermenu">
+                    <ul class="nav">
+                        <li ng-class="{active: $state.includes('profile.introduction')}">
+                            <a href="javascript:;" ui-sref="profile.introduction">
+                                <i class="fa fa-home"></i>
+                                {{ 'sidebar.introduction'|trans([], 'profile') }}
+                            </a>
+                        </li> 
+                        <li ng-class="{active: $state.includes('profile.gallery')}">
+                            <a href="javascript:;" ui-sref="profile.gallery">
+                                <i class="fa fa-picture-o"></i>
+                                {{ 'sidebar.gallery'|trans([], 'profile') }}
+                            </a>
+                        </li>                       
+                        <li ng-class="{active: $state.includes('profile.ideal')}">
+                            <a href="javascript:;" ui-sref="profile.ideal">
+                                <i class="fa  fa-heartbeat"></i>
+                                {{ 'sidebar.ideal'|trans([], 'profile') }}
+                            </a>
+                        </li>
+                        {% if user == app.user or is_granted('ROLE_ADMIN_CAN_EDIT_USER_SETTINGS') %}
+                            <li ng-class="{active: $state.includes('profile.settings')}">
+                                <a href="javascript:;" ui-sref="profile.settings">
+                                    <i class="fa fa-cog"></i>
+                                    {{ 'sidebar.settings'|trans([], 'profile') }}
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if is_granted('ROLE_ADMIN') and not (user == app.user) %}
+                            <li class="heading">
+                                <h3 class="uppercase">{{ 'sidebar.admin_section'|trans([], 'profile') }}</h3>
+                            </li>
+                            {% if is_granted('ROLE_ADMIN_CAN_VIEW_MESSAGES') %}
+                                <li>
+                                    <a href="javascript:;" ng-click="openUserMessages({{user.id}})">
+                                        <i class="fa fa-comment"></i> 
+                                        {{ 'common.admin_action.open_messages' | trans([], 'messages') }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN_CAN_EDIT_ROLE') and not (user == app.user) %}
+                                <li ng-class="{active: $state.includes('profile.editRole')}">
+                                    <a href="javascript:;" ui-sref="profile.editRole">
+                                        <i class="fa fa-unlock"></i>
+                                        {{ 'admin.edit_role.title'|trans([], 'profile') }}
+                                    </a>
+                                </li>                                                    
+                            {% endif %}
+                            {% if is_granted('ROLE_ADMIN_CAN_VIEW_FRIENDS') and not (user == app.user) %}
+                                <li>
+                                    <a href="javascript:;" ui-sref="friends({userId:{{user.id}}, tab: 'accepted'})">
+                                        <i class="fa fa-heart"></i>
+                                        {{ 'admin.view_friendships.title'|trans([], 'profile') }}
+                                    </a>
+                                </li>                                                    
+                            {% endif %}
+                        {% endif %}                       
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div ui-view class="profile-content"></div>
+    </div>
+</div>

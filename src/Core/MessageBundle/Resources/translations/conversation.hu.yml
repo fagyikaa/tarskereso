@@ -1,0 +1,20 @@
+page_head:
+    page_title: Üzenetek
+    admin_title: '%username% üzenetei'
+breadcrumb:
+    messages: Üzenetek 
+conversation_list:
+    conversation_search_form:
+        search_user_placeholder: Felhasználónév   
+    no_conversation: Nincsenek még beszélgetések
+    loading: Töltés...  
+conversation:
+    conversation_write_message_form:
+        type_something: Írj valamit
+        button:
+            send: Küldés
+    no_conversation: <strong ui-sref="search" style="cursor:pointer;">Keress valakit</strong> és írj rá a beszélgetéshez!
+    no_conversation_of_this_user: Ennek a felhasználónak még nincsenek beszélgetései!
+    loading: Töltés...        
+    send_to_start_conversation: Írj valamit és küld el a beszélgetés elkezdéséhez
+    more: Több

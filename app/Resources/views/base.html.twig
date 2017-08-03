@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8 no-js" lang="{{ app.request.locale|split('_')[0] }}" ng-app="IndexApp"> <![endif]-->
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ app.request.locale|split('_')[0] }}" ng-app="IndexApp"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="{{ app.request.locale|split('_')[0] }}" ng-app="App">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta name="keywords" content="TÁRSKERESŐ date dating love">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="TÁRSKERESŐ">
+        <meta name="author" content="Zoltán Tóth - fagyikaa@gmail.com">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
+        {% block stylesheets %}
+
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css">
+            <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+            {% stylesheets
+                'assets/vendor/font-awesome/css/font-awesome.css'
+                'assets/vendor/angular-xeditable/dist/css/xeditable.css'
+                'assets/vendor/bootstrap/dist/css/bootstrap.css'
+                'assets/vendor/select2/dist/css/select2.css'
+                'bundles/corecommon/css/Common/common.css'
+                'bundles/corecommon/css/Layout/layout.css'
+                'bundles/corecommon/css/Common/flag.css'
+                'assets/vendor/jquery.uniform/dist/css/default.css'
+                'assets/vendor/angular-jk-rating-stars/dist/jk-rating-stars.min.css'
+                'assets/vendor/angular-datatables/dist/plugins/bootstrap/datatables.bootstrap.min.css'
+                'assets/vendor/angular-loading-bar/src/loading-bar.css'
+                'assets/vendor/angular-ui-notification/dist/angular-ui-notification.css'
+                 filter='cssrewrite' %}
+            <link href="{{ asset_url }}" rel="stylesheet" type="text/css">
+            {% endstylesheets %}           
+
+            <!-- BEGIN DYMANICLY LOADED CSS FILES(all plugin and page related styles must be loaded between GLOBAL and THEME css files ) -->
+            <link id="ng_load_plugins_before">
+
+            <!-- DEFAULT CSS FOR ADMINS, LIGHT FOR USERS -->
+            {% if is_granted('ROLE_ADMIN') %}
+                <link href="{{ asset('bundles/corecommon/css/Layout/default.css') }}" rel="stylesheet" type="text/css" id="style_color">
+            {% else %}
+                <link href="{{ asset('bundles/corecommon/css/Layout/light.css') }}" rel="stylesheet" type="text/css" id="style_color">
+            {% endif %}
+
+        {% endblock %}       
+
+        <title> TÁRSKERESŐ </title>
+    </head>
+
+    <body ng-controller="AppController" ng-init="appInit('{{app.user.username}}', {{app.user.id}})">
+        <!-- HEADER -->
+        <div ng-include="'{{ path('core_common_header') }}'" ng-controller="HeaderController" class="page-header navbar navbar-fixed-top"></div>
+
+        <div class="clearfix"></div>
+
+        <div class="page-container" >
+
+            <!-- SIDEBAR -->
+            <div ng-include="'{{ path('core_common_sidebar') }}'" ng-controller="SidebarController" class="page-sidebar-wrapper"></div>
+
+
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                   
+                    <!-- BEGIN PAGE HEAD -->
+                    {% for flash_message in app.session.flashBag.get('success') %}
+                        <div class="alert alert-success">
+                            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                            {{ flash_message }}
+                        </div>
+                    {% endfor %}
+
+                    <div ui-view="page-head" class="page-head"></div>
+                    <!-- END PAGE HEAD -->
+                    <!-- BEGIN ACTUAL CONTENT -->
+                    <div ui-view></div>
+                    <!-- END ACTUAL CONTENT -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <div ng-include="'{{ path('core_common_page_footer') }}'" ng-controller="FooterController" class="page-footer"></div>
+
+        {% block javascripts %}
+            <!-- CORE JQUERY PLUGINS -->
+            <!--[if lt IE 9]>
+            <script src="{{ asset('assets/vendor/respond/dest/respond.min.js') }}"></script>
+            <![endif]-->
+            {% javascripts
+                'assets/vendor/jquery/dist/jquery.js'
+                'assets/vendor/bootstrap/dist/js/bootstrap.js'
+                'assets/vendor/select2/dist/js/select2.js'
+                'assets/vendor/autobahn/autobahn.js'
+                'assets/vendor/moment/moment.js'
+                'assets/vendor/autoNumeric/autoNumeric-min.js'
+                'assets/vendor/datatables.net/js/jquery.dataTables.min.js'
+            %}
+            <script src="{{ asset_url }}"></script>                       
+
+            {% endjavascripts %}
+
+            <!-- CORE ANGULARJS PLUGINS -->
+            {% javascripts
+                'assets/vendor/angular/angular.js'
+                'assets/vendor/angular-bootstrap/ui-bootstrap-tpls.js'
+                'assets/vendor/angular-messages/angular-messages.min.js'
+                'assets/vendor/angular-ui-router/release/angular-ui-router.js'
+                'assets/vendor/oclazyload/dist/ocLazyLoad.js'    
+                'assets/vendor/angular-counter-animation/js/angular-counter.js'
+                'assets/vendor/angular-xeditable/dist/js/xeditable.js'  
+                'assets/vendor/angular-wamp/release/angular-wamp.min.js'
+                'assets/vendor/angular-jk-rating-stars/dist/jk-rating-stars.min.js'
+                'assets/vendor/angular-scroll-glue/src/scrollglue.js'
+                'assets/vendor/angular-translate/angular-translate.min.js'
+                'assets/vendor/angular-dialog-service/dist/dialogs.min.js'
+                'assets/vendor/angular-sanitize/angular-sanitize.js'
+                'assets/vendor/angular-dialog-service/dist/dialogs-default-translations.min.js'
+                'assets/vendor/angular-datatables/dist/angular-datatables.min.js'
+                'assets/vendor/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js'
+                'assets/vendor/angular-loading-bar/src/loading-bar.js'
+                'assets/vendor/angular-ui-notification/dist/angular-ui-notification.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+            {% if app.request.locale|split('_')[0] != 'en' %}
+                <script src="{{ asset('assets/vendor/angular-i18n/angular-locale_' ~ app.request.locale|split('_')[0] ~ '.js') }}"></script>
+                <script src="{{ asset('assets/vendor/moment/locale/' ~ app.request.locale|split('_')[0] ~ '.js') }}"></script>              
+            {% endif %}
+
+           
+            <!-- TRANSLATOR -->
+            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', {'locales': app.request.locale|split('_')[0] }) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'index', 'locales': app.request.locale|split('_')[0]}) }}"></script>           
+
+            {% if app.request.locale|split('_')[0] != 'en' %}
+                <script src="{{ asset('assets/vendor/angular-i18n/angular-locale_' ~ app.request.locale|split('_')[0] ~ '.js') }}"></script>
+                <script src="{{ asset('assets/vendor/select2/dist/js/i18n/' ~ app.request.locale|split('_')[0] ~ '.js') }}"></script>
+            {% endif %}
+
+            <!-- WEBSOCKET AND OTHER JS GLOBALS -->
+            <script type="text/javascript">
+                var _languages = {{ language_requirements|split('|')|json_encode|raw }};
+                
+                {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                    var _original_user_id = '{{ get_original_user_id() }}';
+                    var _user_hash = '{{ get_original_user_id() | hashids_encode }}';
+                {% else %}
+                    var _original_user_id = 0;
+                    var _user_hash = '{{ app.user.id | hashids_encode }}';
+                {% endif %}
+                
+                var _user_id = '{{ app.user.id }}'; 
+                var _websocket_url = '{{ websocket_url }}';
+                
+                {% if attribute( translation_locales, app.request.locale) is defined %}
+                    var _translationLocale = '{{ attribute( translation_locales, app.request.locale) }}';
+                {% else %}
+                    var _translationLocale = '{{ attribute( translation_locales, 'default') }}';
+                {% endif %}
+            </script>
+
+            <!-- APP LEVEL ANGULARJS SCRIPTS -->
+            {% javascripts
+                'bundles/corecommon/js/Core/App.js'
+                'bundles/corecommon/js/Core/States.js'
+                'bundles/corecommon/js/Layout/FooterController.js'
+                'bundles/corecommon/js/Layout/HeaderController.js'
+                'bundles/corecommon/js/Layout/SidebarController.js'
+                'bundles/coreuser/js/Index/IndexApp.js'
+                'bundles/coreuser/js/Services/UserFriendshipHelperService.js'
+                'bundles/corecommon/js/Core/RequestsErrorHandler.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+            <!-- APP LEVEL ANGULARJS DIRECTIVES -->
+            {% javascripts
+                'bundles/coreuser/js/Directives/PasswordVerifyDirective.js'
+                'bundles/corecommon/js/Directives/ApplySelect2Directive.js'
+                'bundles/corecommon/js/Directives/ApplyAutoNumericDirective.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+
+            <!-- JS ROUTING AND TRANSLATION SCRIPTS -->
+            {% javascripts
+                'bundles/fosjsrouting/js/router.js'
+                'bundles/bazingajstranslation/js/translator.min.js' %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <script src="{{ path('fos_js_routing_js', {'callback': 'fos.Router.setData'}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', {'locales': app.request.locale|split('_')[0] }) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'search', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'profile', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'languages', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'role', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'messages', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'gallery', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'search', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'friendship', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'conversation', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'admin_users', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'validators', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <!-- END JS ROUTING PLUGINS -->
+
+        {% endblock %}
+    </body>
+</html>
+

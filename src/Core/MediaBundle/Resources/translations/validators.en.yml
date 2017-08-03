@@ -1,0 +1,23 @@
+media:
+    image:
+        about:
+            length: This field can't be longer than 255 characters!
+        name: 
+            length: The name can't be longer than 255 characters!    
+        owner:
+            not_blank: The owner can't be blank!
+        file:
+            mime_type: This file type isn't allowed!
+        uploaded_at:
+            not_blank: The time of the upload can't be blank!
+        private_profile_not_allowed: A profile picture can't be private!    
+    upload_image:
+        modal:
+            wrong_format: This file type isn't allowed or too big!
+            upload_error: Some error appeared during uploading. Please try again later!
+    vote:
+        already_voted: You can only have one vote!
+        image:
+            not_blank: The image field can't be empty!
+        user:
+            not_blank: The user field can't be empty!       

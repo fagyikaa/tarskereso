@@ -1,0 +1,55 @@
+<div class="page-sidebar navbar-collapse collapse">
+    <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" ng-class="{'page-sidebar-menu-closed': settings.layout.pageSidebarClosed}">
+        <li class="heading">
+            <h3 class="uppercase">{{ 'sidebar.general_title'|trans([], 'layout') }}</h3>
+        </li>
+        <li ng-class="{active: $state.includes('search')}" class="start">
+            <a href="#" ui-sref="search">
+                <i class="fa fa-search"></i>
+                <span class="title">{{ 'sidebar.search'|trans([], 'layout') }}</span>
+            </a>
+        </li>
+        <li ng-class="{active: $state.includes('profile')}">
+            <a href="#" ui-sref="profile.introduction({userId:$root.userId})">
+                <i class="fa fa-user"></i>
+                <span class="title">{{ 'sidebar.profile'|trans([], 'layout') }}</span>
+            </a>
+        </li> 
+        <li ng-class="{active: $state.includes('messages')}">
+            <a href="#" ui-sref="messages({userId:$root.userId, target: 'last'})">
+                <i class="fa fa-comments"></i>
+                <span class="title">{{ 'sidebar.messages'|trans([], 'layout') }}</span>
+            </a>
+        </li>
+        <li ng-class="{active: $state.includes('friends')}">
+            <a href="#" ui-sref="friends({userId:$root.userId, tab: 'accepted'})">
+                <i class="fa fa-heart"></i>
+                {{ 'sidebar.friends'|trans([], 'layout') }}
+            </a>
+        </li> 
+        {% if is_granted('ROLE_ADMIN_CAN_VIEW_ROLE_SET') %}
+            <li ng-class="{active: $state.includes('adminRoleSets')}">
+                <a href="#" ui-sref="adminRoleSets">
+                    <i class="fa fa-unlock-alt"></i>
+                    {{ 'sidebar.role_sets'|trans([], 'layout') }}
+                </a>
+            </li> 
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN_CAN_VIEW_ALL_USERS') %}
+            <li ng-class="{active: $state.includes('adminAllUsers')}">
+                <a href="#" ui-sref="adminAllUsers">
+                    <i class="fa fa-users"></i>
+                    {{ 'sidebar.all_users'|trans([], 'layout') }}
+                </a>
+            </li> 
+        {% endif %}
+        {% if is_granted('ROLE_ADMIN_CAN_VIEW_ACTIVE_USERS') %}
+            <li ng-class="{active: $state.includes('adminActiveUsers')}">
+                <a href="#" ui-sref="adminActiveUsers">
+                    <i class="fa fa-user-circle-o"></i>
+                    {{ 'sidebar.active_users'|trans([], 'layout') }}
+                </a>
+            </li> 
+        {% endif %}
+    </ul>
+</div>

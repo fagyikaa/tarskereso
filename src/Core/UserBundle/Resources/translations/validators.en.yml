@@ -1,0 +1,47 @@
+user:
+    email: 
+        type: You must enter a valid e-mail address!
+        not_blank: You must enter an e-mail address!
+    password:
+        not_match: The two password don't match!
+        min_length: The password must be at least 6 characters long!
+        max_length: The password can't be longer than 32 characters!
+        not_blank: The password can't be blank!    
+    gender: 
+        not_valid: The given value is invalid! 
+        not_blank: A gender must be choosen!
+    created_at:
+        date_time: The createdAt field must be DateTime!
+        not_blank: The createdAt field can't be blank! 
+    language:
+        locale: The language must be a valid locale! 
+        length: The language can't be longer than 2 characters!
+    deleted_at:
+        date_time: The deletedAt field must be DateTime!
+    birth_date:
+        not_blank: Your birth date can't be blank!
+        date: Your birth date must be a valid date!
+        year: Your birth year can't be blank!
+        month: Your birth month can't be blank!
+        day: Your birth day can't be blank!    
+        under18: The birth date can't be less then 18 years!
+    address:
+        not_blank: Your address can't be blank!
+        type: Your address must be a string! 
+    username:
+        not_blank: Your username can't be blank!
+        type: Your username must be a string! 
+        min_length: Your username must be at least 2 characters long!
+        max_length: Your username can not be longer than 255 characters!
+    uploaded_images:
+        only_one_profile: Only one image can be set as profile picture!
+    role_set:
+        super_admin: Can't contain every roles, use 'Everything' role for this purpose.
+        name:
+            not_blank: The name can not be blank!
+            unique: The name must be unique!
+        roles:
+            min: At least 2 seperated role must be choosen! From a role chain only the highest role will be saved thus this error message may appear even if you have choosen more roles. 
+            unique: The roles must not be the same as other role set's roles!
+    role_change:
+        roles_min_message:  At least 1 role must be given!    

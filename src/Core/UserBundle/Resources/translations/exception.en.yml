@@ -1,0 +1,30 @@
+user:
+    not_found_user: The given user was not found!
+    invalid_profile_category: The given profile category is not valid!  
+    no_right_to_edit_profile: You can't edit the profile of the user with the given id!
+    no_right_to_edit_settings: You can't edit the settings of the user with the given id!
+    invalid_property: The field to edit is not exists!
+    no_right_to_view_friends: You don't have permission to view the friends of this user!
+    add_friend_blocked: Can't add this user as friends due to blocking!
+    not_found_friendship: No friendship was found between you and the given user!
+    accept_own_request: You can't accept your own friend request!
+    unblock_yourself: You can't unblock yourself!
+    only_pending_can_be_accepted: Only pending friend request can be accepted!
+    friendship_blocked: You are blocked by or you have blocked the given user!
+    already_declined: This friend request has been already declined!
+    friendship_not_blocked: Can't unblock a user if they wasn't blocked!
+    no_right_to_delete_user: You don't have permission to delete users!
+    already_deleted: The given user is already deleted!
+    set_enabled_yourself: You can't set your own enabled property!
+    unique_email: This e-mail address is taken!
+    impersonating_an_admin: An admin can't be impersonated!
+    cant_block_admin: You can't block an admin!
+    no_right_to_view_active: You don't have permission to view active users!
+    no_right_to_view_all: You don't have permission to view every users!   
+    role:
+        not_found_role_set: The requested role set wasn't found!
+        invalid_hierarchy: The given role hierarchy is invalid!
+        no_right_to_view_page: You don't have permission to this page!  
+        no_self: Access rights of yourself can not be edited!
+        no_right_to_edit: You don't have permission to edit roles!
+        

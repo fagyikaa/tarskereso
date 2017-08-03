@@ -1,0 +1,20 @@
+page_head:
+    page_title: Messages
+    admin_title: 'Messages of %username%'
+breadcrumb:
+    messages: Messages    
+conversation_list:
+    conversation_search_form:
+        search_user_placeholder: Username
+    no_conversation: There is no conversations yet  
+    loading: Loading... 
+conversation:    
+    conversation_write_message_form:
+        type_something: Type something
+        button:
+            send: Send
+    no_conversation: <strong ui-sref="search" style="cursor:pointer;">Search someone</strong> and write them for conversation!
+    no_conversation_of_this_user: This user has no conversations yet!
+    loading: Loading...   
+    send_to_start_conversation: Write something and send to start conversation
+    more: More

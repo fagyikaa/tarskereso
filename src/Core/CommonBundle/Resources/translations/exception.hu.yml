@@ -1,0 +1,5 @@
+common:
+    address:
+        not_found: Nem létezik cím a megadott id-val!
+    websocket_auth:
+        missing_authid: Hiányzik az authid paraméter!

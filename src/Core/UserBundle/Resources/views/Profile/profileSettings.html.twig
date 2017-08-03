@@ -1,0 +1,48 @@
+<div class="row" ng-init="init({{ user.id }}, {{ user.enabled | json_encode() }}, '{{ user.email }}')">
+    <div class="col-md-12">
+        <div class="board profile-edit">
+            <div class="board-title">
+                <div class="caption">
+                    <span class="caption-subject">{{ 'page_titles.settings'|trans([], 'profile') }}</span>
+                </div>
+            </div>
+            <div class="board-body">
+                {% if user == app.user %}
+                    {% include 'CoreUserBundle:Profile:changePasswordForm.html.twig' %}
+                    <hr>
+                    <label class="control-label profile-field">
+                        {{ 'settings.email.label' |trans([], 'profile') }}
+                    </label>
+                    <div class="editable-wrapper">
+                        <a href="#" id="field-email" editable-text="user.email" onbeforesave="setUserEmail($data)">
+                            {{ '{{ user.email || "' ~ "x_edit.empty_data"|trans([], "profile") ~ '" }}' }}
+                        </a>
+                    </div>                    
+                {% endif %}
+                {% if is_granted('ROLE_ADMIN_CAN_EDIT_USER_SETTINGS') and not (user == app.user) %}
+                    <label class="control-label profile-field margin-bottom-10">
+                        {{ 'settings.enabled.label' |trans([], 'profile') }}
+                    </label>
+                    <div class="margin-left-20">                       
+                        <a href="#" id="user-enabled" editable-checkbox="user.enabled" onbeforesave="setUserEnabled($data)">
+                            {{ '{{ getUserEnabledTranslation(user.enabled) }}' }}
+                        </a>
+                    </div>
+                {% endif %}
+                {% if user == app.user or is_granted('ROLE_ADMIN_CAN_DELETE_USER') %}
+                    <hr>
+                    <div class="alert alert-danger" ng-if="error">
+                        {{ '{{ error }}' }}
+                    </div>
+                    <button type="button" class="btn btn-danger" ng-click="deleteUser({{user.id}})"><i class="fa fa-remove"></i>
+                        {% if user == app.user %}
+                            {{ 'settings.delete.self' | trans([], 'profile') }}
+                        {% else %}
+                            {{ 'settings.delete.user' | trans([], 'profile') }}
+                        {% endif %}
+                    </button>                   
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>

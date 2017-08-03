@@ -1,0 +1,17 @@
+<div class="row" ng-init="init({{ user.id }}, '{{ constant('Core\\UserBundle\\Managers\\UserManager::PROFILE_CATEGORY_IDEAL') }}')">
+    <div class="col-md-12">
+        <div class="board profile-edit">
+            <div class="board-title">
+                <div class="caption">
+                    <span class="caption-subject">{{ 'sidebar.ideal'|trans([], 'profile') }}</span>
+                </div>
+            </div>
+            <div class="board-body">
+                <div class="form-group" ng-repeat="(title, field) in fieldsData">
+                    {% include 'CoreUserBundle:Profile:profileField.html.twig' %}
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+breadcrumb:
+    search: Search
+page_head:
+    page_title: Searching for other members 
+result:
+    title: Results
+    no_filters: Set some filters to search and click the "Search" button.
+    no_result: No user fit for the given filters :( set some other conditions.
+    card:
+        button:
+            add_friend: Add as friend
+            write_message: Write message
+form:
+    gender:
+        label: Gender
+        male: Male
+        female: Female
+    want_to:
+        label: Want to
+        relationship: Relationship
+        sex: Sex
+        friendship: Friendship     
+    searching_for: 
+        label: Searching for
+        man: Man
+        woman: Woman
+        both: No matter   
+    body_shape:
+        label: Body shape
+        skinny: Skinny
+        average: Average   
+        sport: Sporty 
+        muscular: Muscular
+        chubby: Chubby
+        obese: Obese    
+    eye_color: 
+        label: Eye color
+        green: Green
+        blue: Blue
+        brown: Brown
+        other: Other    
+    hair_color:
+        label: Hair color
+        green: Green
+        blue: Blue
+        brown: Brown
+        other: Other
+        blond: Blond
+        gray: Gray
+        red: Red
+        pink: Pink
+        black: Black    
+    hair_length:
+        label: Hair length
+        bald: Bald
+        short: Short   
+        middle: Middle
+        long: Long            
+    height:
+        label: Height
+        from_label: At least
+        to_label: At the most
+    weight:
+        label: Weight
+        from_label: At least
+        to_label: At the most
+    age:
+        label: Age
+        from_label: At least
+        to_label: At the most    
+    address:
+        label: Place of residence
+    county:
+        label: County
+    button:
+        more: More filters
+        search: Search

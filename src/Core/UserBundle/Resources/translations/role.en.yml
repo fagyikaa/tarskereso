@@ -1,0 +1,80 @@
+role_set:
+    form:
+        label:
+            submit: Save
+            name: Name
+            roles: Access rights
+            set: Role list
+    not_found: Access right set not found with this id.
+    page_title: Access right sets
+    page_subtitle: Here you can see all of the access right sets
+    not_unique: There is already an access right set with the same roles!
+    table:
+        show_detailed_role_set_button: Full list
+        remove: Delete
+        edit: Edit
+        name: Name
+        roles: Access rights
+        more: 'More...'
+        close: 'Close'
+        deleted_at: Deleted at
+    create: New access right set
+    delete_confirm_modal:
+        header: Access right set deletion
+        message: Are you sure you want to delete?
+    create_modal:
+        button:
+            close: Close
+        header: Create new access right set
+        tree:
+            loading: Loading
+            filter_label: Filter
+        role_name_not_unique: There is already an access right set with this name!    
+        super_admin_warning: Every access right has been selected! Are you sure want to create this? 
+    detailed_modal:
+        header: Detailed access right set
+        button:
+            close: Close
+    create_modal:
+        button:
+            close: Close
+        header: Edit access right set
+        tree:
+            loading: Loading
+            filter_label: Filter
+        role_name_not_unique: There is already an access right set with this name!    
+        super_admin_warning: Every access right has been selected! Are you sure want to create this?         
+role:
+    edit:
+        notification: 
+            successful_editing: The changes ahs been successfully saved.
+        save_button: Save
+        super_admin_warning: Every access right has been selected! Are you sure want to create this?
+        tree:
+            loading: Loading
+            filter_label: Filter
+        board_title: Editing of access rights
+        role_set:
+            not_found: No access right set has been created.
+        access_denied: Access rights of yourself can not be edited!
+    
+    ROLE_USER: User level
+    ROLE_ADMIN: Admin level
+    ROLE_ADMIN_CAN_EDIT_USER_PROFILE: Edition of profile
+    ROLE_ADMIN_CAN_DELETE_USER: Deletion of user
+    ROLE_ADMIN_CAN_EDIT_USER_SETTINGS:  Edition of user settings
+    ROLE_ADMIN_CAN_DELETE_IMAGE: Deletion of images   
+    ROLE_ADMIN_CAN_EDIT_IMAGE: Edition of images  
+    ROLE_ADMIN_CAN_VIEW_PRIVATE_IMAGES: Viewing of private images
+    ROLE_ADMIN_CAN_VIEW_FRIENDS: Viewing of friendships 
+    ROLE_ADMIN_CAN_VIEW_MESSAGES: Viewing of messages   
+    ROLE_ADMIN_CAN_VIEW_ROLE_SET: Viewing of role sets
+    ROLE_ADMIN_CAN_EDIT_ROLE: Edition of roles
+    ROLE_ADMIN_CAN_EDIT_ROLE_SET: Editiong of role sets
+    ROLE_SUPER_ADMIN: Everything
+    ROLE_ALLOWED_TO_SWITCH: Impersonating user
+    ROLE_ADMIN_CAN_SEARCH: Searching among users
+    ROLE_ADMIN_CAN_VIEW_USERS: Viewing of users
+    ROLE_ADMIN_CAN_VIEW_ADMINS: Viewing of admins
+    ROLE_ADMIN_CAN_VIEW_ACTIVE_USERS: Viewing of active users
+    ROLE_ADMIN_CAN_VIEW_ALL_USERS: Viewing of every users

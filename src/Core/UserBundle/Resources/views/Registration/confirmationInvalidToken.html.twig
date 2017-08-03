@@ -1,0 +1,10 @@
+{% extends "CoreUserBundle::layout.html.twig" %}
+
+{% block forms %}
+    <div class="text-center">
+        <h3>{{ 'confirmation.invalid_token' | trans([], 'registration') | raw}}</h3>
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

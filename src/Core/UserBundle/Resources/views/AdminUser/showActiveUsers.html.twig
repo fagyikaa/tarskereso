@@ -1,0 +1,59 @@
+<div class="page-head">
+    <div class="page-title">
+        <h1>{{ 'active_users.page_title'|trans([], 'admin_users') }} <small>{{ 'active_users.page_subtitle'|trans([], 'admin_users') }}</small></h1>
+    </div>
+</div>
+<ul class="page-breadcrumb breadcrumb">
+    <li>
+        <a href="javascript:;" ui-sref="search">{{ 'breadcrumb.search'|trans([], 'profile') }}</a><i class="fa fa-circle"></i>
+    </li>
+    <li class="active">
+    <li>
+        {{ 'active_users.page_title'|trans([], 'admin_users') }}
+    </li>
+</ul> 
+
+<div ng-init="init()" class="row">
+    <div class="col-md-12">
+        <div class="board">
+            <div class="board-body">
+                <div ng-if="!isWSConnected" class="alert alert-info text-center">
+                    {{ 'active_users.ws_not_connected'|trans([], 'admin_users') }}
+                </div>
+                <table ng-if="isWSConnected" class="table table-hover table-light table-striped table-vertical-align" datatable="ng" dt-columns="dtColumns" dt-options="dtOptions" dt-column-defs="dtColumnDefs" dt-instance="dtInstance" width="100%">
+                    <thead>
+                        <tr>
+                            <th>{{ 'active_users.data_tables.id'|trans([], 'admin_users') }}</th>
+                            <th>{{ 'active_users.data_tables.username'|trans([], 'admin_users') }}</th>
+                            <th>{{ 'active_users.data_tables.current_state'|trans([], 'admin_users') }}</th>
+                            <th>{{ 'active_users.data_tables.is_admin'|trans([], 'admin_users') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="(session, user) in users">
+                            <td>{{ '{{ user.id }}' }}</td>
+                            <td>
+                                <a class="link-no-decor" ui-sref="profile.introduction({ userId: user.id })" href="">
+                                    <div>
+                                        <img class="img-circle" ng-src="{{ '{{ getUserProfileImageSrc(user.id) }}' }}" alt="">
+                                        {{ '{{ user.username }}' }}
+                                    </div>                             
+                                </a>
+                                <i uib-tooltip="{{ 'active_users.data_tables.is_admin'|trans([], 'admin_users') }}" ng-if="user.impersonating" class="fa fa-user-secret"></i>
+                            </td>                            
+                            <td>{{ '{{ translateState(user.currentStateTranslatorKey, user.translatorKeyDomain) }}' }}</td>
+                            <td>
+                                <span ng-if="user.isAdmin">
+                                    <i class="fa fa-check font-green"></i>
+                                </span>
+                                <span ng-if="!user.isAdmin">
+                                    <i class="fa fa-ban font-red"></i>
+                                </span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

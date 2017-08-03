@@ -1,0 +1,5 @@
+message:
+    no_right_to_view_messages: You don't have permission to view user messages!
+    user_not_part_of_conversation: The given user isn't part of the required conversation!
+    messages_seen_at_only_for_self: You can only set for yourself the seen at date of messages!
+    no_conversation_with_given_id: No conversation exists with the given id!

@@ -1,0 +1,4 @@
+api_core_common_websocket_authentication:
+    path:     /websocket/user/auth
+    defaults: { _controller: CoreCommonBundle:ApiSecurity:websocketAuthentication }
+    methods: [POST]  

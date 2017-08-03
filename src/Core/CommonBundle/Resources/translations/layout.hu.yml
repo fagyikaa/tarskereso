@@ -1,0 +1,15 @@
+sidebar:
+    general_title: Menü
+    search: Keresés
+    profile: Adatlap
+    messages: Üzenetek
+    friends: Kapcsolatok
+    gallery: Galéria
+    role_sets: Jogosultság összeállítások
+    all_users: Minden felhasználó
+    active_users: Aktív felhasználók 
+header:
+    profile: Adatlap
+    logout_impersonate: Vissza adminba
+    request_accept_required: '%number% ismerősnek jelölés'
+    unseen_conversations: 'Van %number% beszélgetésed olvasatlan üzenetekkel'    

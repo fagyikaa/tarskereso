@@ -1,0 +1,14 @@
+.drop-zone-and-wrapper {
+    border: 2px dotted #CCC;
+    border-radius: 6px;
+    background-color: #EEE;
+    padding: 50px;
+    font-size: 30px;
+    font-weight: 200;
+    color: #222;
+    text-align: center;
+    cursor: pointer;
+}
+#file-input {
+    display: none;
+}

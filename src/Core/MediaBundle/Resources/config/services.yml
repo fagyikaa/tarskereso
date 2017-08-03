@@ -1,0 +1,37 @@
+services:
+    core_media.image_upload_uniq_hash_namer:
+            class: Core\MediaBundle\Helper\UniqNamerForImageUpload
+            
+    core_media.image_upload_user_id_hash_directory_namer:
+        class: Core\MediaBundle\Helper\UserIdHashDirectoryNamerForImageUpload
+        arguments: [@hashids]
+        
+    core_media.cache_resolver:
+        class: Core\MediaBundle\Helper\ImagePreviewCacheResolver
+        arguments: [@filesystem, @router, @liip_imagine.filter.configuration]
+        tags:
+            - { name: liip_imagine.cache.resolver, resolver: image_preview_cache } 
+            
+    core_media.default_image_cache_resolver:
+        class: Core\MediaBundle\Helper\DefaultImagePreviewCacheResolver
+        arguments: [@filesystem, @liip_imagine.filter.configuration, @router.request_context]
+        tags:
+            - { name: liip_imagine.cache.resolver, resolver: default_image_cache }         
+            
+    core_media.helper:
+        class: Core\MediaBundle\Helper\MediaHelper
+        arguments: [@liip_imagine.filter.configuration]    
+        
+    core_media.form.type.upload_image:
+        class: Core\MediaBundle\Form\Type\UploadImageType
+        arguments: [@security.token_storage]
+        tags:
+            - { name: form.type }    
+
+    core_media.image_manager:
+        class: Core\MediaBundle\Managers\ImageManager
+        arguments: [@core_media.form.type.upload_image, @doctrine.orm.entity_manager, @translator, @form.factory, @core_media.helper, @liip_imagine.controller, @core_media.cache_resolver, @hashids, @validator, @liip_imagine.cache.manager]       
+
+    core_media.vote_manager:
+        class: Core\MediaBundle\Managers\VoteManager
+        arguments: [@doctrine.orm.entity_manager, @validator]       

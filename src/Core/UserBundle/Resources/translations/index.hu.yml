@@ -1,0 +1,24 @@
+content:
+    registered_members: keresi nálunk élete párját
+form:
+    login:
+        title: Bejelentkezés
+        forgot_password:
+            email: Email cím
+            title: Elfelejtettem a jelszavam
+            back_to_login: Vissza
+    resetting:
+        not_found: Ezzal az e-maillel nem regisztrált senki!
+        non_expired: Erre az e-mail címre már küldtünk e-mailt!
+        success: Egy e-mail lett küldve a megadott e-mail címre. A benne lévő linken tudsz új jelszót megadni. 
+resetting:
+    invalid_token: Ehhez a linkhez nem tartozik felhasználó!        
+email:
+    resetting:
+        subject: Jelszó helyreállítás
+        dear: Kedves %username%!
+        message: Az alábbi linkre kattintva megadhatsz új jelszót. Kérjük, hogy amennyiben ezt nem te kezdeményezted, úgy hagyd figyelmen kívül ezt a levelet.    
+header:
+    best_dating_site: a legjobb randi oldal
+    
+    

@@ -1,0 +1,82 @@
+<div class="page-head">
+    <div class="page-title">
+        <h1>{{ 'role_set.page_title'|trans([], 'role') }} <small>{{ 'role_set.page_subtitle'|trans([], 'role') }}</small></h1>
+    </div>
+</div>
+<ul class="page-breadcrumb breadcrumb">
+    <li>
+        <a href="javascript:;" ui-sref="search">{{ 'breadcrumb.search'|trans([], 'profile') }}</a><i class="fa fa-circle"></i>
+    </li>
+    <li class="active">
+    <li>
+        {{ 'role_set.page_title'|trans([], 'role') }}
+    </li>
+</ul>    
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="board">
+            <div class="board-body">
+                <button ng-click="openAddNewRoleSetModal()" type="button" class="btn btn-rounded btn-bg-blue color-white">
+                    <span>{{ 'role_set.create' | trans([], 'role') }}</span>
+                </button>
+                <table class="table table-hover table-light table-striped table-vertical-align" ng-init="init()" datatable="ng" dt-options="dtOptions" dt-column-defs="dtColumnDefs" width="100%">
+                    <thead>
+                        <tr>
+                            <th>{{ 'role_set.table.name' | trans([], 'role') }}</th>
+                            <th>{{ 'role_set.table.roles' | trans([], 'role') }}</th>
+                            <th>{{ 'role_set.table.deleted_at' | trans([], 'role') }}</th>
+                            <th width="1%" nowrap></th>                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-class="{'deleted': roleSet.deletedAt}" ng-repeat="roleSet in roleSets">
+                            <td nowrap>
+                                {{ '{{ roleSet.name }}' }}
+                            </td>
+                            <td>
+                                <ul>
+                                    <li ng-repeat="role in roleSet.roles | limitTo: roleSet.limit track by $index">
+                                        {{ '{{ role }}' }}
+                                    </li>
+                                </ul>
+                                <div class="show-more-role" ng-if="roleSet.roles.length > 5 && roleSet.limit != roleSet.roles.length">
+                                    <a ng-click="roleSet.limit = roleSet.roles.length">
+                                        <i class="fa fa-caret-down"></i>&nbsp;&nbsp;{{ 'role_set.table.more' | trans([], 'role') }}
+                                    </a>
+                                </div>
+
+                                <div class="show-more-role" ng-if="roleSet.limit == roleSet.roles.length">
+                                    <a ng-click="roleSet.limit = limit">
+                                        <i class="fa fa-caret-up"></i>&nbsp;&nbsp;{{ 'role_set.table.close' | trans([], 'role') }}
+                                    </a>
+                                </div>
+                            </td>
+                            <td>
+                                <div ng-if="roleSet.deletedAt">
+                                    {{ '{{ roleSet.deletedAt | date: "short"}}' }}
+                                </div>
+                                <div ng-if="!roleSet.deletedAt">
+                                    -
+                                </div>
+                            </td>
+                            <td width="1%" nowrap class="text-right">
+                                <a ng-click="showDetailedRoleSet(roleSet)" class="btn" uib-tooltip="{{ 'role_set.table.show_detailed_role_set_button' | trans([], 'role') }}">
+                                    <i class="fa fa-eye"></i>
+                                </a>
+
+                                <a ng-if="!roleSet.deletedAt" ng-click="editRoleSetModal(roleSet)" class="btn" uib-tooltip="{{ 'role_set.table.edit' | trans([], 'role') }}">
+                                    <i class="fa fa-pencil"></i>
+                                </a>
+
+                                <a ng-if="!roleSet.deletedAt"  ng-click="deleteRoleSet(roleSet)" class="btn font-red" uib-tooltip="{{ 'role_set.table.remove' | trans([], 'role') }}">
+                                    <i class="fa fa-trash-o"></i>
+                                </a>
+                            </td>                            
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

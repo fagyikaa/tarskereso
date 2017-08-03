@@ -1,0 +1,26 @@
+page_head:
+    page_title: Friends
+tooltip:
+    request_pending: Pending
+breadcrumb:
+    friends: Friends
+caption:
+    main_caption: Connections overviewing
+tab_titles:
+    accepted: Friends
+    pending: Pending requests
+    blocked: Blocked users   
+tab_content:
+    no_accepted: You don't have any accepted friend.
+    no_pending: You don't have any pending friend request.
+    no_blocked: You haven't blocked any user yet.    
+    no_accepted_admin: There isn't any accepted friend.
+    no_pending_admin: There isn't any pending friend request.
+    no_blocked_admin: There isn't any blocked user. 
+friendship:
+    friend: Friend
+    status:
+        blocked: Blocked
+        pending: Pending
+        accepted: Accepted
+        declined: Declined   

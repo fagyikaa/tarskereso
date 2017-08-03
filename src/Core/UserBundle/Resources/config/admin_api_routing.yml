@@ -1,0 +1,97 @@
+admin_api_core_user_edit_user_enabled:
+    path:     /edit/user/enabled
+    defaults: { _controller: CoreUserBundle:AdminApiProfile:editUserEnabled }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true        
+
+admin_api_core_user_all_users_data_tables:
+    path: /get/users/all/datatables
+    defaults: { _controller: CoreUserBundle:AdminApiUser:getAllUsersDataTables }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods: [POST]
+    options:
+        expose: true
+
+admin_api_core_user_get_role_tree_and_sets_for_user:
+    path: /get/roles/{userId}
+    defaults: { _controller: CoreUserBundle:AdminApiManageRole:getRoleTreeAndSetsForUser }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods:   [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true
+
+admin_api_core_user_get_role_sets:
+    path: /get/role/sets
+    defaults: { _controller: CoreUserBundle:AdminApiManageRole:getTranslatedRoleSets }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods:   [GET]
+    options:
+        expose: true
+
+admin_api_core_user_submit_new_role_set_form:
+    path:   /new/role/set/form/submit
+    defaults:   { _controller: CoreUserBundle:AdminApiManageRole:createRoleSetForm }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods:   [POST]
+    options:
+        expose: true
+
+admin_api_core_user_get_full_role_tree:
+    path: /get/full/role/tree
+    defaults: { _controller: CoreUserBundle:AdminApiManageRole:getFullRoleTree }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods:   [GET]
+    options:
+        expose: true
+
+admin_api_core_user_remove_role_set:
+    path: /remove/role/set/{roleSetId}
+    defaults: { _controller: CoreUserBundle:AdminApiManageRole:removeRoleSet }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods:   [DELETE]
+    requirements:
+        roleSetId: \d+
+    options:
+        expose: true
+
+admin_api_core_user_get_detailed_role_set_tree:
+    path: /get/detailed/role/set/tree/{roleSetId}
+    defaults: { _controller: CoreUserBundle:AdminApiManageRole:getDetailedRoleSetTree }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods:   [GET]
+    requirements:
+        roleSetId: \d+
+    options:
+        expose: true
+
+admin_api_core_user_get_undeleted_detailed_role_sets:
+    path: /get/undeleted/detailed/role/sets
+    defaults: { _controller: CoreUserBundle:AdminApiManageRole:getUndeletedDetailedRoleSets }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods:   [GET]
+    options:
+        expose: true
+
+admin_api_core_user_submit_edit_role_set_form:
+    path:   /edit/role/set/form/submit/{roleSetId}
+    defaults:   { _controller: CoreUserBundle:AdminApiManageRole:editRoleSetForm }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods:   [POST]
+    options:
+        expose: true
+    requirements:
+        roleSetId: \d+
+
+admin_api_core_user_submit_edit_user_role:
+    path:   /edit/roles/{userId}
+    defaults:   { _controller: CoreUserBundle:AdminApiManageRole:editUserRoles }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods:   [POST]
+    options:
+        expose: true
+    requirements:
+        userId: \d+        

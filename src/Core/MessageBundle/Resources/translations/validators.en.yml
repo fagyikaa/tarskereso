@@ -1,0 +1,3 @@
+message:
+    required: Write something to be able to submit!
+    max_length: Your message can't be longer than 1024 characters!    

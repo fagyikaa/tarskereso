@@ -1,0 +1,25 @@
+parameters:
+    database_host: 127.0.0.1
+    database_port: 3306
+    database_name: tarsker
+    database_user: root
+    database_password: null
+    mailer_transport: smtp
+    mailer_host: 127.0.0.1
+    mailer_user: root
+    mailer_password: qwertz
+    mailer_port: 465
+    mailer_encryption: ssl
+    secret: secreTStringDASgoofdsqqe1234214AS21
+    language_requirements: en|hu
+    emails.sender: noreply@tarsker.hu
+    emails.support: support@tarsker.hu
+    jms_serializer.serialized_name_annotation_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
+    websocket_api_bcrypt_hash: $2y$12$Otl2w/7emE0f58xiyPpV..6BsBDKhhQwcmJVygW6TsL6vb64HV82O
+    websocket_url: 'ws://127.0.0.1:8888/ws'
+    language_country_pairs:
+        en: en-US
+        hu: hu-HU
+        es: es-ES
+        fr: fr-FR
+        default: en-US

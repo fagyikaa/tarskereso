@@ -1,0 +1,16 @@
+<div class="modal-header">
+    <button class="close" type="button" ng-click="close()"></button>
+    <h3 class="modal-title">{{ 'role_set.detailed_modal.header' | trans([], 'role') }}</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="tree">
+                <div ivh-treeview="roleSetTree" ivh-treeview-use-checkboxes="false" ivh-treeview-expand-to-depth="-1" ivh-treeview-validate="false"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn default" ng-click="close()">{{ 'common.modal.button.cancel'|trans }}</button>
+</div>

@@ -1,0 +1,14 @@
+{% block subject %} {{ 'email.confirmation.subject'|trans([], 'registration') }} • Társkereső{% endblock %}
+
+{% block body_html %}
+    {% embed 'CoreCommonBundle:Layout:email.html.twig' %}
+        {% block greetings %}
+            {{ 'email.confirmation.dear'|trans({'%username%': user.username}, 'registration') }}
+        {% endblock %}
+
+        {% block message %}
+            {{ 'email.confirmation.message'|trans([], 'registration') }}<br>
+            <a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

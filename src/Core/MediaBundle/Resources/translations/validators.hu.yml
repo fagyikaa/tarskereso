@@ -1,0 +1,25 @@
+media:
+    image:
+        about:
+            length: Ez a mező nem lehet hosszabb 255 karakternél!
+        name: 
+            length: A név nem lehet hosszabb 255 karakternél!
+        owner:
+            not_blank: A tulajdonos nem lehet üres!
+        file:
+            mime_type: Ez a fájlformátum nem engedélyezett!
+        uploaded_at:
+            not_blank: A feltöltés ideje nem lehet üres! 
+        private_profile_not_allowed: Egy profilkép nem lehet privát!    
+    upload_image:
+        modal:
+            wrong_format: Ez a fájlformátum nem engedélyezett vagy túl nagy!
+            upload_error: Valami hiba történt feltöltés közben. Próbálkozz később! 
+    vote:
+        already_voted: Csak egy szavazatod lehet!
+        image:
+            not_blank: A kép mező nem lehet üres!
+        user:
+            not_blank: A felhasználó mező nem lehet üres!
+        
+            

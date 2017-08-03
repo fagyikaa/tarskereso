@@ -1,0 +1,58 @@
+<form {{ form_enctype(form) }} ng-controller="EditRoleSetFormController as cc" novalidate name="{{ form.vars.name }}"
+                               ng-submit="submit()" method="post">
+    {{ form_widget(form._token, {'attr': {'ng-init': 'data[\'' ~ form._token.vars.full_name ~ '\'] = \'' ~ form._token.vars.value ~ '\'' }}) }}
+    <div class="alert alert-danger" ng-show="errors.global.length > 0">
+        <h4>{{ '{{ globalError }}' }}</h4>
+        <p ng-repeat="error in errors.global">
+            {{ '{{ error }}' }}
+        </p>
+    </div>
+    <div ng-class="{'has-error': (errors.fields.name.errors.length > 0 || {{ form.vars.name }}['{{ form.name.vars.full_name }}'].$invalid)
+                                && !{{ form.vars.name }}['{{ form.name.vars.full_name }}'].$pristine}" class="form-group">
+        <label class="control-label">{{ 'role_set.form.label.name' | trans([], 'role') }}</label>
+        {{ form_widget(form.name, {'attr': {'class': 'form-control', 'ng-model': 'data[\'' ~ form.name.vars.full_name ~ '\']', 'ng-init': 'data[\'' ~ form.name.vars.full_name ~ '\'] = \'' ~ form.name.vars.value ~ '\''}}) }} 
+        <span class="help-block" ng-repeat="error in errors.fields.name.errors">
+            {{ '{{ error }}' }}
+        </span>
+        <div ng-show="!{{ form.vars.name }}['{{ form.name.vars.full_name }}'].$pristine && !(errors.fields.name.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.name.vars.full_name }}'].$error">
+            {# Display error messages #}
+            <div ng-message="required">{{ 'common.basic.not_blank' | trans([], 'validators') }}</div>
+            <div ng-message="uniqueName">{{ 'user.role_set.name.unique' | trans([], 'validators') }}</div>
+        </div>
+    </div>
+    <div ng-class="{'has-error': (errors.fields.roles.errors.length > 0 || {{ form.vars.name }}['{{ form.roles.vars.full_name }}'].$invalid && !isRoleTreePristine)}" class="form-group">
+        {# This input field is here to add the model of roles to the form controller thus the form validation can be user for roles too #}
+        <input class="hidden" type="text" id="role_set_roles" name="{{ form.roles.vars.full_name }}" ng-model="data['{{ form.roles.vars.full_name }}']">
+        <label class="control-label">{{ 'role_set.form.label.roles' | trans([], 'role') }}</label>
+        <span class="help-block" ng-repeat="error in errors.fields.roles.errors">
+            {{ '{{ error }}' }}
+        </span>
+        <div ng-show="!(errors.fields.roles.errors.length > 0) && !isRoleTreePristine" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.roles.vars.full_name }}'].$error">
+            {# Display error messages #}
+            <div ng-message="roleSetUnique">{{ 'user.role_set.roles.unique' | trans([], 'validators') }}</div>
+            <div ng-message="rolesMin">{{ 'user.role_set.roles.min' | trans([], 'validators') }}</div>
+        </div>
+
+        <div ng-show="roleTreeLoading"><i class="fa fa-spinner fa-spin fa-fw font-blue"></i></div>        
+        <div ng-hide="roleTreeLoading" id="tree_3" ng-init="init({{roleSetId}})">
+            <input id="ivh-tree-filter" type="text" class="form-control input-medium margin-bottom-20" placeholder="{{ 'role_set.create_modal.tree.filter_label' | trans([], 'role') }}" ng-model="roleSearch" />
+            <div ivh-treeview="roleTree" ivh-treeview-filter="roleSearch" ivh-treeview-expand-to-depth="0" ivh-treeview-validate="false" 
+                 ivh-treeview-on-cb-change="treeChanged(ivhNode, ivhIsSelected, ivhTree)" ivh-treeview-use-checkboxes="true">
+
+            </div>
+        </div> 
+
+    </div>
+    <div class="alert alert-warning" ng-show="superAdminWarning">
+        {{ 'user.role_set.super_admin' | trans([], 'validators') }}
+    </div>
+
+    <div>
+        <label class="control-label" ng-if="selectedRolesLabel.length">{{ 'role_set.form.label.set' | trans([], 'role') }} ({{ '{{ selectedRolesLabel.length }}' }})</label>
+        <ul>
+            <li ng-repeat="roleLabel in selectedRolesLabel">
+                {{ '{{ roleLabel }}' }}
+            </li>
+        </ul>
+    </div>
+</form>

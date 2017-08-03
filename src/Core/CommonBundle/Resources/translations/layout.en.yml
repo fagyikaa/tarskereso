@@ -1,0 +1,16 @@
+sidebar:
+    general_title: Menu
+    search: Search
+    profile: Profile
+    messages: Messages
+    friends: Friends
+    gallery: Gallery
+    role_sets: Role sets
+    all_users: Every users
+    active_users: Active users   
+header:
+    profile: Profile
+    logout_impersonate: Back to admin
+    request_accept_required: '%number% friend request(s)'
+    unseen_conversations: 'You have %number% conversation(s) with unseen message(s)'
+        

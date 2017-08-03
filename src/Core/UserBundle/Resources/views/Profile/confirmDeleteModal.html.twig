@@ -1,0 +1,15 @@
+<div class="modal-header">
+    <button class="close" type="button" ng-click="close()"></button>
+    <h3 class="modal-title">{{ 'profile.moderation_history.modal.title'|trans([], 'profile') }}</h3>
+</div>
+<div class="modal-body">
+    <div class="row">
+        <div class="col-md-12">
+            {{ '{{ modalOptions.bodyText }}' }}
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn default" ng-click="ok()">{{ 'common.frontend.modal.button.ok'|trans }}</button>
+    <button class="btn default" ng-click="close()">{{ 'common.frontend.modal.button.cancel'|trans }}</button>
+</div>

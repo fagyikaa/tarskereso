@@ -1,0 +1,19 @@
+media:
+    upload_image:
+        only_self: Csak magadhoz tölthetsz fel!
+    serve_image:
+        access_denied: Ezt a képet nincs jogosultságod megtekinteni! 
+    get_private_images:    
+        access_denied: Ennek a felhasználónak a privát képeit nincs jogosultságod megtekinteni! 
+    not_found: Nem található kép a megadott id-val!   
+    vote:
+        no_admins: Adminok nem szavazhatnak!
+        no_yourself: Saját képedre nem szavazhatsz!
+        only_friend_on_private: Privát képre csak ismerős szavazhat!
+    remove:
+        access_denied: Nincs jogosultságod törölni ezt a képet!
+    edit:
+        access_denied: Nincs jogosultságod szerkeszteni ezt a képet!
+        invalid_property: Nincs ilyen szerkeszthető mezője a képnek!
+    image_preview_cache_resolver:
+        resolve: Belső hiba történt a kép gyorsítótárból történő betöltése során. Ismételt hiba esetén vedd fel velünk a kapcsolatot!  

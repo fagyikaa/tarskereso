@@ -1,0 +1,96 @@
+api_core_media_get_allowed_mimetypes_and_file_size:
+    path:     /get/allowed/mimetypes/and/file/size
+    defaults: { _controller: CoreMediaBundle:ApiImage:getAllowedMimeTypesAndFileSize }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    options:
+        expose: true    
+        
+api_core_media_upload_image:
+    path:     /upload/image/{userId}
+    defaults: { _controller: CoreMediaBundle:ApiImage:uploadImage }
+    methods: [POST]
+    requirements:
+        userId: \d+
+    options:
+        expose: true 
+        
+api_core_media_serve_image:
+    path:     /serve/image/{imageId}/{type}/{size}
+    defaults: { _controller: CoreMediaBundle:ApiImage:serveImage, size: 150 }
+    methods: [GET]
+    requirements:
+        imageId: \d+
+        type: normal|thumbnail
+        size: \d+
+    options:
+        expose: true   
+        
+api_core_media_serve_image_thumbnail:
+    path:     /serve/image/thumbnail/{imageId}
+    defaults: { _controller: CoreMediaBundle:ApiImage:serveImageThumbnail, size: 150 }
+    methods: [GET]
+    requirements:
+        imageId: \d+
+        size: \d+
+    options:
+        expose: true           
+        
+api_core_media_get_public_images_for_user:
+    path:     /get/public/images/for/{userId}
+    defaults: { _controller: CoreMediaBundle:ApiImage:getPublicImagesForUser}
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true 
+        
+api_core_media_get_private_images_for_user:
+    path:     /get/private/images/for/{userId}
+    defaults: { _controller: CoreMediaBundle:ApiImage:getPrivateImagesForUser}
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true   
+        
+api_core_media_vote_on_image:
+    path:     /vote/on/image/{imageId}/{stars}
+    defaults: { _controller: CoreMediaBundle:ApiVote:vote}
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    requirements:
+        imageId: \d+
+        stars: \d+
+    options:
+        expose: true  
+        
+api_core_media_remove_image:
+    path:     /remove/image/{imageId}
+    defaults: { _controller: CoreMediaBundle:ApiImage:removeImage}
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [DELETE]
+    requirements:
+        imageId: \d+
+    options:
+        expose: true  
+        
+api_core_media_get_image:
+    path:     /get/image/{imageId}
+    defaults: { _controller: CoreMediaBundle:ApiImage:getImage}
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        imageId: \d+
+    options:
+        expose: true    
+        
+api_core_media_edit_image_data:
+    path:     /edit/image/data
+    defaults: { _controller: CoreMediaBundle:ApiImage:editImageData}
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true 

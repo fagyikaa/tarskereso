@@ -1,0 +1,65 @@
+services:
+    core_user.authentication.entry_point:
+        class: Core\UserBundle\EventListener\AuthenticationEntryPointListener
+        arguments: [@router]
+        
+    core_user.user_manager:
+        class: Core\UserBundle\Managers\UserManager
+        arguments: [@fos_user.util.password_updater, @fos_user.util.canonical_fields_updater, @doctrine.orm.entity_manager, Core\UserBundle\Entity\User, @service_container]    
+    
+    core_user.form.registration:
+        class: Core\UserBundle\Form\Type\RegistrationType
+        tags:
+            - { name: form.type, alias: core_user_registration }         
+            
+    core_user.is_admin_extension:
+        class: Core\UserBundle\Twig\IsAdminExtension
+        arguments: [@core_user.role_manager]
+        tags:
+            - { name: twig.extension }   
+            
+    core_user.role_manager:
+        class: Core\UserBundle\Managers\RoleManager
+        arguments: [%security.role_hierarchy.roles%, @core_common.helper, @translator, @doctrine.orm.entity_manager, @core_user.user_manager, @event_dispatcher, @form.factory, @service_container]   
+        
+    core_user.form.type.role_set:
+        class: Core\UserBundle\Form\Type\RoleSetType
+        arguments: [@core_user.role_manager, %security.role_hierarchy.roles%]
+        tags:
+            - { name: form.type }
+            
+    core_user.validator.unique_role_set:
+        class: Core\UserBundle\Validator\Constraints\UniqueRoleSetValidator
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: validator.constraint_validator, alias: unique_role_set }      
+        
+    core_user.form.search:
+        class: Core\UserBundle\Form\Type\SearchType
+        arguments: [@doctrine.orm.entity_manager]
+        tags:
+            - { name: form.type, alias: core_user_search }    
+            
+    core_user.search_manager:
+        class: Core\UserBundle\Managers\SearchManager  
+        arguments: [@doctrine.orm.entity_manager, @form.factory, @core_user.form.search]
+        
+    core_user.friendship_manager:
+        class: Core\UserBundle\Managers\FriendshipManager  
+        arguments: [@doctrine.orm.entity_manager, @translator, @core_user.role_manager, @event_dispatcher]    
+    
+    core_user.switch_user_listener:
+        class: Core\UserBundle\EventListener\SwitchUserListener
+        arguments: [@core_user.role_manager, @translator]
+        tags:
+            - { name: kernel.event_listener, event: security.switch_user, method: onSwitchUser }    
+            
+    core_user.role_handling_front_end_adapter:
+        class: Core\UserBundle\Helper\RoleHandlingFrontEndAdapter
+        arguments: [@translator]      
+        
+    core_user.user_bundle.subscriber:
+        class: Core\UserBundle\EventListener\UserBundleEventsSubscriber
+        arguments: [@core_user.friendship_manager]
+        tags:
+            - { name: kernel.event_subscriber }      

@@ -1,0 +1,36 @@
+upload_image:
+    modal:
+        title: Image uploading
+        max_file_size: "Maximum file size is: %max_file_size% MB!"
+        file_types: "Accepted file types: %file_types%"
+        drop_zone_text_bold: Drop image
+        drop_zone_text: to upload
+        drop_zone_text_small: (or click)  
+        button:
+            upload: Upload
+            remove:
+                tooltip: Remove image
+    form:
+        is_private:
+            label: Private (only friends can see the photo)
+        is_profile:
+            label: Set as profil picture
+        about:
+            label: Say something about the photo
+view_image:
+    modal:
+        title: View photo
+        button:
+            cancel: Close
+            remove:
+                tooltip: Delete
+        point:
+            tooltip: Points
+            no_votes_yet:
+                tooltip: No votes yet
+        private: Private
+        profile: Profile   
+        x_edit:
+            empty: Empty   
+            checkbox_true: Yes
+            checkbox_false: No 

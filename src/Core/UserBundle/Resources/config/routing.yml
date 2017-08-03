@@ -1,0 +1,72 @@
+core_user_index:
+    path:   /login
+    defaults: { _controller: CoreUserBundle:Index:index }
+    methods: [GET]
+    options:
+        expose: true
+        
+core_user_profil_skeleton:
+    path:     /profile/{userId}/skeleton
+    defaults: { _controller: CoreUserBundle:Profile:profileSkeleton }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"    
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true
+        
+core_user_profile_introduction:
+    path:     /profile/{userId}/introduction
+    defaults: { _controller: CoreUserBundle:Profile:profileIntroduction }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'" 
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true
+        
+core_user_profile_ideal:        
+    path:     /profile/{userId}/ideal
+    defaults: { _controller: CoreUserBundle:Profile:profileIdeal }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'" 
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true
+        
+core_user_profile_gallery:
+    path:     /profile/{userId}/gallery
+    defaults: { _controller: CoreUserBundle:Profile:profileGallery }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'" 
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true
+        
+core_user_profile_settings:
+    path:     /profile/{userId}/settings
+    defaults: { _controller: CoreUserBundle:Profile:profileSettings }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'" 
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true        
+        
+core_user_search:
+    path:     /search
+    defaults: { _controller: CoreUserBundle:Search:search }
+    methods: [GET]
+    options:
+        expose: true    
+        
+core_user_show_friends:
+    path:     /show/friends/{userId}
+    defaults: { _controller: CoreUserBundle:Friendship:showFriends }
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true  

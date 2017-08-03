@@ -1,0 +1,5 @@
+common:
+    address:
+        not_found: No address was found with the given id!
+    websocket_auth:
+        missing_authid: The authid parameter is missing!    

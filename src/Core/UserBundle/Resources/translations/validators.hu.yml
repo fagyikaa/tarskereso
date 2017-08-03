@@ -1,0 +1,47 @@
+user:
+    email:    
+        type: Egy érvényes e-mail címet kell megadnod!
+        not_blank: Meg kell adnod egy e-mail címet!
+    password:
+        not_match: A két jelszó nem egyezik!  
+        min_length: A jelszónak legalább 6 karakter hosszúnak kell lennie!
+        max_length: A jelszó legfeljebb 32 karakter hosszú lehet! 
+        not_blank: A jelszó nem lehet üres!
+    gender: 
+        not_valid: A megadott érték érvénytelen!    
+        not_blank: Ki kell választani egy nemet!
+    created_at:
+        date_time: A createdAt mezőnek DateTime-nak kell lennie!
+        not_blank: A createdAt mező nem lehet üres!
+    language:
+        locale: A language mezőnek valós locale-nak kell lennie!
+        length: A language mező maximum 2 karakter hosszú lehet!
+    deleted_at:
+        date_time: A deletedAt mezőnel DateTime-nak kell lennie!
+    birth_date:
+        not_blank: A születési idő nem lehet üres!
+        date: A születési időnek valós dátumnak kell lennie!  
+        year: Meg kell adnod a születési éved!
+        month: Meg kell adnod a születési hónapod!
+        day: Meg kell adnod a születési napod! 
+        under18: A születési idő nem lehet kevesebb mint 18 év!
+    address:
+        not_blank: A lakhely nem lehet üres!
+        type: A lakhelynek string típusúnak kell lennie! 
+    username:
+        not_blank: A felhasználóneved nem lehet üres!
+        type: A felhasználónevednek string típusúnak kell lennie! 
+        min_length: A felhasználónevednek legalább 2 karakter hosszúnak kell lennie!
+        max_length: A felhasználóneved legfeljebb 255 karakter hosszú lehet!
+    uploaded_images:
+        only_one_profile: Csak egy kép lehet profilképként beállítva!    
+    role_set:
+        super_admin: Nem tartalmazhatja az összes role-t, erre a célra használja a 'Minden' role-t.
+        name:
+            not_blank: A név nem lehet üres!
+            unique: A névnek egyedinek kell lennie!
+        roles:
+            min: Minimum 2 különálló role-t ki kell választani! Egy láncolatból csak a legmagasabb role kerül elmentésre így előfordulhat, hogy több kiválasztása esetén kapja ezt a hibaüzenetet.
+            unique: Nem egyezhet meg az összes role már meglévő összeállításéval!    
+    role_change:
+        roles_min_message:  Minimum 1 role-t meg kell adni!    

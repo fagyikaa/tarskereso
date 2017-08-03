@@ -1,0 +1,126 @@
+breadcrumb:
+    search: Search
+    profile: Profile
+page_titles:
+    introduction: Introduction
+    ideal: Ideal
+    settings: Settings
+    gallery: 
+        main: Gallery
+        public: Public images
+        private: Private images
+    friends: Friends
+    edit_role: Access management
+sidebar:
+    admin: Administrator
+    introduction: Introduction
+    gallery: Gallery
+    friends: Friends
+    settings: Settings
+    ideal: Ideal
+    admin_section: Admin section
+user:
+    gender:
+        male: Male
+        female: Female    
+ideal:
+    field_titles:
+        body_shape: Body shape
+        eye_color: Eye color
+        hair_color: Hair color
+        hair_length: Hair length
+        height: Height (cm)
+        searching_for: Searching for
+        want_to: Want to
+        weight: Weight (kg)   
+        address: Place of residence
+        gender: Gender
+        age: Age
+    gender:
+        male: Male
+        female: Female        
+introduction:
+    field_titles:
+        body_shape: Body shape
+        eye_color: Eye color
+        hair_color: Hair color
+        hair_length: Hair length
+        height: Height (cm)
+        introduction: Introduction
+        motto: Motto
+        searching_for: Searching for
+        want_to: Want to
+        weight: Weight (kg)
+        birth_date: Birth date
+personal:    
+    want_to:
+        relationship: Relationship
+        sex: Sex
+        friendship: Friendship     
+    searching_for: 
+        man: Man
+        woman: Woman
+        both: No matter   
+        male: Male
+        female: Female
+    body_shape:
+        skinny: Skinny
+        average: Average   
+        sport: Sporty 
+        muscular: Muscular
+        chubby: Chubby
+        obese: Obese    
+    eye_color:
+        green: Green
+        blue: Blue
+        brown: Brown
+        other: Other    
+    hair_color:
+        green: Green
+        blue: Blue
+        brown: Brown
+        other: Other
+        blond: Blond
+        gray: Gray
+        red: Red
+        pink: Pink
+        black: Black    
+    hair_length:
+        bald: Bald
+        short: Short   
+        middle: Middle
+        long: Long    
+x_edit:
+    empty_data: Not given
+    range_from: "From: %html_snippet%"
+    range_to: "To: %html_snippet%" 
+gallery:
+    upload:
+        button: Upload image
+    no_images: There are no images uploaded yet.   
+    pagination:
+        next: Next
+        prev: Previous   
+settings:
+    change_password:
+        submit: Change
+    delete:
+        self: Delete myself
+        user: Delete user  
+        confirm_modal:
+            header: Profil deletion
+            msg: Are you sure in the deltion?
+    enabled:
+        label: User enabled
+        enabled: Enabled
+        disabled: Disabled
+    email:
+        label: E-mail address
+admin:
+    impersonation:
+        button: Impersonating user
+    edit_role:
+        title: Access management
+    view_friendships:
+        title: User's friends
+            

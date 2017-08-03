@@ -1,0 +1,49 @@
+{
+  "name": "tarskereso",
+  "version": "1.0.0",
+  "authors": [
+    "Zoltán Tóth - fagyikaa@gmail.com"
+  ],
+  "license": "proprietary",
+  "dependencies": {
+    "jquery": "2.2.4",
+    "jquery-migrate": "1.4.0",
+    "respond": "1.4.2",
+    "bootstrap": "3.3.7",
+    "angular": "1.6.2",
+    "angular-i18n": "1.5.8",
+    "angular-ui-router": "0.3.1",
+    "angular-bootstrap": "2.0.1",
+    "angular-messages": "1.5.8",
+    "angular-ivh-treeview": "1.0.4",
+    "angular-wamp": "0.3.4",
+    "oclazyload": "0.5.2",
+    "font-awesome": "4.7",
+    "select2": "4.0.3",
+    "angular-dialog-service": "5.3.0",
+    "angular-counter-animation": "0.2.0",
+    "angular-file-upload": "2.3.4",
+    "angular-xeditable": "0.2.0",
+    "autobahn": "0.11.2",
+    "autoNumeric": "1.9.43",
+    "moment": "2.15.1",
+    "angular-jk-rating-stars": "1.0.3",
+    "angular-scroll-glue": "2.1.0",
+    "angular-datatables": "0.5.5",
+    "angular-loading-bar": "0.9.0",
+    "angular-sanitize": "1.6.2",
+    "angular-ui-notification": "0.3.5"
+  },
+  "resolutions": {
+    "angular": "1.5.8",
+    "jquery": "2.2.4"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "web/assets/vendor/",
+    "test",
+    "tests"
+  ]
+}

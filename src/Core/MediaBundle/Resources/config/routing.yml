@@ -1,0 +1,20 @@
+core_media_upload_image_modal:
+    path:     /media/upload/image/modal/{userId}/{isProfile}
+    defaults: { _controller: CoreMediaBundle:Image:uploadImageModal, isProfile: "false"}
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'" 
+    methods: [GET]
+    requirements:
+        userId: \d+
+        isProfile: true|false
+    options:
+        expose: true
+        
+core_media_view_image_modal:
+    path:     /media/view/image/modal/{imageId}
+    defaults: { _controller: CoreMediaBundle:Image:viewImageModal}
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'" 
+    methods: [GET]
+    requirements:
+        imageId: \d+
+    options:
+        expose: true        

@@ -1,0 +1,53 @@
+admin_core_user_active_users:
+    path: /users/active
+    defaults: { _controller: CoreUserBundle:AdminUser:renderShowActiveUsers }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods: [GET]
+    options:
+        expose: true
+
+admin_core_user_all_users:
+    path: /users/all
+    defaults: { _controller: CoreUserBundle:AdminUser:renderShowAllUsers }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"
+    methods: [GET]
+    options:
+        expose: true
+        
+admin_core_user_show_edit_role:
+    path: /edit/role
+    defaults: { _controller: CoreUserBundle:AdminManageRole:renderEditRole }
+    methods: [GET]
+    options:
+        expose: true
+
+admin_core_user_show_role_sets:
+    path: /show/role/sets
+    defaults: { _controller: CoreUserBundle:AdminManageRole:renderShowRoleSets }
+    methods: [GET]
+    options:
+        expose: true
+
+admin_core_user_show_new_role_set_modal:
+    path: /show/new/role/set/modal
+    defaults: { _controller: CoreUserBundle:AdminManageRole:renderCreateRoleSetModal }
+    methods: [GET]
+    options:
+        expose: true
+
+admin_core_user_show_detailed_role_set_modal:
+    path: /show/detailed/role/set/modal
+    defaults: { _controller: CoreUserBundle:AdminManageRole:renderDetailedRoleSetModal }
+    methods: [GET]
+    options:
+        expose: true
+
+admin_core_user_show_edit_role_set_modal:
+    path: /show/edit/role/set/modal/{roleSetId}
+    defaults: { _controller: CoreUserBundle:AdminManageRole:renderEditRoleSetModal }
+    methods: [GET]
+    options:
+        expose: true
+    requirements:
+        roleSetId: \d+
+              

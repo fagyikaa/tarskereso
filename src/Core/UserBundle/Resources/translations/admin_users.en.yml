@@ -1,0 +1,20 @@
+all_users:
+    page_title: Every users
+    page_subtitle: Here you can see every users of the page (admins too)
+    data_tables:
+       id: Identifier
+       username: Username
+       enabled: Enabled
+       created_at: Registered at
+       is_admin: Admin    
+    
+active_users:
+    page_title: Active users
+    page_subtitle: Here you can see the users who are browsing the page right now (admins too)
+    ws_not_connected: The websocket not connected at the moment.
+    data_tables:
+       id: Identifier
+       username: Username
+       current_state: Current page
+       is_admin: Admin 
+       impersonating: This admin is currently impersonating a user

@@ -1,0 +1,11 @@
+common:
+    basic:
+        string: Ennek a mezőnek szövegnek kell lennie!
+        integer: Ennek a mezőnek egész számnak kell lennie!
+        range_min: Ez az érték túl kicsi!
+        range_max: Ez az érték túl nagy!
+        invalid_value: Ez az érték nem megengedett!  
+        too_long: Ez az érték túl hosszú!
+        date_time: Ennek a mezőnek DateTime típusúnak kell lennie!
+        bool: Ennek a mezőnek logikai értékűnek kell lennie!
+        not_blank: Ez a mező nem lehet üres!

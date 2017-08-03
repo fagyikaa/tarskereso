@@ -1,0 +1,92 @@
+<div class="modal-header">
+    <button class="close" type="button" ng-click="close()"></button>
+    <h3 class="modal-title">{{ 'view_image.modal.title' | trans([], 'gallery') }}</h3>
+</div>
+<div class="modal-body" ng-init="init()">
+    <div>
+        <div class="row">                                  
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12" ng-if="error !== false">                       
+                        <span class="alert alert-danger center-block margin-top-10 margin-bottom-20" >{{ '{{ error }}' }}</span>
+                    </div>                   
+                    <div class="col-md-12">                       
+                        <img class="img-responsive" src="{{ path('api_core_media_serve_image', {'imageId': image.id, 'type': constant('Core\\MediaBundle\\Controller\\ApiImageController::IMAGE_SERVING_TYPE_NORMAL')}) }}"></img>
+                    </div>
+                </div>
+                <div class="row margin-top-10">
+                    <div class="col-md-8 image-about-container">
+                        <div class="editable-wrapper">                                                  
+                            <a href="#" id="field-about" editable-textarea="image.about" onbeforesave="updateImage($data, '{{ constant('Core\\MediaBundle\\Entity\\Image::FIELD_ABOUT') }}')" edit-disabled="{{ readOnly }}">
+                                {{ '{{ image.about || "' ~ "x_edit.empty_data"|trans([], "profile") ~ '" }}' }}
+                            </a>
+                        </div>
+                    </div>
+                    {% if not (app.user == image.owner) and not is_granted('ROLE_ADMIN') %}
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col-md-2 margin-top-5">
+                                    <span class="text text-bold" ng-if="image.voteAverage > 0">
+                                        ({{ '{{ image.voteAverage }}' }})
+                                    </span>
+                                    <span class="text text-bold" ng-if="image.voteAverage < 0">
+                                        (-)
+                                    </span>
+                                </div>
+                                <div class="col-md-10">
+                                    <jk-rating-stars max-rating="5" rating="stars" on-rating="vote()" >
+                                    </jk-rating-stars>
+                                </div>                           
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="col-md-4">
+                            <div class="row"> 
+                                <div class="col-md-2">
+                                    <div class="text text-bold margin-top-5" ng-if="image.voteAverage > 0" uib-tooltip="{{ 'view_image.modal.point.tooltip'|trans([], 'gallery') }}">
+                                        ({{ '{{ image.voteAverage }}' }})
+                                    </div>
+                                    <div class="text text-bold margin-top-5" ng-if="image.voteAverage < 0" uib-tooltip="{{ 'view_image.modal.point.no_votes_yet.tooltip'|trans([], 'gallery') }}">
+                                        (-)
+                                    </div>
+                                </div>
+                                {% if app.user == image.owner or is_granted('ROLE_ADMIN_CAN_DELETE_IMAGE') %}
+                                    <div class="col-md-2">
+                                        <a ng-click="remove()" class="btn font-red" uib-tooltip="{{ 'view_image.modal.button.remove.tooltip'|trans([], 'gallery') }}">
+                                            <i class="fa fa-trash-o"></i>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                {% if app.user == image.owner or is_granted('ROLE_ADMIN_CAN_EDIT_IMAGE') %}
+                                    <div class="col-md-4">    
+                                        <div class="editable-wrapper">
+                                            <label class="control-label" style="display: block;">
+                                                {{ 'view_image.modal.private'|trans([], 'gallery') }}
+                                            </label>
+                                            <a href="#" id="field-isPrivate" editable-checkbox="image.isPrivate" onbeforesave="updateImage($data, '{{ constant('Core\\MediaBundle\\Entity\\Image::FIELD_IS_PRIVATE') }}')">
+                                                {{ '{{ getLabelForCheckbox(image.isPrivate) }}' }}
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">    
+                                        <div class="editable-wrapper"> 
+                                            <label class="control-label" style="display: block;">
+                                                {{ 'view_image.modal.profile'|trans([], 'gallery') }}
+                                            </label>
+                                            <a href="#" id="field-isProfile" editable-checkbox="image.isProfile" onbeforesave="updateImage($data, '{{ constant('Core\\MediaBundle\\Entity\\Image::FIELD_IS_PROFILE') }}')">
+                                                {{ '{{ getLabelForCheckbox(image.isProfile) }}' }}
+                                            </a>
+                                        </div>
+                                    </div>        
+                                {% endif %}                              
+                            </div>
+                        </div>
+                    {% endif %}                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button class="btn default" ng-click="close()">{{ 'view_image.modal.button.cancel'| trans([], 'gallery') }}</button>
+</div>

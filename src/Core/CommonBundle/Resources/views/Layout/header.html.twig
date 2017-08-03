@@ -1,0 +1,75 @@
+<div class="page-header-inner">
+    <div class="page-logo">
+        <span ui-sref="search">
+            <h1 {% if is_granted('ROLE_ADMIN') %} class="admin-header" {% endif %}>Társkereső {% if is_granted('ROLE_ADMIN') %}<small>(admin)</small>{% endif %}</h1>
+        </span>       
+    </div>
+    <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+    </a>
+    <div class="page-top">
+        <div class="top-menu">
+            <ul class="nav navbar-nav pull-right">
+                <li class="separator hide"></li>
+                <li class="dropdown" ng-if="$root.unseenConversationCount > 0">
+                    <a class="dropdown-toggle" data-close-others="true" data-toggle="dropdown" ui-sref="messages({userId:$root.userId, target: 'last'})" uib-tooltip="{{ 'header.unseen_conversations' | trans({'%number%': '{{ $root.unseenConversationCount }}'}, 'layout') }}" tooltip-placement="bottom">
+                        <i class="fa fa-comments"></i>
+                        <span class="badge bg-red">{{ '{{ $root.unseenConversationCount }}' }}</span>
+                    </a>
+                </li>
+                <li class="dropdown" ng-if="$root.unseenFriendRequests.length > 0">
+                    <a class="dropdown-toggle" data-close-others="true" data-toggle="dropdown" ui-sref="friends({userId:$root.userId, tab: 'pending'})" uib-tooltip="{{ 'header.request_accept_required' | trans({'%number%': '{{ $root.unseenFriendRequests.length }}'}, 'layout') }}" tooltip-placement="bottom">
+                        <i class="fa fa-users"></i>
+                        <span class="badge bg-red">{{ '{{ $root.unseenFriendRequests.length }}' }}</span>
+                    </a>
+                </li>
+                <li class="dropdown dropdown-language">
+                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                        {% image '@CoreCommonBundle/Resources/public/images/flags/blank.gif' %}
+                        <img src="{{ asset_url }}" class="flag {{ app.request.getLocale() }}">
+                        {% endimage %}
+                        <span class="langname">
+                            {{ app.request.getLocale()|upper }}
+                        </span>
+                        <i class="fa fa-angle-down"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% set languages = language_requirements|split('|') %}
+                        {% for language in languages if language != app.request.getLocale() %}
+                            <li>
+                                <a href="javascript:;" ng-click="selectLanguage('{{ language }}', '{{ path('core_common_homepage', app.request.get('_route_params')|merge({'_locale': language})) }}')" lang="{{ language }}">
+                                    {% image '@CoreCommonBundle/Resources/public/images/flags/blank.gif' %}
+                                    <img src="{{ asset_url }}" class="flag {{ language }}">
+                                    {% endimage %}
+                                    {{ ('languages.' ~ language)|trans([], 'languages') }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="dropdown dropdown-user">
+                    <a style="padding-top: 23px;" href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-close-others="true">
+                        <span class="username username-hide-on-mobile">
+                            {{ '{{ $root.username }}' }}
+                        </span>
+                        <img alt="" ng-class="{'red-border': !isWSConnected, 'green-border': isWSConnected}" class="img-circle" ng-src="{{ '{{ profileImage }}' }}">
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-default">                        
+                        <li>
+                            <a href="javascript:;" ui-sref="profile.introduction({userId:$root.userId})">
+                                <i class="fa fa-user"></i>
+                                {{ 'header.profile'|trans([], 'layout') }}
+                            </a>
+                        </li>                      
+                        <li>
+                            {% if is_granted('ROLE_PREVIOUS_ADMIN') %}
+                                <a href="{{ path('core_common_homepage', {'_switch_user': '_exit'}) }}"><i class="fa fa-key"></i> {{ 'header.logout_impersonate'|trans([], 'layout') }} </a>
+                            {% else %}
+                                <a href="{{ path('fos_user_security_logout') }}"><i class="fa fa-key"></i> {{ 'layout.logout'|trans({}, 'FOSUserBundle') }} </a>
+                            {% endif %}
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

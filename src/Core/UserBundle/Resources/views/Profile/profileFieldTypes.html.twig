@@ -1,0 +1,33 @@
+{# TEXT #}
+<a href="#" id="field-{{ '{{ field.property }}' }}" editable-text="field.data" onbeforesave="updateUser($data, field.property)" ng-switch-when="{{ constant('Core\\UserBundle\\Managers\\UserManager::PROFILE_FIELD_TYPE_TEXT') }}" edit-disabled="{{ '{{ readOnly }}' }}">
+    {{ '{{ field.data || "' ~ "x_edit.empty_data"|trans([], "profile") ~ '" }}' }}
+</a>
+{# TEXTAREA #}
+<a href="#" id="field-{{ '{{ field.property }}' }}" editable-textarea="field.data" onbeforesave="updateUser($data, field.property)" ng-switch-when="{{ constant('Core\\UserBundle\\Managers\\UserManager::PROFILE_FIELD_TYPE_TEXTAREA') }}" edit-disabled="{{ '{{ readOnly }}' }}">
+    {{ '{{ field.data || "' ~ "x_edit.empty_data"|trans([], "profile") ~ '" }}' }}
+</a>
+{# SELECT #}
+<a href="#" id="field-{{ '{{ field.property }}' }}" editable-select="field.data" e-ng-options="s.value as s.text for s in possibleSelectValues[field.property]" onbeforesave="updateUser($data, field.property)" ng-switch-when="{{ constant('Core\\UserBundle\\Managers\\UserManager::PROFILE_FIELD_TYPE_SELECT') }}" edit-disabled="{{ '{{ readOnly }}' }}">
+    {{ '{{ getTranslatedNameForSelect(field.data, field.property) }}' }}
+</a>
+{# NUMBER #}
+<a href="#" id="field-{{ '{{ field.property }}' }}" e-max="{{ '{{field.max}}' }}" e-min="{{ '{{field.min}}' }}" editable-number="field.data" onbeforesave="updateUser($data, field.property)" ng-switch-when="{{ constant('Core\\UserBundle\\Managers\\UserManager::PROFILE_FIELD_TYPE_NUMBER') }}" edit-disabled="{{ '{{ readOnly }}' }}">
+    {{ '{{ field.data.toString() || "' ~ "x_edit.empty_data"|trans([], "profile") ~ '" }}' }}
+</a>
+{# RANGE #}
+<span class="x-edit-range" ng-switch-when="{{ constant('Core\\UserBundle\\Managers\\UserManager::PROFILE_FIELD_TYPE_RANGE') }}">
+    <a href="#" id="field-{{ '{{ field.property_from }}' }}" e-max="{{ '{{field.max}}' }}" e-min="{{ '{{field.min}}' }}" editable-number="field.data_from" onbeforesave="updateUser($data, field.property_from)" edit-disabled="{{ '{{ readOnly }}' }}">
+        {{ '{{ field.data_from.toString() || "' ~ "x_edit.empty_data"|trans([], "profile") ~ '" }}' }}
+    </a> -
+    <a href="#" id="field-{{ '{{ field.property_to }}' }}" e-max="{{ '{{field.max}}' }}" e-min="{{ '{{field.min}}' }}" editable-number="field.data_to" onbeforesave="updateUser($data, field.property_to)" edit-disabled="{{ '{{ readOnly }}' }}">
+        {{ '{{ field.data_to.toString() || "' ~ "x_edit.empty_data"|trans([], "profile") ~ '" }}' }}
+    </a>    
+</span>
+{# CHECKBOX #}
+<a href="#" id="field-{{ '{{ field.property }}' }}" editable-checkbox="field.data" onbeforesave="updateUser($data, field.property)" ng-switch-when="{{ constant('Core\\UserBundle\\Managers\\UserManager::PROFILE_FIELD_TYPE_CHECKBOX') }}" edit-disabled="{{ '{{ readOnly }}' }}">
+    {{ '{{ field.data }}' }}
+</a>
+{# DATEPICKER #}
+<a href="#" id="field-{{ '{{ field.property }}' }}" class="date-picker-link" editable-combodate="field.data" e-min-year="{{ '{{field.min}}' }}" e-max-year="{{ '{{field.max}}' }}" onbeforesave="updateUser($data, field.property, true)" ng-switch-when="{{ constant('Core\\UserBundle\\Managers\\UserManager::PROFILE_FIELD_TYPE_DATE') }}" edit-disabled="{{ '{{ readOnly }}' }}">
+    {{ '{{ (field.data | date: "shortDate") || "' ~ "x_edit.empty_data"|trans([], "profile") ~ '" }}' }}
+</a>

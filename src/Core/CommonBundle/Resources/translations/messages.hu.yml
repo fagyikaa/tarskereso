@@ -1,0 +1,60 @@
+common:
+    copy_right: Tóth Zoltán © Minden jog fenntartva!
+    modal:
+        button:
+            cancel: Mégse
+            ok: Mehet
+    pagination:
+        next: Következő
+        prev: Előző
+    user_action:
+        add_friend: Ismerősnek jelöl
+        write_message: Üzenet írása    
+        remove_block: Blokkolás feloldása
+        block: Letiltás 
+        remove_friend: Ismerős törlése
+        decline_request: Jelölés elutasítása
+        cancel_request: Jelölés visszavonása
+        accept_friend: Jelölés elfogadása
+    admin_action:    
+        open_messages: Felhasználó üzenetei
+    confirm_modal:    
+        header: Megerősítés
+        message: Biztosan ezt szeretnéd?  
+    notification:
+        success:
+            title: Siker!
+        error:
+            4xx:
+                title: 'Hibakód: %status_code%'
+                message: Kliens hiba
+            403:
+                title: 403-as hiba
+                message: Nincs megfelelő jogosultsága ehhez a kéréshez.
+            404:
+                title: 404-es hiba
+                message: A kért erőforrás nem található.      
+            5xx:
+                title: 'Hibakód: %status_code%'
+                message: Szerverhiba
+            500:
+                title: 500-as hiba
+                message: Szerverhiba miatt a kérés nem teljesíthető.
+            503:
+                title: 503-as hiba
+                message: Karbantartás miatt az oldal átmenetileg nem elérhető!    
+modal_service:
+    dialogs_error: "Hiba"
+    dialogs_error_msg: "Ismeretlen hiba történt."
+    dialogs_close: "Bezár"
+    dialogs_please_wait: "Kérjük várjon"
+    dialogs_please_wait_elips: "Kérjük várjon..."
+    dialogs_please_wait_msg: "Várjon amíg a feladat befejeződik."
+    dialogs_percent_complete: "% Kész"
+    dialogs_notification: "Értesítés"
+    dialogs_notification_msg: "Ismeretlen alkalmazás értesítés."
+    dialogs_confirmation: "Megerősítés"
+    dialogs_confirmation_msg: "Megerősítés szükséges."
+    dialogs_ok: "Oké"
+    dialogs_yes: "Igen"
+    dialogs_no: "Nem"    

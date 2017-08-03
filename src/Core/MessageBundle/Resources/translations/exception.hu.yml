@@ -1,0 +1,5 @@
+message:
+    no_right_to_view_messages: Nincs hozzáférésed a felhasználók üzeneteinek megtekintéséhez!
+    user_not_part_of_conversation: A megadott felhasználó nem résztvevő a kért beszélgetésben!
+    messages_seen_at_only_for_self: Az üzenetek megtekintésének az időpontját csak saját magadnak állíthatod!
+    no_conversation_with_given_id: A megadott id-val nem létezik beszélgetés!

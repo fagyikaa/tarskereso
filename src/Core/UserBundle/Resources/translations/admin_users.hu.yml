@@ -1,0 +1,20 @@
+all_users:
+    page_title: Minden felhasználó
+    page_subtitle: Itt található az összes felhasználó (adminok is)
+    data_tables:
+       id: Azonosító
+       username: Felhasználónév
+       enabled: Engedéleyzve
+       created_at: Regisztrálva
+       is_admin: Admin
+    
+active_users:
+    page_title: Aktív felhasználók
+    page_subtitle: Itt találhatóak azok a felhasználók, akik épp böngészik az oldalt (adminok is)
+    ws_not_connected: A websocket kapcsolat pillanatnyilag nem él.
+    data_tables:
+       id: Azonosító
+       username: Felhasználónév
+       current_state: Aktuális oldal
+       is_admin: Admin
+       impersonating: Ez az admin jelenleg egy felhasználói fiókba van belépve

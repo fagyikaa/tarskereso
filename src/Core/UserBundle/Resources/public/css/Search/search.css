@@ -1,0 +1,16 @@
+@media (min-width: 992px) {
+    label.search-main-label {
+        display: block;
+        text-align: center;
+    }
+
+    div.search-center {
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+}
+
+.label-100 {
+    width: 100px;
+}

@@ -1,0 +1,55 @@
+api_core_message_get_conversation_list:
+    path:     /get/conversation/list/{userId}
+    defaults: { _controller: CoreMessageBundle:ApiConversation:getConversationList }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true
+        
+api_core_message_get_conversation:
+    path:     /get/conversation/{currentUserId}/{otherUserId}/{offset}/{length}
+    defaults: { _controller: CoreMessageBundle:ApiConversation:getConversation }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        currentUserId: \d+
+        otherUserId: \d+
+    options:
+        expose: true
+        
+api_core_message_get_conversation_for_list:  
+    path:     /get/conversation/for/list/{currentUserId}/{conversationId}
+    defaults: { _controller: CoreMessageBundle:ApiConversation:getConversationForList }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        currentUserId: \d+
+        conversationId: \d+
+    options:
+        expose: true    
+        
+api_core_message_post_message:   
+    path:     /post/message
+    defaults: { _controller: CoreMessageBundle:ApiMessage:postMessage }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true
+        
+api_core_message_set_conversation_messages_seen_at:  
+    path:     /set/conversation/messages/seen/at
+    defaults: { _controller: CoreMessageBundle:ApiConversation:setConversationMessagesSeenAt }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true
+        
+api_core_message_get_conversation_count_with_unseen_message:  
+    path:     /get/conversation/count/with/unseen/message
+    defaults: { _controller: CoreMessageBundle:ApiConversation:getConversationCountWithUnseenMessage }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    options:
+        expose: true         

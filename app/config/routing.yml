@@ -1,0 +1,110 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: %language_requirements%
+        
+core_user:
+    resource: "@CoreUserBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: %language_requirements%
+        
+api_core_user:
+    resource: "@CoreUserBundle/Resources/config/api_routing.yml"
+    prefix:   /{_locale}/api
+    requirements:
+        _locale: %language_requirements%           
+        
+admin_core_user:
+    resource: "@CoreUserBundle/Resources/config/admin_routing.yml"
+    prefix:   /{_locale}/admin
+    requirements:
+        _locale: %language_requirements%
+        
+admin_api_core_user:
+    resource: "@CoreUserBundle/Resources/config/admin_api_routing.yml"
+    prefix:   /{_locale}/api/admin
+    requirements:
+        _locale: %language_requirements%   
+        
+core_common:
+    resource: "@CoreCommonBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: %language_requirements%
+        
+api_core_common:
+    resource: "@CoreCommonBundle/Resources/config/api_routing.yml"
+    prefix:   /{_locale}/api
+    requirements:
+        _locale: %language_requirements%           
+        
+admin_core_common:
+    resource: "@CoreCommonBundle/Resources/config/admin_routing.yml"
+    prefix:   /{_locale}/admin
+    requirements:
+        _locale: %language_requirements%
+        
+admin_api_core_common:
+    resource: "@CoreCommonBundle/Resources/config/admin_api_routing.yml"
+    prefix:   /{_locale}/api/admin
+    requirements:
+        _locale: %language_requirements%    
+        
+core_media:
+    resource: "@CoreMediaBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: %language_requirements%
+        
+api_core_media:
+    resource: "@CoreMediaBundle/Resources/config/api_routing.yml"
+    prefix:   /{_locale}/api
+    requirements:
+        _locale: %language_requirements%           
+        
+admin_core_media:
+    resource: "@CoreMediaBundle/Resources/config/admin_routing.yml"
+    prefix:   /{_locale}/admin
+    requirements:
+        _locale: %language_requirements%
+        
+admin_api_core_media:
+    resource: "@CoreMediaBundle/Resources/config/admin_api_routing.yml"
+    prefix:   /{_locale}/api/admin
+    requirements:
+        _locale: %language_requirements%    
+        
+core_message:
+    resource: "@CoreMessageBundle/Resources/config/routing.yml"
+    prefix:   /{_locale}
+    requirements:
+        _locale: %language_requirements%
+        
+api_core_message:
+    resource: "@CoreMessageBundle/Resources/config/api_routing.yml"
+    prefix:   /{_locale}/api
+    requirements:
+        _locale: %language_requirements%           
+        
+admin_core_message:
+    resource: "@CoreMessageBundle/Resources/config/admin_routing.yml"
+    prefix:   /{_locale}/admin
+    requirements:
+        _locale: %language_requirements%
+        
+admin_api_core_message:
+    resource: "@CoreMessageBundle/Resources/config/admin_api_routing.yml"
+    prefix:   /{_locale}/api/admin
+    requirements:
+        _locale: %language_requirements%            
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"
+
+bazinga_jstranslation:
+    resource: "@BazingaJsTranslationBundle/Resources/config/routing/routing.yml"
+    
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"    

@@ -1,0 +1,28 @@
+page_head:
+    page_title: Ismerősök
+tooltip:
+    request_pending: Függőben
+breadcrumb:
+    friends: Ismerősök
+caption:
+    main_caption: Kapcsolatok áttekintése
+tab_titles:
+    accepted: Ismerősök
+    pending: Függő kapcsolatok
+    blocked: Blokkolt felhasználók   
+tab_content:
+    no_accepted: Nincs elfogadott ismerősöd.
+    no_pending: Nincs elfogadásra váró kérelmed.
+    no_blocked: Nem blokkoltál még senkit.   
+    no_accepted_admin: Nincs elfogadott ismerős.
+    no_pending_admin: Nincs elfogadásra váró kérelem.
+    no_blocked_admin: Nincs blokkolt felhasználó. 
+friendship:
+    friend: Ismerős
+    status: 
+        blocked: Blokkolt
+        pending: Függőben
+        accepted: Elfogadott
+        declined: Visszautasított
+        
+        

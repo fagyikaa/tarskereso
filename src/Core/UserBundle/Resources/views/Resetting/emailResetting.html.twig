@@ -1,0 +1,15 @@
+{% block subject %}{{ 'email.resetting.subject'|trans([], 'index') }} • Társkereső{% endblock %}
+
+{% block body_html %}
+    {% embed 'CoreCommonBundle:Layout:email.html.twig' %}
+        {% block greetings %}
+            {{ 'email.resetting.dear'|trans({'%username%': user.username}, 'index') }}
+        {% endblock %}
+
+        {% block message %}
+            {{ 'email.resetting.message'|trans([], 'index') }}<br>
+            <a href="{{ confirmationUrl }}">{{ confirmationUrl }}</a>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
+

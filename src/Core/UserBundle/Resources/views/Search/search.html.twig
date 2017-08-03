@@ -1,0 +1,317 @@
+<div class="page-head">
+    <div class="page-title">
+        <h1>
+            {{ '{{ $state.current.data.pageTitle }}' }}
+            <small>{{ '{{ pageSubTitle }}' }}</small>
+        </h1>
+    </div>
+</div>
+<ul class="page-breadcrumb breadcrumb">
+    <li class="active">
+        {{ 'breadcrumb.search'|trans([], 'search') }}
+    </li>
+</ul>
+<div class="row" ng-controller="SearchFormController" ng-init="init()">
+    <div class="col-md-12">
+        <div class="board">
+            <div class="board-body">
+                <form {{ form_enctype(form) }} novalidate name="{{ form.vars.name }}" ng-submit="submit()" method="post">
+                    {{ form_widget(form._token, {'attr': {'ng-init': 'data[\'' ~ form._token.vars.full_name ~ '\'] = \'' ~ form._token.vars.value ~ '\'' }}) }}
+                    <div class="alert alert-danger" ng-show="errors.global.length > 0">
+                        <p ng-repeat="error in errors.global">
+                            {{ '{{ error }}' }}
+                        </p>
+                    </div>
+                    <div class="row margin-bottom-10">
+
+                        <div class="col-md-2">
+                            <label class="search-main-label">{{ 'form.height.label' | trans([], 'search') }}</label>
+                            <div ng-class="{'has-error': ((errors.fields.heightFrom.errors.length > 0 || {{ form.vars.name }}['{{ form.heightFrom.vars.full_name }}'].$invalid
+                        && !{{ form.vars.name }}['{{ form.heightFrom.vars.full_name }}'].$pristine) || (errors.fields.heightTo.errors.length > 0 || {{ form.vars.name }}['{{ form.heightTo.vars.full_name }}'].$invalid
+                        && !{{ form.vars.name }}['{{ form.heightTo.vars.full_name }}'].$pristine))}" class="form-group form-inline">
+                                <label class="control-label label-100">{{ 'form.height.from_label' | trans([], 'search') }}</label>
+                                {{ form_widget(form.heightFrom, {'attr': {'ng-change': 'removePropertyFromDataIfEmpty("heightFrom")', 'min': '50', 'max': '300', 'ng-model': 'data[\'' ~ form.heightFrom.vars.full_name ~ '\']', 'ng-init': 'setIntData(\'' ~ form.heightFrom.vars.full_name ~ '\', ' ~ form.heightFrom.vars.value | json_encode() ~ ')', 'value': '' }}) }}
+                                <span class="help-block" ng-repeat="error in errors.fields.heightFrom.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                                <div ng-show="!(errors.fields.heightFrom.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.heightFrom.vars.full_name }}'].$error">
+                                    {# Display error messages #}
+                                    <div ng-message="min">{{ 'common.basic.range_min' | trans([], 'validators') }}</div>
+                                    <div ng-message="max">{{ 'common.basic.range_max' | trans([], 'validators') }}</div>
+                                </div>
+
+                                <label class="control-label label-100">{{ 'form.height.to_label' | trans([], 'search') }}</label>
+                                {{ form_widget(form.heightTo, {'attr': {'ng-change': 'removePropertyFromDataIfEmpty("heightTo")', 'min': '50', 'max': '300', 'ng-model': 'data[\'' ~ form.heightTo.vars.full_name ~ '\']', 'ng-init': 'setIntData(\'' ~ form.heightTo.vars.full_name ~ '\', ' ~ form.heightTo.vars.value | json_encode() ~ ')', 'value': '' }}) }}
+                                <span class="help-block" ng-repeat="error in errors.fields.heightTo.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                                <div ng-show="!(errors.fields.heightTo.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.heightTo.vars.full_name }}'].$error">
+                                    {# Display error messages #}
+                                    <div ng-message="min">{{ 'common.basic.range_min' | trans([], 'validators') }}</div>
+                                    <div ng-message="max">{{ 'common.basic.range_max' | trans([], 'validators') }}</div>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="search-main-label">{{ 'form.age.label' | trans([], 'search') }}</label>
+                            <div ng-class="{'has-error': ((errors.fields.ageFrom.errors.length > 0 || {{ form.vars.name }}['{{ form.ageFrom.vars.full_name }}'].$invalid
+                        && !{{ form.vars.name }}['{{ form.ageFrom.vars.full_name }}'].$pristine) || (errors.fields.ageTo.errors.length > 0 || {{ form.vars.name }}['{{ form.ageTo.vars.full_name }}'].$invalid
+                        && !{{ form.vars.name }}['{{ form.ageTo.vars.full_name }}'].$pristine))}" class="form-group form-inline">
+                                <label class="control-label label-100">{{ 'form.age.from_label' | trans([], 'search') }}</label>
+                                {{ form_widget(form.ageFrom, {'attr': {'ng-change': 'removePropertyFromDataIfEmpty("ageFrom")', 'min': '18', 'max': '100', 'ng-model': 'data[\'' ~ form.ageFrom.vars.full_name ~ '\']', 'ng-init': 'setIntData(\'' ~ form.ageFrom.vars.full_name ~ '\', ' ~ form.ageFrom.vars.value | json_encode() ~ ')', 'value': '' }}) }}
+                                <span class="help-block" ng-repeat="error in errors.fields.ageFrom.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                                <div ng-show="!(errors.fields.ageFrom.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.ageFrom.vars.full_name }}'].$error">
+                                    {# Display error messages #}
+                                    <div ng-message="min">{{ 'common.basic.range_min' | trans([], 'validators') }}</div>
+                                    <div ng-message="max">{{ 'common.basic.range_max' | trans([], 'validators') }}</div>
+                                </div>
+
+                                <label class="control-label label-100">{{ 'form.age.to_label' | trans([], 'search') }}</label>
+                                {{ form_widget(form.ageTo, {'attr': {'ng-change': 'removePropertyFromDataIfEmpty("ageTo")', 'min': '18', 'max': '100', 'ng-model': 'data[\'' ~ form.ageTo.vars.full_name ~ '\']', 'ng-init': 'setIntData(\'' ~ form.ageTo.vars.full_name ~ '\', ' ~ form.ageTo.vars.value | json_encode() ~ ')', 'value': '' }}) }}
+                                <span class="help-block" ng-repeat="error in errors.fields.ageTo.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                                <div ng-show="!(errors.fields.ageTo.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.ageTo.vars.full_name }}'].$error">
+                                    {# Display error messages #}
+                                    <div ng-message="min">{{ 'common.basic.range_min' | trans([], 'validators') }}</div>
+                                    <div ng-message="max">{{ 'common.basic.range_max' | trans([], 'validators') }}</div>
+                                </div>
+                            </div>    
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="search-main-label">{{ 'form.weight.label' | trans([], 'search') }}</label>
+                            <div ng-class="{'has-error': ((errors.fields.weightFrom.errors.length > 0 || {{ form.vars.name }}['{{ form.weightFrom.vars.full_name }}'].$invalid
+                        && !{{ form.vars.name }}['{{ form.weightFrom.vars.full_name }}'].$pristine) || (errors.fields.weightTo.errors.length > 0 || {{ form.vars.name }}['{{ form.weightTo.vars.full_name }}'].$invalid
+                        && !{{ form.vars.name }}['{{ form.weightTo.vars.full_name }}'].$pristine))}" class="form-group form-inline">
+                                <label class="control-label label-100">{{ 'form.weight.from_label' | trans([], 'search') }}</label>
+                                {{ form_widget(form.weightFrom, {'attr': {'ng-change': 'removePropertyFromDataIfEmpty("weightFrom")', 'min': '30', 'max': '400', 'ng-model': 'data[\'' ~ form.weightFrom.vars.full_name ~ '\']', 'ng-init': 'setIntData(\'' ~ form.weightFrom.vars.full_name ~ '\', ' ~ form.weightFrom.vars.value | json_encode() ~ ')', 'value': '' }}) }}
+                                <span class="help-block" ng-repeat="error in errors.fields.weightFrom.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                                <div ng-show="!(errors.fields.weightFrom.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.weightFrom.vars.full_name }}'].$error">
+                                    {# Display error messages #}
+                                    <div ng-message="min">{{ 'common.basic.range_min' | trans([], 'validators') }}</div>
+                                    <div ng-message="max">{{ 'common.basic.range_max' | trans([], 'validators') }}</div>
+                                </div>
+                                <label class="control-label label-100">{{ 'form.weight.to_label' | trans([], 'search') }}</label>
+                                {{ form_widget(form.weightTo, {'attr': {'ng-change': 'removePropertyFromDataIfEmpty("weightTo")', 'min': '30', 'max': '400', 'ng-model': 'data[\'' ~ form.weightTo.vars.full_name ~ '\']', 'ng-init': 'setIntData(\'' ~ form.weightTo.vars.full_name ~ '\', ' ~ form.weightTo.vars.value | json_encode() ~ ')', 'value': '' }}) }}
+                                <span class="help-block" ng-repeat="error in errors.fields.weightTo.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                                <div ng-show="!(errors.fields.weightTo.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.weightTo.vars.full_name }}'].$error">
+                                    {# Display error messages #}
+                                    <div ng-message="min">{{ 'common.basic.range_min' | trans([], 'validators') }}</div>
+                                    <div ng-message="max">{{ 'common.basic.range_max' | trans([], 'validators') }}</div>
+                                </div>
+                            </div> 
+                        </div>
+
+                        <div class="col-md-3 margin-bottom-10">
+                            <label class="search-main-label">{{ 'form.county.label' | trans([], 'search') }}</label>
+                            <div ng-class="{'has-error': (errors.fields.county.errors.length > 0 || {{ form.vars.name }}['{{ form.county.vars.full_name }}'].$invalid
+                        && !{{ form.vars.name }}['{{ form.county.vars.full_name }}'].$pristine)}" class="input-group search-center">
+                                {{ form_widget(form.county, {'attr': {'ng-change': 'removePropertyFromDataIfEmpty("county")', 'ng-model': 'data[\'' ~ form.county.vars.full_name ~ '\']', 'ng-init': 'setStringData(\'' ~ form.county.vars.full_name ~ '\', ' ~ form.county.vars.value | json_encode() ~ ')', 'value': '' }}) }}
+                                <span class="help-block" ng-repeat="error in errors.fields.county.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                            </div>    
+                        </div>        
+
+                        <div class="col-md-1">
+                            <div class="form-group" ng-class="{'has-error': errors.fields.gender.errors.length > 0 || {{ form.vars.name }}['{{ form.gender.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.gender.vars.full_name }}'].$pristine}">
+                                <label class="control-label">{{ 'form.gender.label' | trans({}, 'search') }}</label>
+                                {% for checkbox in form.gender %}
+                                    {{ form_label(checkbox) }}
+                                    {{ form_widget(checkbox, {'attr': {'ng-model': 'genderCheckbox[\''~ checkbox.vars.value ~'\']', 'ng-click': 'buildCheckboxFields("gender")', 'ng-init': 'genderCheckbox[\''~ checkbox.vars.value ~'\'] = ' ~ checkbox.vars.data | json_encode()}}) }}
+                                {% endfor %}
+                                <span class="help-block" ng-repeat="error in errors.fields.gender.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                            </div>  
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group" ng-class="{'has-error': errors.fields.searchingFor.errors.length > 0 || {{ form.vars.name }}['{{ form.searchingFor.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.searchingFor.vars.full_name }}'].$pristine}">
+                                <label class="control-label">{{ 'form.searching_for.label' | trans({}, 'search') }}</label>
+                                {% for checkbox in form.searchingFor %}
+                                    {{ form_label(checkbox) }}
+                                    {{ form_widget(checkbox, {'attr': {'ng-model': 'searchingForCheckbox[\''~ checkbox.vars.value ~'\']', 'ng-click': 'buildCheckboxFields("searchingFor")', 'ng-init': 'searchingForCheckbox[\''~ checkbox.vars.value ~'\'] = ' ~ checkbox.vars.data | json_encode() }}) }}
+                                {% endfor %}
+                                <span class="help-block" ng-repeat="error in errors.fields.searchingFor.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                            </div> 
+                        </div>
+
+                        <div class="col-md-1">
+                            <div class="form-group" ng-class="{'has-error': errors.fields.wantTo.errors.length > 0 || {{ form.vars.name }}['{{ form.wantTo.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.wantTo.vars.full_name }}'].$pristine}">
+                                <label class="control-label">{{ 'form.want_to.label' | trans({}, 'search') }}</label>
+                                {% for checkbox in form.wantTo %}
+                                    {{ form_label(checkbox) }}
+                                    {{ form_widget(checkbox, {'attr': {'ng-model': 'wantToCheckbox[\''~ checkbox.vars.value ~'\']', 'ng-click': 'buildCheckboxFields("wantTo")', 'ng-init': 'wantToCheckbox[\''~ checkbox.vars.value ~'\'] = ' ~ checkbox.vars.data | json_encode() }}) }}
+                                {% endfor %}
+                                <span class="help-block" ng-repeat="error in errors.fields.wantTo.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                            </div> 
+                        </div>        
+
+                    </div>
+
+                    <div id="advanced-search" class="collapse row margin-bottom-10">
+
+                        <div class="col-md-4 margin-bottom-10">
+                            <label class="search-main-label">{{ 'form.address.label' | trans([], 'search') }}</label>
+                            <div ng-class="{'has-error': (errors.fields.address.errors.length > 0 || {{ form.vars.name }}['{{ form.address.vars.full_name }}'].$invalid
+                        && !{{ form.vars.name }}['{{ form.address.vars.full_name }}'].$pristine)}" class="input-group search-center">
+                                {{ form_widget(form.address, {'attr': {'ng-change': 'removePropertyFromDataIfEmpty("address")', 'ng-model': 'data[\'' ~ form.address.vars.full_name ~ '\']', 'ng-init': 'setStringData(\'' ~ form.address.vars.full_name ~ '\', ' ~ form.address.vars.value | json_encode() ~ ')', 'value': '' }}) }}
+                                <span class="help-block" ng-repeat="error in errors.fields.address.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                            </div>    
+                        </div> 
+
+                        <div class="col-md-2">
+                            <div class="form-group" ng-class="{'has-error': errors.fields.bodyShape.errors.length > 0 || {{ form.vars.name }}['{{ form.bodyShape.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.bodyShape.vars.full_name }}'].$pristine}">
+                                <label class="control-label">{{ 'form.body_shape.label' | trans({}, 'search') }}</label>
+                                {% for checkbox in form.bodyShape %}
+                                    {{ form_label(checkbox) }}
+                                    {{ form_widget(checkbox, {'attr': {'ng-model': 'bodyShapeCheckbox[\''~ checkbox.vars.value ~'\']', 'ng-click': 'buildCheckboxFields("bodyShape")', 'ng-init': 'bodyShapeCheckbox[\''~ checkbox.vars.value ~'\'] = ' ~ checkbox.vars.data | json_encode() }}) }}
+                                {% endfor %}
+                                <span class="help-block" ng-repeat="error in errors.fields.bodyShape.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                            </div> 
+                        </div> 
+
+                        <div class="col-md-2">
+                            <div class="form-group" ng-class="{'has-error': errors.fields.hairColor.errors.length > 0 || {{ form.vars.name }}['{{ form.hairColor.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.hairColor.vars.full_name }}'].$pristine}">
+                                <label class="control-label">{{ 'form.hair_color.label' | trans({}, 'search') }}</label>
+                                {% for checkbox in form.hairColor %}
+                                    {{ form_label(checkbox) }}
+                                    {{ form_widget(checkbox, {'attr': {'ng-model': 'hairColorCheckbox[\''~ checkbox.vars.value ~'\']', 'ng-click': 'buildCheckboxFields("hairColor")', 'ng-init': 'hairColorCheckbox[\''~ checkbox.vars.value ~'\'] = ' ~ checkbox.vars.data | json_encode() }}) }}
+                                {% endfor %}
+                                <span class="help-block" ng-repeat="error in errors.fields.hairColor.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                            </div> 
+                        </div>  
+
+                        <div class="col-md-2">
+                            <div class="form-group" ng-class="{'has-error': errors.fields.hairLength.errors.length > 0 || {{ form.vars.name }}['{{ form.hairLength.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.hairLength.vars.full_name }}'].$pristine}">
+                                <label class="control-label">{{ 'form.hair_length.label' | trans({}, 'search') }}</label>
+                                {% for checkbox in form.hairLength %}
+                                    {{ form_label(checkbox) }}
+                                    {{ form_widget(checkbox, {'attr': {'ng-model': 'hairLengthCheckbox[\''~ checkbox.vars.value ~'\']', 'ng-click': 'buildCheckboxFields("hairLength")', 'ng-init': 'hairLengthCheckbox[\''~ checkbox.vars.value ~'\'] = ' ~ checkbox.vars.data | json_encode() }}) }}
+                                {% endfor %}
+                                <span class="help-block" ng-repeat="error in errors.fields.hairLength.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                            </div> 
+                        </div>  
+
+                        <div class="col-md-2">
+                            <div class="form-group" ng-class="{'has-error': errors.fields.eyeColor.errors.length > 0 || {{ form.vars.name }}['{{ form.eyeColor.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.eyeColor.vars.full_name }}'].$pristine}">
+                                <label class="control-label">{{ 'form.eye_color.label' | trans({}, 'search') }}</label>
+                                {% for checkbox in form.eyeColor %}
+                                    {{ form_label(checkbox) }}
+                                    {{ form_widget(checkbox, {'attr': {'ng-model': 'eyeColorCheckbox[\''~ checkbox.vars.value ~'\']', 'ng-click': 'buildCheckboxFields("eyeColor")', 'ng-init': 'eyeColorCheckbox[\''~ checkbox.vars.value ~'\'] = ' ~ checkbox.vars.data | json_encode() }}) }}
+                                {% endfor %}
+                                <span class="help-block" ng-repeat="error in errors.fields.eyeColor.errors">
+                                    {{ '{{ error }}' }}
+                                </span>
+                            </div> 
+                        </div>   
+
+                    </div> 
+
+                    <div class="form-actions text-center" ng-init="buildCheckboxesAndSendFormIfHasAnyFilter()">
+                        <button type="button" class="btn btn-primary margin-right-10" data-toggle="collapse" data-target="#advanced-search">
+                            <span><i class="fa fa-cogs"></i> {{ 'form.button.more' | trans([], 'search') }}</span>
+                        </button>
+                        <button ng-disabled="{{ form.vars.name }}.$invalid || !hasAnyFilter()" type="submit" class="btn btn-default">
+                            <i class="fa fa-search"></i> {{ 'form.button.search' | trans([], 'search') }}
+                        </button>
+                    </div> 
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" ng-init="init({{ 'Core\\UserBundle\\Entity\\UserFriendship' | constants | json_encode() }}, {{ 'Core\\UserBundle\\Entity\\User' | constants | json_encode() }})">
+    <div class="col-md-12">
+        <div class="board">
+            <div class="board-title">
+                <div class="caption">
+                    <span class="caption-subject">{{ 'result.title'|trans([], 'search') }}</span>
+                </div>
+            </div>
+            <div class="board-body">
+                <div class="row">
+                    <div class="alert alert-info text-center" ng-if="hasBeenSearched === false">
+                        <span class="text text-bold">{{ 'result.no_filters' | trans([], 'search') }}</span>
+                    </div>
+                    <div class="alert alert-warning text-center" ng-if="hasBeenSearched === true && distributedResult.length === 0">
+                        <span class="text text-bold">{{ 'result.no_result' | trans([], 'search') }}</span>
+                    </div>
+                    <div class="col-md-3 name-card-container" ng-repeat="user in distributedResult[pagination.currentPage]">				
+                        <div class="panel panel-default name-card">
+                            <div class="panel-body">
+                                <div class="row cursor-pointer" ng-click="goToProfile(user.id)">
+                                    <div class="col-md-5 text-center">
+                                        <span class="name-card-username">{{ '{{ user.username }}' }}</span><br>
+                                        <img class="img-circle margin-bottom-5" ng-src="{{ '{{ getProfilePictureSrc(user.id) }}' }}" alt=""/>
+                                        <span class="name-card-data">{{ '{{ getGenderString(user.gender) }}' }} ({{ '{{ getAge(user.birthDate) }}' }})</span>
+                                    </div>
+                                    <div class="col-md-7">	
+                                        <span class="name-card-data">{{ '{{ getAddressString(user) }}' }}</span>
+                                        <p class="name-card-motto">{{ '{{ user.motto }}' }}</p>
+                                    </div>
+                                </div>
+
+                                <div class="row margin-top-5">
+                                    <div class="col-md-6">
+                                        <a ng-if="!((user.requestedStatus && user.requestedStatus === friendshipConstants.STATUS_BLOCKED) ||
+                                                    (user.invitedStatus && user.invitedStatus === friendshipConstants.STATUS_BLOCKED) ||
+                                                    (user.requestedStatus && user.requestedStatus === friendshipConstants.STATUS_ACCEPTED) || 
+                                                    (user.invitedStatus && user.invitedStatus === friendshipConstants.STATUS_ACCEPTED))"
+                                           ng-disabled="(user.requestedStatus && user.requestedStatus === friendshipConstants.STATUS_PENDING) || (user.invitedStatus && user.invitedStatus === friendshipConstants.STATUS_PENDING)"
+                                           tooltip-enable="(user.requestedStatus && user.requestedStatus === friendshipConstants.STATUS_PENDING) || (user.invitedStatus && user.invitedStatus === friendshipConstants.STATUS_PENDING)" uib-tooltip="{{ 'tooltip.request_pending' | trans([], 'friendship') }}"
+                                           class="btn btn-user-action btn-rounded" ng-click="addFriend(user)"><i class="fa fa-user-plus"></i> {{ 'common.user_action.add_friend' | trans([], 'messages') }}
+                                        </a>
+                                        <span class="name-card-data font-red margin-top-5" ng-if="(user.requestedStatus && user.requestedStatus === friendshipConstants.STATUS_BLOCKED) || (user.invitedStatus && user.invitedStatus === friendshipConstants.STATUS_BLOCKED)">
+                                            ({{ 'friendship.status.blocked' | trans([], 'friendship')}})
+                                        </span>
+                                        <span style="display: inline-block;" class="name-card-data margin-top-10" ng-if="(user.requestedStatus && user.requestedStatus === friendshipConstants.STATUS_ACCEPTED) || (user.invitedStatus && user.invitedStatus === friendshipConstants.STATUS_ACCEPTED)">
+                                            ({{ 'friendship.friend' | trans([], 'friendship')}})
+                                        </span>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <button ng-if="!((user.requestedStatus && user.requestedStatus === friendshipConstants.STATUS_BLOCKED) || (user.invitedStatus && user.invitedStatus === friendshipConstants.STATUS_BLOCKED))"
+                                                class="btn btn-user-action btn-rounded" ng-click="writeMessage(user.id)"><i class="fa fa-comment"></i> {{ 'common.user_action.write_message' | trans([], 'messages') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center" ng-if="pagination.countOfResult > 0">
+                    <ul uib-pagination next-text="{{ '{{pagination.nextText}}' }}" previous-text="{{ '{{pagination.previousText}}' }}" total-items="pagination.countOfResult" items-per-page="pagination.resultPerPage" max-size="pagination.maxSize" boundary-link-numbers="pagination.showFirstLast" ng-model="pagination.currentPage" class="pagination"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

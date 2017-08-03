@@ -1,0 +1,133 @@
+<div class="page-head" ng-init="init()">
+    <div class="page-title">
+        {% if app.user == user %}
+            <h1>
+                {{ '{{ $state.current.data.pageTitle }}' }}
+                <small>{{ '{{ pageSubTitle }}' }}</small>
+            </h1>  
+        {% else %}
+            <h1>{{ 'page_head.admin_title'|trans({'%username%': user.username}, 'conversation') }}</h1> 
+        {% endif %}
+    </div>
+</div>
+<ul class="page-breadcrumb breadcrumb">
+    <li>
+        <a href="javascript:;" ui-sref="search">{{ 'breadcrumb.search'|trans([], 'profile') }}</a><i class="fa fa-circle"></i>
+    </li>
+    <li class="active">
+        {{ 'breadcrumb.messages'|trans([], 'conversation') }}
+    </li>
+</ul>
+{# $parent.userId is the currentUserId from stateParams, it differs from root.userId if the admin is reading an other user's messages  #}
+<div class="col-md-3 margin-right-10" ng-controller="ConversationListController" ng-init="init($parent.userId, $parent.target)">
+    <div class="row">
+        <div class="board" ng-if="loading || conversationList.length === 0">
+            <div class="alert alert-info" ng-if="conversationList.length === 0 && false === loading">
+                {{ 'conversation_list.no_conversation' | trans([], 'conversation') }}
+            </div>
+            <div class="alert alert-info" ng-if="loading">
+                {{ 'conversation_list.loading' | trans([], 'conversation') }}
+            </div>
+        </div>
+        <div id="conversation-search-input" ng-if="conversationList.length > 0">
+            <div class="input-group col-md-12">
+                <input type="text" class="search-query form-control" ng-model="filtering.searchUsername" placeholder="{{ 'conversation_list.conversation_search_form.search_user_placeholder' | trans([], 'conversation') }}" />
+                <i class="fa fa-search form-control-feedback"></i>
+            </div>
+        </div>
+        <div class="alert alert-danger" ng-if="errorMessage">
+            <p>
+                {{ '{{ errorMessage }}' }}
+            </p>
+        </div>
+        <div class="conversation-list">            
+            <ul class="list-unstyled" ng-if="conversationList.length > 0">
+                <li class="left clearfix" ng-class="{'chat-active': conversation.conversation.id === selectedConversationId}" ng-repeat="conversation in conversationList | filter: {partner: {username: filtering.searchUsername}} | orderBy: '-conversation.lastMessage.createdAt'" ng-click="openConversation(conversation)">
+                    <span class="chat-img pull-left">
+                        <img ng-src="{{ '{{ conversation.partner.profilePictureSrc }}' }}" class="img-circle">
+                    </span>
+                    <div class="chat-body clearfix" ng-class="{'chat-unread': conversation.unreadMessagesCount > 0}">
+                        <div>
+                            <span>{{ '{{ conversation.partner.username }}' }}</span> 
+                            <span ng-if="$parent.refresh" class="pull-right">{{ '{{ formatCreatedAt(conversation.conversation.lastMessage.createdAt) }}' }}</span>
+                        </div>
+                        <div class="contact-sec">
+                            <span>{{ '{{ conversation.conversation.lastMessage.text }}' }}</span> 
+                            <span ng-if="conversation.unreadMessagesCount > 0" class="badge pull-right">{{ '{{ conversation.unreadMessagesCount }}' }}</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-controller="ConversationController as ctrl" ng-init="init($parent.userId)">
+    <div class="col-md-8">
+        <div class="board">
+            <div class="board-title" ng-if="false === loading && false === showNoConversationMessage">
+                <div class="caption">
+                    <span class="caption-subject">{{ '{{ conversation.otherUsername }}' }}</span>
+                </div>
+            </div>
+            <div class="board-body">
+                <div class="alert alert-info" ng-if="loading">
+                    {{ 'conversation.loading' | trans([], 'conversation') }}
+                </div>
+                <div class="alert alert-info" ng-if="showNoConversationMessage && currentUserId === $root.userId">
+                    {{ 'conversation.no_conversation' | trans([], 'conversation') | raw }}
+                </div>
+                <div class="alert alert-info" ng-if="showNoConversationMessage && currentUserId !== $root.userId">
+                    {{ 'conversation.no_conversation_of_this_user' | trans([], 'conversation') }}
+                </div>
+                <div class="alert alert-danger" ng-if="false !== errorMessage">
+                    {{ '{{ errorMessage }}' }}
+                </div>
+                <div class="chat-container" ng-if="false === loading && false === showNoConversationMessage">
+                    <div class="chat-area" scroll-glue>
+                        <ul class="list-unstyled">
+                            <span ng-if="conversation.conversation.messages.length !== messagesCount" ng-click="showMore()" class="center-block text-center font-blue cursor-pointer">{{ 'conversation.more' | trans([], 'conversation') }}</span>
+                            <li class="left clearfix" ng-class="{'self-chat': isOwn(message)}" ng-repeat="message in conversation.conversation.messages">
+                                <span ui-sref="profile.introduction({userId: message.authorId})" class="chat-img1" ng-class="{'pull-right': isOwn(message), 'pull-left': !isOwn(message)}">
+                                    <img ng-src="{{ '{{getProfilePictureSrc(message)}}' }}" class="img-circle">
+                                </span>
+                                <div class="chat-body clearfix">
+                                    <p>{{ '{{ message.text }}' }}</p>
+                                    <div ng-if="$parent.refresh" ng-class="{'pull-right': !isOwn(message), 'pull-left': isOwn(message)}">{{ '{{ formatCreatedAt(message.createdAt) }}' }}</div>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="alert alert-info" ng-if="conversation.conversation.messages.length === 0">
+                            {{ 'conversation.send_to_start_conversation' | trans([], 'conversation') }}
+                        </div>
+                    </div>
+                    {% if app.user == user %}
+                        <div class="message-write">
+                            <form novalidate name="ctrl.message_form" ng-submit="sendMessage()" method="post">
+                                <div class="form-group" ng-class="{'has-error': postErrorMessage || message_form.$invalid && !message_form.$pristine}">
+                                    <textarea class="form-control" required
+                                              ng-maxLength="1024" ng-model="data['message']" placeholder="{{ 'conversation.conversation_write_message_form.type_something' | trans([], 'conversation') }}">
+                                    </textarea>  
+                                    <span class="help-block" ng-if="postErrorMessage">
+                                        {{ '{{ postErrorMessage }}' }}
+                                    </span>
+                                    <div ng-show="!message_form.$pristine && !postErrorMessage" class="help-block" ng-messages="message_form.$error">
+                                        {# Display error messages #}
+                                        <div ng-message="required">{{ 'message.required' | trans([], 'validators') }}</div>
+                                        <div ng-message="maxlength">{{ 'message.max_length' | trans([], 'validators') }}</div>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="clearfix"></div>
+                            <div class="chat-bottom">
+                                <button type="submit" class="pull-right btn btn-rounded btn-bg-blue color-white" ng-disabled="!ctrl.message_form.$valid || messageUnderSending" ng-click="sendMessage()">
+                                    {{ 'conversation.conversation_write_message_form.button.send' | trans([], 'conversation') }}
+                                </button>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>                          

@@ -1,0 +1,37 @@
+upload_image:
+    modal:
+        title: Képfeltöltés
+        max_file_size: "Maximális fájl méret: %max_file_size% MB!"
+        file_types: "Elfogadott fájl típusok: %file_types%"
+        drop_zone_text_bold: Húzza ide,
+        drop_zone_text: a feltöltendő képet
+        drop_zone_text_small: (vagy kattintson)  
+        button:
+            upload: Feltöltés
+            remove:
+                tooltip: Kép eltávolítása
+    form:
+        is_private: 
+            label: Privát (csak ismerősök láthatják)
+        is_profile:
+            label: Beállítás profilképként
+        about:
+            label: Mondj valamit a fotóról 
+view_image:
+    modal:
+        title: Kép megtekintés
+        button:
+            cancel: Bezár
+            remove:
+                tooltip: Törlés
+        point:
+            tooltip: Pontszám
+            no_votes_yet:
+                tooltip: Még nincs szavazat
+        private: Privát
+        profile: Profil          
+        x_edit:
+            empty: Üres
+            checkbox_true: Igen
+            checkbox_false: Nem   
+        

@@ -1,0 +1,156 @@
+<div ng-if="registrationSuccess" class="alert alert-success">
+    <span>{{ 'success.message'|trans([], 'registration') }}</span>
+</div>
+<form ng-if="!registrationSuccess" {{ form_enctype(form) }} ng-controller="RegistrationFormController" novalidate name="{{ form.vars.name }}" ng-submit="submit('{{ path('fos_user_registration_register') }}')" method="post">
+    <div ng-if="fatalError" class="alert alert-danger">
+        <span>{{ 'fatal.message'|trans([], 'registration') }}</span>
+    </div>
+    <fieldset ng-disabled="loading">
+        <h3 class="form-title">{{ 'form.title'|trans([], 'registration') }}</h3>
+        {{ form_widget(form._token, {'attr': {'ng-init': 'data[\'' ~ form._token.vars.full_name ~ '\'] = \'' ~ form._token.vars.value ~ '\'' }}) }}
+        <div class="alert alert-danger" ng-show="errors.global.length > 0">
+            <p ng-repeat="error in errors.global">
+                {{ '{{ error }}' }}
+            </p>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': errors.fields.username.errors.length > 0 || {{ form.vars.name }}['{{ form.username.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.username.vars.full_name }}'].$pristine}">
+            <label class="control-label visible-ie8 visible-ie9">{{ 'form.username.label' | trans({}, 'registration') }}</label>
+            <div class="input-icon">
+                <i class="fa fa-user"></i>
+                {{ form_widget(form.username, {'attr': {'placeholder': 'form.username.label' | trans({}, 'registration'), 'ng-minlength': '2', 'ng-maxlength': '255', 'required': '', 'ng-model': 'data[\'' ~ form.username.vars.full_name ~ '\']' }}) }}
+            </div>
+            <span class="help-block" ng-repeat="error in errors.fields.username.errors">
+                {{ '{{ error }}' }}
+            </span>
+            <div ng-show="!{{ form.vars.name }}['{{ form.username.vars.full_name }}'].$pristine && !(errors.fields.username.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.username.vars.full_name }}'].$error">
+                {# Display error messages #}
+                <div ng-message="required">{{ 'user.username.not_blank' | trans([], 'validators') }}</div>
+                <div ng-message="minlength">{{ 'user.username.min_length' | trans([], 'validators') }}</div>
+                <div ng-message="maxlength">{{ 'user.username.max_length' | trans([], 'validators') }}</div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': errors.fields.email.errors.length > 0 || {{ form.vars.name }}['{{ form.email.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.email.vars.full_name }}'].$pristine}">
+            <label class="control-label visible-ie8 visible-ie9">{{ 'form.email.label' | trans({}, 'registration') }}</label>
+            <div class="input-icon">
+                <i class="fa fa-envelope"></i>
+                {{ form_widget(form.email, {'attr': {'placeholder': 'form.email.label' | trans({}, 'registration'), 'required': '', 'ng-model': 'data[\'' ~ form.email.vars.full_name ~ '\']' }}) }}
+            </div>
+            <span class="help-block" ng-repeat="error in errors.fields.email.errors">
+                {{ '{{ error }}' }}
+            </span>
+            <div ng-show="!{{ form.vars.name }}['{{ form.email.vars.full_name }}'].$pristine && !(errors.fields.email.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.email.vars.full_name }}'].$error">
+                {# Display error messages #}
+                <div ng-message="email">{{ 'user.email.type' | trans([], 'validators') }}</div>
+                <div ng-message="required">{{ 'user.email.not_blank' | trans([], 'validators') }}</div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error':  errors.fields.plainPassword.children.first.errors.length > 0 || {{ form.vars.name }}['{{ form.plainPassword.first.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.plainPassword.first.vars.full_name }}'].$pristine}">
+            <label class="control-label visible-ie8 visible-ie9">{{ 'form.password.first.label' | trans({}, 'registration') }}</label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                {{ form_widget(form.plainPassword.first, {'attr': {'placeholder': 'form.password.first.label' | trans({}, 'registration'), 'required': '', 'ng-minlength': '6', 'ng-maxlength': '32', 'ng-model': 'data[\'' ~ form.plainPassword.first.vars.full_name ~ '\']' }}) }}
+            </div>
+            <span class="help-block" ng-repeat="error in errors.fields.plainPassword.children.first.errors">
+                {{ '{{ error }}' }}
+            </span>
+            <div ng-show="!{{ form.vars.name }}['{{ form.plainPassword.first.vars.full_name }}'].$pristine && !(errors.fields.plainPassword.children.first.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.plainPassword.first.vars.full_name }}'].$error">
+                {# Display error messages #}
+                <div ng-message="required">{{ 'user.password.not_blank' | trans([], 'validators') }}</div>
+                <div ng-message="minlength">{{ 'user.password.min_length' | trans([], 'validators') }}</div>
+                <div ng-message="maxlength">{{ 'user.password.max_length' | trans([], 'validators') }}</div>
+            </div>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error': errors.fields.plainPassword.errors.length > 0 || {{ form.vars.name }}['{{ form.plainPassword.second.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.plainPassword.second.vars.full_name }}'].$pristine}">
+            <label class="control-label visible-ie8 visible-ie9">{{ 'form.password.second.label' | trans({}, 'registration') }}</label>
+            <div class="input-icon">
+                <i class="fa fa-lock"></i>
+                {{ form_widget(form.plainPassword.second, {'attr': {'placeholder': 'form.password.second.label' | trans({}, 'registration'), 'required': '', 'ng-model': 'data[\'' ~ form.plainPassword.second.vars.full_name ~ '\']', 'password-verify': 'data[\'' ~ form.plainPassword.first.vars.full_name ~ '\']' }}) }}
+            </div>
+            <span class="help-block" ng-repeat="error in errors.fields.password.errors">
+                {{ '{{ error }}' }}
+            </span>
+            <div ng-show="!{{ form.vars.name }}['{{ form.plainPassword.second.vars.full_name }}'].$pristine && !(errors.fields.password.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.plainPassword.second.vars.full_name }}'].$error">
+                {# Display error messages #}
+                <div ng-message="passwordVerify">{{ 'user.password.not_match' | trans([], 'validators') }}</div>
+            </div>
+        </div>    
+
+        <div class="form-group" ng-class="{'has-error': errors.fields.birthDate.errors.length > 0 
+        || {{ form.vars.name }}['{{ form.birthDate.year.vars.full_name }}'].$invalid && !{{ form.vars.name }}['{{ form.birthDate.year.vars.full_name }}'].$pristine
+        || {{ form.vars.name }}['{{ form.birthDate.month.vars.full_name }}'].$invalid && !{{ form.vars.name }}['{{ form.birthDate.month.vars.full_name }}'].$pristine
+        || {{ form.vars.name }}['{{ form.birthDate.day.vars.full_name }}'].$invalid && !{{ form.vars.name }}['{{ form.birthDate.day.vars.full_name }}'].$pristine}">
+            <label class="control-label">{{ 'form.birth_date.label' | trans({}, 'registration') }}</label>
+            <div class="form-inline">
+                {{ form_widget(form.birthDate.year, {'attr': {'required': '', 'ng-model': 'data[\'' ~ form.birthDate.year.vars.full_name ~ '\']' }}) }}
+                {{ form_widget(form.birthDate.month, {'attr': {'required': '', 'ng-model': 'data[\'' ~ form.birthDate.month.vars.full_name ~ '\']' }}) }}
+                {{ form_widget(form.birthDate.day, {'attr': {'required': '', 'ng-model': 'data[\'' ~ form.birthDate.day.vars.full_name ~ '\']' }}) }}
+            </div>
+            <span class="help-block" ng-repeat="error in errors.fields.birthDate.errors">
+                {{ '{{ error }}' }}
+            </span>
+            <div ng-show="!{{ form.vars.name }}['{{ form.birthDate.year.vars.full_name }}'].$pristine && !(errors.fields.birthDate.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.birthDate.year.vars.full_name }}'].$error">
+                {# Display error messages #}
+                <div ng-message="required">{{ 'user.birth_date.year' | trans([], 'validators') }}</div>
+            </div>
+            <div ng-show="!{{ form.vars.name }}['{{ form.birthDate.month.vars.full_name }}'].$pristine && !(errors.fields.birthDate.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.birthDate.month.vars.full_name }}'].$error">
+                {# Display error messages #}
+                <div ng-message="required">{{ 'user.birth_date.month' | trans([], 'validators') }}</div>
+            </div>
+            <div ng-show="!{{ form.vars.name }}['{{ form.birthDate.day.vars.full_name }}'].$pristine && !(errors.fields.birthDate.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.birthDate.day.vars.full_name }}'].$error">
+                {# Display error messages #}
+                <div ng-message="required">{{ 'user.birth_date.day' | trans([], 'validators') }}</div>
+            </div>
+        </div>   
+
+        <div class="form-group" ng-class="{'has-error': errors.fields.gender.errors.length > 0 || {{ form.vars.name }}['{{ form.gender.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.gender.vars.full_name }}'].$pristine}">
+            <label class="control-label">{{ 'form.gender.label' | trans({}, 'registration') }}</label>
+            <div class="control-group radio-list">                                                                                
+                <label class="required radio-inline">
+                    <input type="radio" id="fos_user_registration_form_gender_0" name="fos_user_registration_form[gender]" required="required" value="{{constant('Core\\UserBundle\\Entity\\User::GENDER_MALE')}}" ng-model="data['{{ form.gender.vars.full_name }}']">
+                    {{ 'form.gender.male' |trans({}, 'registration') }}
+                </label>                                                                             
+                <label class="required radio-inline">
+                    <input type="radio" id="fos_user_registration_form_gender_1" name="fos_user_registration_form[gender]" required="required" value="{{constant('Core\\UserBundle\\Entity\\User::GENDER_FEMALE')}}" ng-model="data['{{ form.gender.vars.full_name }}']"> 
+                    {{ 'form.gender.female' | trans({}, 'registration') }}
+                </label>
+            </div>
+            <span class="help-block" ng-repeat="error in errors.fields.gender.errors">
+                {{ '{{ error }}' }}
+            </span>
+            <div ng-show="!{{ form.vars.name }}['{{ form.gender.vars.full_name }}'].$pristine && !(errors.fields.gender.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.gender.vars.full_name }}'].$error">
+                {# Display error messages #}
+                <div ng-message="required">{{ 'user.gender.not_blank' | trans([], 'validators') }}</div>
+            </div>
+        </div>  
+
+        <div class="form-group" ng-class="{'has-error': errors.fields.address.errors.length > 0 || {{ form.vars.name }}['{{ form.address.vars.full_name }}'].$invalid 
+                                && !{{ form.vars.name }}['{{ form.address.vars.full_name }}'].$pristine}">
+            <label class="control-label visible-ie8 visible-ie9">{{ 'form.address.label' | trans({}, 'registration') }}</label>
+            <div class="input-icon">
+                <i class="fa fa-map-marker"></i>
+                {{ form_widget(form.address, {'attr': {'placeholder': 'form.address.label' | trans({}, 'registration'), 'required': '', 'ng-model': 'data[\'' ~ form.address.vars.full_name ~ '\']' }}) }}
+            </div>
+            <span class="help-block" ng-repeat="error in errors.fields.address.errors">
+                {{ '{{ error }}' }}
+            </span>
+            <div ng-show="!{{ form.vars.name }}['{{ form.address.vars.full_name }}'].$pristine && !(errors.fields.address.errors.length > 0)" class="help-block" ng-messages="{{ form.vars.name }}['{{ form.address.vars.full_name }}'].$error">
+                {# Display error messages #}
+                <div ng-message="required">{{ 'user.address.not_blank' | trans([], 'validators') }}</div>
+            </div>
+        </div>
+        <div class="form-actions">
+            <button ng-disabled="{{ form.vars.name }}.$invalid" type="submit" class="btn btn-default pull-left">{{ 'form.submit.label'|trans([], 'registration') }} <i class="fa fa-arrow-right"></i></button>
+        </div> 
+    </fieldset>
+</form>
+
+

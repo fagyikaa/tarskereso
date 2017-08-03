@@ -1,0 +1,60 @@
+common:
+    copy_right: Tóth Zoltán © All rights reserved!
+    modal:
+        button:
+            cancel: Cancel
+            ok: Send
+    pagination:
+        next: Next
+        prev: Previous     
+    user_action:
+        add_friend: Add as friend
+        write_message: Write message
+        remove_block: Remove block
+        block: Block
+        remove_friend: Remove friend
+        decline_request: Decline request
+        cancel_request: Cancel request   
+        accept_friend: Accept request
+    admin_action: 
+        open_messages: User's messages
+    confirm_modal:    
+        header: Confimation
+        message: Are you sure want this?  
+    notification:
+        success:
+            title: Success!
+        error:
+            4xx:
+                title: 'Error %status_code%'
+                message: Client error
+            403:
+                title: Error 403
+                message: You are not authorized to view this request.
+            404:
+                title: Error 404
+                message: The required resource was not found.    
+            5xx:
+                title: 'Error %status_code%'
+                message: Server error
+            500:
+                title: Error 500
+                message: Internal server error!
+            503:
+                title: Error 503
+                message: The site is currently unavailable because of maintenance!
+modal_service:
+    dialogs_error: "Error"
+    dialogs_error_msg: "An unknown error happened"
+    dialogs_close: "Close"
+    dialogs_please_wait: "Please wait"
+    dialogs_please_wait_elips: "Please wait..."
+    dialogs_please_wait_msg: "Wait until the task ends."
+    dialogs_percent_complete: "% Finished"
+    dialogs_notification: "Notification"
+    dialogs_notification_msg: "Unknown app notification."
+    dialogs_confirmation: "Verification"
+    dialogs_confirmation_msg: "Verification required."
+    dialogs_ok: "Ok"
+    dialogs_yes: "Yes"
+    dialogs_no: "No"                    

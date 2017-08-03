@@ -1,0 +1,19 @@
+media:
+    upload_image:
+        only_self: You can upload only to yourself!
+    serve_image:
+        access_denied: You don't have access to view this image!
+    get_private_images:    
+        access_denied: You don't have access to view the private images of this user!    
+    not_found: No image was found with the given id!   
+    vote:
+        no_admins:
+        no_yourself:
+        only_friend_on_private: 
+    remove:
+        access_denied: You don't have permission to delete this image! 
+    edit:
+        access_denied: You don't have permission to edit this image!  
+        invalid_property: There is no such editable field of the image!
+    image_preview_cache_resolver:
+        resolve: There was an internal error during the serving of the image cache. If the problem appears again contact us!

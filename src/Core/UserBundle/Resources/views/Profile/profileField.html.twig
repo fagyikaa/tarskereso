@@ -1,0 +1,6 @@
+<label class="control-label profile-field" ng-if="field.type !== 'section_title' && field.title != ''">
+    {{ '{{ title }}' }}
+</label>
+<div ng-switch on="field.type" class="editable-wrapper">
+    {% include 'CoreUserBundle:Profile:profileFieldTypes.html.twig' %}
+</div>

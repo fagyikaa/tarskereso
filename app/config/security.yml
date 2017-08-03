@@ -1,0 +1,68 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/book/security.html
+security:
+    encoders:
+        FOS\UserBundle\Model\UserInterface: bcrypt
+        Symfony\Component\Security\Core\User\User:
+            algorithm: bcrypt
+            cost: 12
+    providers:
+        fos_userbundle:
+            id: fos_user.user_provider.username
+        websocket_provider:
+            memory:
+                users:
+                    websocket_api_auth:
+                        password: %websocket_api_bcrypt_hash%
+                        roles: ROLE_WEBSOCKET_API    
+            
+    role_hierarchy:
+        ROLE_ADMIN:                         ROLE_USER
+        ROLE_ADMIN_CAN_EDIT_USER_PROFILE:   ROLE_ADMIN
+        ROLE_ADMIN_CAN_EDIT_USER_SETTINGS:  ROLE_ADMIN_CAN_EDIT_USER_PROFILE
+        ROLE_ADMIN_CAN_DELETE_USER:         ROLE_ADMIN_CAN_EDIT_USER_SETTINGS
+        ROLE_ADMIN_CAN_VIEW_PRIVATE_IMAGES: ROLE_ADMIN
+        ROLE_ADMIN_CAN_EDIT_IMAGE:          ROLE_ADMIN_CAN_VIEW_PRIVATE_IMAGES
+        ROLE_ADMIN_CAN_DELETE_IMAGE:        ROLE_ADMIN_CAN_EDIT_IMAGE
+        ROLE_ADMIN_CAN_VIEW_FRIENDS:        ROLE_ADMIN
+        ROLE_ADMIN_CAN_VIEW_MESSAGES:       ROLE_ADMIN
+        ROLE_ALLOWED_TO_SWITCH:             ROLE_ADMIN
+        ROLE_ADMIN_CAN_VIEW_ROLE_SET:       ROLE_ADMIN
+        ROLE_ADMIN_CAN_EDIT_ROLE:           ROLE_ADMIN_CAN_VIEW_ROLE_SET
+        ROLE_ADMIN_CAN_EDIT_ROLE_SET:       ROLE_ADMIN_CAN_VIEW_ROLE_SET
+        ROLE_ADMIN_CAN_VIEW_ALL_USERS:      ROLE_ADMIN
+        ROLE_ADMIN_CAN_VIEW_ACTIVE_USERS:   ROLE_ADMIN_CAN_VIEW_ALL_USERS
+        ROLE_SUPER_ADMIN: [ROLE_ADMIN_CAN_DELETE_USER, ROLE_ADMIN_CAN_DELETE_IMAGE, ROLE_ADMIN_CAN_VIEW_FRIENDS, ROLE_ALLOWED_TO_SWITCH, ROLE_ADMIN_CAN_VIEW_MESSAGES, ROLE_ADMIN_CAN_EDIT_ROLE_SET, ROLE_ADMIN_CAN_EDIT_ROLE, ROLE_ADMIN_CAN_VIEW_ACTIVE_USERS]
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            security: false
+
+        websocket_authentication:
+            pattern: ^/([a-z][a-z]|)/?api/websocket
+            http_basic: ~
+            provider: websocket_provider
+            
+        main:
+            pattern: ^/
+            form_login:
+                provider: fos_userbundle
+                csrf_token_generator: security.csrf.token_manager
+                check_path: fos_user_security_check
+            logout:
+                path: fos_user_security_logout
+            entry_point: core_user.authentication.entry_point
+            anonymous: true
+            switch_user: true
+            context: main
+
+    access_control:
+        - { path: ^/([a-z][a-z]|)/?api/websocket/user/auth, role: ROLE_WEBSOCKET_API }
+        - { path: ^/([a-z][a-z]|)/?login$, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/([a-z][a-z]|)/?register, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/([a-z][a-z]|)/?resetting, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/([a-z][a-z]|)/?translations, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/([a-z][a-z]|)/?admin, role: ROLE_ADMIN }
+        - { path: ^/([a-z][a-z]|)/?api/admin, role: ROLE_ADMIN }
+        - { path: ^/, role: ROLE_USER }

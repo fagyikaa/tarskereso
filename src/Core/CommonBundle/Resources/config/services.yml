@@ -1,0 +1,58 @@
+services:
+    core_common.locale_redirect.listener:
+        class: Core\CommonBundle\EventListener\LocaleRedirectListener
+        arguments: [@router, @core_common.helper]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException } 
+            
+    core_common.mailer:
+        class: Core\CommonBundle\Mailer\Mailer
+        public: true
+        arguments:
+            - '@mailer'
+            - '@router'
+            - '@twig'
+            - template:
+                confirmation: %fos_user.registration.confirmation.template%
+                resetting: %fos_user.resetting.email.template%
+              from_email:
+                confirmation: %fos_user.registration.confirmation.from_email%
+                resetting: %fos_user.resetting.email.from_email%                            
+
+    core_common.helper:
+        class: Core\CommonBundle\Helper\CommonHelper
+        arguments: [%language_requirements%, @liip_imagine.filter.configuration]    
+        
+    core_common.address_manager:
+        class: Core\CommonBundle\Managers\AddressManager
+        arguments: [@doctrine.orm.entity_manager, @translator]
+    
+        
+    core_common.hash_id_extension:
+        class: Core\CommonBundle\Twig\HashIdExtension        
+        arguments: ["@hashids"]
+        tags:
+            - { name: twig.extension }    
+            
+    core_common.constants_extension:
+        class: Core\CommonBundle\Twig\ConstantsExtension        
+        tags:
+            - { name: twig.extension }            
+            
+    core_common.exception_handler.listener:
+        class: Core\CommonBundle\EventListener\ExceptionHandlerListener
+        arguments: [@translator, @fos_rest.serializer]
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+            
+    core_common.websocket_publisher.subscriber:
+        class: Core\CommonBundle\EventListener\WebsocketPublisherSubscriber
+        arguments: [@facile.crossbar.publisher.crossbar_publisher, @fos_rest.serializer]
+        tags:
+            - { name: kernel.event_subscriber }   
+            
+    core_common.original_user_id_extension:
+        class: Core\CommonBundle\Twig\OriginalUserIdExtension
+        arguments: [@security.token_storage, @security.authorization_checker]
+        tags:
+            - { name: twig.extension }          

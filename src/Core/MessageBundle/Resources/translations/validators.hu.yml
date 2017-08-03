@@ -1,0 +1,3 @@
+message:
+    required: Írj valamit, hogy elküldhesd!
+    max_length: Az üzeneted nem lehet hosszabb 1024 karakternél!   

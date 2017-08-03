@@ -1,0 +1,54 @@
+<div class="modal-header">
+    <button class="close" type="button" ng-click="close()"></button>
+    <h3 class="modal-title">{{ 'upload_image.modal.title' | trans([], 'gallery') }}</h3>
+</div>
+<div class="modal-body">
+    <div class="alert alert-danger" ng-show="showWrongFormatError">{{ 'media.upload_image.modal.wrong_format' | trans([], 'validators') }}</div>
+    <div class="alert alert-danger" ng-show="showUploadError">{{ 'media.upload_image.modal.upload_error' | trans([], 'validators') }}</div>
+
+    <div class="alert alert-info">
+        {{ 'upload_image.modal.max_file_size' | trans({ '%max_file_size%': '{{ maxFileSize }}' }, 'gallery') | raw }}<br>
+        {{ 'upload_image.modal.file_types' | trans({ '%file_types%': '{{ getAllowedFileTypes().join(", ") }}' }, 'gallery') | raw }}
+    </div>
+
+    <div ng-show="uploader.isHTML5">
+        <!-- 3. nv-file-over uploader="link" over-class="className" -->					
+        <!-- Example: nv-file-drop="" uploader="{Object}" options="{Object}" filters="{String}" -->
+        <div id="file-drop-zone" ng-click="browse()" ng-if="uploader.queue.length == 0" class="drop-zone-and-wrapper" nv-file-drop="" nv-file-over="" over-class="file-drop-zone-over" uploader="uploader" options="{ url: '{{ path('api_core_media_upload_image', {'userId': user.id}) }}' }"> 
+            <i class="fa fa-cloud-upload"></i> <b>{{ 'upload_image.modal.drop_zone_text_bold'|trans([], 'gallery') }}</b> {{ 'upload_image.modal.drop_zone_text'|trans([], 'gallery') }}<small>{{ 'upload_image.modal.drop_zone_text_small'|trans([], 'gallery') }}</small>
+        </div>
+        <div class="row clearfix" ng-if="uploader.queue.length > 0" ng-repeat="item in uploader.queue">                                  
+            {# display-preview-of-selected-file displays a preview of the actually uploading image #}
+            <div class="col-md-6 document-preview-image" display-preview-of-selected-file="{ file: item._file }"></div>    
+            <div class="col-md-6">
+                <div class="row margin-top-20">
+                    <div class="col-md-1">
+                        <a style="padding-top: 0px;" ng-click="removeItem(item)" class="btn font-red" uib-tooltip="{{ 'upload_image.modal.button.remove.tooltip'|trans([], 'gallery') }}">
+                            <i class="fa fa-trash-o"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-11">
+                        <div class="progress" ng-show="uploader.isHTML5" ng-if="uploader.queue.length > 0">
+                            <div class="progress-bar progress-bar-info" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="margin-top-20" ng-show="uploader.queue.length > 0">
+                            {{ render(controller('CoreMediaBundle:Image:uploadImageForm', { 'isProfile': isProfile })) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Example: nv-file-select="" uploader="{Object}" options="{Object}" filters="{String}" -->
+    <form name="image_upload" enctype="multipart/form-data">
+        <input id="file-input" type="file" nv-file-select uploader="uploader" options="{ url: '{{ path('api_core_media_upload_image', {'userId': user.id}) }}' }">
+    </form>
+</div>
+<div class="modal-footer">
+    <button ng-if="uploader.queue.length > 0" class="btn btn-primary" ng-disabled="isChildFormInvalid()" ng-click="upload()">{{ 'upload_image.modal.button.upload' | trans([], 'gallery') }}</button>
+    <button class="btn default" ng-click="close()">{{ 'common.modal.button.cancel'|trans }}</button>
+</div>

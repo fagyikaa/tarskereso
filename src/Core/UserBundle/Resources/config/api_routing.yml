@@ -1,0 +1,178 @@
+api_core_user_get_profile_data:
+    path:     /get/profile/data/{userId}/{category}
+    defaults: { _controller: CoreUserBundle:ApiProfile:getProfileData }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true
+        
+api_core_user_get_possible_select_values_for_profile_datas:
+    path:     /get/profile/data/{category}
+    defaults: { _controller: CoreUserBundle:ApiProfile:getPossibleSelectValuesForProfileDatas }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    options:
+        expose: true       
+        
+api_core_user_profile_change_password:        
+    path:     /change/password
+    defaults: { _controller: CoreUserBundle:ApiProfile:changePassword }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true      
+        
+api_core_user_delete_user:        
+    path:     /delete/user/{userId}
+    defaults: { _controller: CoreUserBundle:ApiProfile:deleteUser }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [DELETE]
+    requirements:
+        userId: \d+
+    options:
+        expose: true         
+        
+api_core_user_edit_profile_data:
+    path:     /edit/profile/data
+    defaults: { _controller: CoreUserBundle:ApiProfile:editProfileData }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true 
+        
+api_core_user_edit_user_email:        
+    path:     /edit/user/email
+    defaults: { _controller: CoreUserBundle:ApiProfile:editUserEmail }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true 
+        
+api_core_user_serve_profile_image_thumbnail:        
+    path:     /serve/profile/image/thumbnail/{userId}
+    defaults: { _controller: CoreUserBundle:ApiProfile:serveProfileImageThumbnail } 
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true 
+        
+api_core_user_get_profile_picture_id:
+    path:     /get/profile/picture/id/{userId}
+    defaults: { _controller: CoreUserBundle:ApiProfile:getProfilePictureId }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true     
+        
+api_core_user_search_users:
+    path:     /search/users/{userId}
+    defaults: { _controller: CoreUserBundle:ApiSearch:searchUsers }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    requirements:
+        userId: \d+
+    options:
+        expose: true         
+        
+api_core_user_add_friend:
+    path:     /add/friend
+    defaults: { _controller: CoreUserBundle:ApiFriendship:addFriend }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true 
+        
+api_core_user_decline_friend:
+    path:     /decline/friend
+    defaults: { _controller: CoreUserBundle:ApiFriendship:declineFriend }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true 
+        
+api_core_user_block_friend:
+    path:     /block/friend
+    defaults: { _controller: CoreUserBundle:ApiFriendship:blockFriend }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true   
+        
+api_core_user_unblock_friend:
+    path:     /unblock/friend
+    defaults: { _controller: CoreUserBundle:ApiFriendship:unblockFriend }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true    
+        
+api_core_user_accept_friend:
+    path:     /accept/friend
+    defaults: { _controller: CoreUserBundle:ApiFriendship:acceptFriend }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true 
+        
+api_core_user_get_friendship_with:
+    path:     /get/friendship/with/{userId}
+    defaults: { _controller: CoreUserBundle:ApiFriendship:getFriendshipWith }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true 
+        
+api_core_user_get_friends:
+    path:     /get/friends/{userId}
+    defaults: { _controller: CoreUserBundle:ApiFriendship:getFriends }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true         
+        
+api_core_user_get_pending_requests:
+    path:     /get/pending/requests/{userId}
+    defaults: { _controller: CoreUserBundle:ApiFriendship:getPendingRequests }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true       
+        
+api_core_user_get_blocked_friendships:
+    path:     /get/blocked/friendships/{userId}
+    defaults: { _controller: CoreUserBundle:ApiFriendship:getBlockedFriendships }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true   
+        
+api_core_user_get_unseen_pending_requests:
+    path:     /get/unseen/pending/requests/{userId}
+    defaults: { _controller: CoreUserBundle:ApiFriendship:getUnseenPendingRequests }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [GET]
+    requirements:
+        userId: \d+
+    options:
+        expose: true        
+        
+api_core_user_set_unseen_pending_requests_invited_seen_at:
+    path:     /set/unseen/pending/requests/invited/seen/at
+    defaults: { _controller: CoreUserBundle:ApiFriendship:setUnseenPendingRequestsInvitedSeenAt }
+    condition: "request.headers.get('X-Requested-With') == 'XMLHttpRequest'"   
+    methods: [POST]
+    options:
+        expose: true         

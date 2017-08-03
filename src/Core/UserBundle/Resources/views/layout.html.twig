@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!--[if IE 8]> <html class="ie8 no-js" lang="{{ app.request.locale|split('_')[0] }}" ng-app="IndexApp"> <![endif]-->
+<!--[if IE 9]> <html class="ie9 no-js" lang="{{ app.request.locale|split('_')[0] }}" ng-app="IndexApp"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="{{ app.request.locale|split('_')[0] }}" ng-app="IndexApp">
+    <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="MobileOptimized" content="320">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="TÁRSKERESŐ">
+        <meta name="author" content="Zoltán Tóth - fagyikaa@gmail.com">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}">
+
+        {% block stylesheets %}
+
+            <!-- BEGIN GLOBAL MANDATORY STYLES -->
+            <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css">
+            {% stylesheets
+                'assets/vendor/font-awesome/css/font-awesome.css'
+                'assets/vendor/bootstrap/dist/css/bootstrap.css'
+                'assets/vendor/select2/dist/css/select2.css'
+                'bundles/coreuser/css/Index/index.css'
+                'bundles/corecommon/css/Common/common.css'
+                'bundles/corecommon/css/Common/flag.css'
+                'assets/vendor/jquery.uniform/dist/css/default.css'               
+                 filter='cssrewrite' %}
+            <link href="{{ asset_url }}" rel="stylesheet" type="text/css">
+            {% endstylesheets %}           
+
+        {% endblock %}
+        <title> TÁRSKERESŐ </title>
+    </head>
+
+    <body class="index-wrapper">
+        <div class="container" ng-controller="IndexAppController" ng-init='init({{ render(controller('CoreUserBundle:ApiIndex:getActiveUsersByGender')) }})'>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="text text-center">Társkereső - {{ 'header.best_dating_site' | trans([], 'index') }}</h1>
+                    <hr>
+                </div>
+
+                <div class="col-lg-6">
+                    {% block forms %}
+                        <div class="index-form-container">
+                            <div class="pull-right languages">
+                                {% set languages = language_requirements|split('|') %}
+                                {% for language in languages %}
+                                    {% set class = (language == app.request.locale|split('_')[0]) ? 'class=active' : '' %}
+                                    <a href="{{ path(app.request.get('_route'), app.request.get('_route_params')|merge({'_locale': language}))}}" {{ class }} lang="{{ language }}">
+                                        {% image '@CoreCommonBundle/Resources/public/images/flags/blank.gif' %}
+                                        <img src="{{ asset_url }}" class="flag {{ language }}">
+                                        {% endimage %}
+                                    </a>
+                                {% endfor %}
+                            </div>
+                            <!-- BEGIN LOGIN FORM -->
+                            {% embed "CoreUserBundle:Index:loginForm.html.twig" %}
+                            {% endembed %}   
+                            <!-- BEGIN FORGOT PASSWORD FORM -->
+                            {% embed "CoreUserBundle:Resetting:resetPasswordForm.html.twig" %}
+                            {% endembed %} 
+                            <!-- BEGIN REGISTRATION FORM -->
+                            <hr>
+                            {% render(controller('CoreUserBundle:Registration:renderRegistrationForm')) %}
+                        </div>
+                    {% endblock %}
+                </div>
+
+                <div class="col-lg-6">                   
+                    <div class="text text-center registered-members-container">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="registered-members-circle">
+                                    <img class="img-responsive" src="/bundles/coremedia/images/def_male.jpg" alt="">
+                                </div>
+                                <counter value="tmpMaleCounter" to="malesCount" duration="2000">{{ '{{ tmpMaleCounter | number:0 }}' }}</counter>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="registered-members-circle">
+                                    <img class="img-responsive" src="/bundles/coremedia/images/def_female.jpg" alt="">
+                                </div>
+                                <counter value="tmpFemaleCounter" to="femalesCount" duration="2000">{{ '{{ tmpFemaleCounter | number:0 }}' }}</counter>
+                            </div>
+                        </div><br>
+                        {{ 'content.registered_members' | trans([], 'index') | raw}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <hr>
+                <h4>{{ 'common.copy_right' | trans([], 'messages') | raw}}</h4>
+            </div>
+        </div>
+        {% block javascripts %}
+            <!-- BEGIN CORE JQUERY PLUGINS -->
+            <!--[if lt IE 9]>
+            <script src="{{ asset('assets/vendor/respond/dest/respond.min.js') }}"></script>
+            <![endif]-->
+            {% javascripts
+                'assets/vendor/jquery/dist/jquery.js'
+                'assets/vendor/bootstrap/dist/js/bootstrap.js'
+                'assets/vendor/select2/dist/js/select2.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <!-- END CORE JQUERY PLUGINS -->
+            <!-- BEGIN CORE ANGULARJS PLUGINS -->
+            {% javascripts
+                'assets/vendor/angular/angular.js'
+                'assets/vendor/angular-bootstrap/ui-bootstrap-tpls.js'
+                'assets/vendor/angular-messages/angular-messages.min.js'
+                'assets/vendor/angular-counter-animation/js/angular-counter.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <!-- END CORE ANGULARJS PLUGINS -->
+            <!-- TRANSLATOR -->
+            <script src="{{ asset('bundles/bazingajstranslation/js/translator.min.js') }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', {'locales': app.request.locale|split('_')[0] }) }}"></script>
+            <script src="{{ url('bazinga_jstranslation_js', { 'domain': 'index', 'locales': app.request.locale|split('_')[0]}) }}"></script>
+            <!-- END TRANSLATOR -->
+
+            {% if app.request.locale|split('_')[0] != 'en' %}
+                <script src="{{ asset('assets/vendor/angular-i18n/angular-locale_' ~ app.request.locale|split('_')[0] ~ '.js') }}"></script>
+                <script src="{{ asset('assets/vendor/select2/dist/js/i18n/' ~ app.request.locale|split('_')[0] ~ '.js') }}"></script>
+            {% endif %}
+
+            <script type="text/javascript">
+var _languages = {{ language_requirements|split('|')|json_encode|raw }};
+            </script>
+
+            <!-- BEGIN APP LEVEL ANGULARJS SCRIPTS -->
+            {% javascripts
+                'bundles/coreuser/js/Index/IndexApp.js'
+                'bundles/coreuser/js/Registration/RegistrationFormController.js'
+                'bundles/coreuser/js/Resetting/ResetPasswordFormController.js'
+                'bundles/coreuser/js/Directives/PasswordVerifyDirective.js'
+            %}
+            <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+            <!-- END APP LEVEL ANGULARJS SCRIPTS -->
+            <!-- END JAVASCRIPTS -->
+        {% endblock %}
+    </body>
+</html>
+

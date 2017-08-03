@@ -1,0 +1,82 @@
+role_set:
+    form:
+        label:
+            submit: Mentés
+            name: Név
+            roles: Jogosultságok
+            set: Összeállított lista
+    not_found: Nincs ilyen id-ju jogosultság összeállítás
+    page_title: Jogosultság összeállítások
+    page_subtitle: Itt található az összes jogosultság összeállítás
+    not_unique: Van már ezeket a jogosultságokat tartalmazó összeállítás!
+    table:
+        show_detailed_role_set_button: Teljes lista
+        remove: Törlés
+        edit: Módosítás
+        name: Név
+        roles: Jogosultságok
+        more: 'Továbbiak...'
+        close: 'Bezárás'
+        deleted_at: Törölve
+    create: Új jogosultság összeállítás
+    delete_confirm_modal:
+        header: Jogosultság összeállítás törlése
+        message: Biztosan törölni szeretnéd?
+    create_modal:
+        button:
+            close: Bezár
+        header: Új jogosultság összeállítás létrehozása
+        tree:
+            loading: Töltés
+            filter_label: Szűrés
+        role_name_not_unique: Van már ugyan ilyen nevű jogosultság összeállítás!
+        super_admin_warning: Minden jogosultság ki van választva! Biztosan ezt szeretné?
+    detailed_modal:
+        header: Részletes jogosultság összeállítás
+        button:
+            close: Bezár
+    edit_modal:
+        button:
+            close: Bezár
+        header: Jogosultság összeállítás szerkesztése
+        tree:
+            loading: Töltés
+            filter_label: Szűrés
+        role_name_not_unique: Van már ugyan ilyen nevű jogosultság összeállítás!
+        super_admin_warning: Minden jogosultság ki van választva! Biztosan ezt szeretné?            
+role:
+    edit:
+        notification: 
+            successful_editing: A változtatások siekresen elmentve.
+        save_button: Mentés
+        super_admin_warning: Minden jogosultság ki van választva! Biztosan ezt szeretné?
+        tree:
+            loading: Töltés
+            filter_label: Szűrés
+        board_title: Jogosultságok szerkesztése
+        role_set:
+            not_found: Nincsenek jogosultság összeállítások létrehozva
+        access_denied: Saját jogokat nem lehet szerkeszteni!
+    
+    ROLE_USER: Felhasználói szint
+    ROLE_ADMIN: Admin szint
+    ROLE_ADMIN_CAN_EDIT_USER_PROFILE: Profil szerkesztés
+    ROLE_ADMIN_CAN_DELETE_USER: Felhasználók törlése
+    ROLE_ADMIN_CAN_EDIT_USER_SETTINGS: Felhasználói beállítások szerkesztése
+    ROLE_ADMIN_CAN_DELETE_IMAGE: Képek törlése   
+    ROLE_ADMIN_CAN_EDIT_IMAGE: Képek szerkesztése 
+    ROLE_ADMIN_CAN_VIEW_PRIVATE_IMAGES: Privát képek megtekintése
+    ROLE_ADMIN_CAN_VIEW_FRIENDS: Ismerősök megtekintése 
+    ROLE_ADMIN_CAN_VIEW_MESSAGES: Üzenetek megtekintése    
+    ROLE_ADMIN_CAN_VIEW_ROLE_SET: Jogosultság kezelés
+    ROLE_ADMIN_CAN_EDIT_ROLE: Jogosultság szerkesztés
+    ROLE_ADMIN_CAN_EDIT_ROLE_SET: Jogosultság összeállítás szerkesztés
+    ROLE_SUPER_ADMIN: Minden
+    ROLE_ALLOWED_TO_SWITCH: Belépés a felhasználó nevében
+    ROLE_ADMIN_CAN_SEARCH: Keresés a felhasználók közt
+    ROLE_ADMIN_CAN_VIEW_USERS: Felhasználók megtekintése
+    ROLE_ADMIN_CAN_VIEW_ADMINS: Adminok megtekintése
+    ROLE_ADMIN_CAN_VIEW_ACTIVE_USERS: Aktív felhasználók megtekintése
+    ROLE_ADMIN_CAN_VIEW_ALL_USERS: Összes felhasználó megtekintése
+
+

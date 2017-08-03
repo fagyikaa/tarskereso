@@ -1,0 +1,29 @@
+user:
+    not_found_user: A megadott felhasználó nem található!
+    invalid_profile_category: A megadott profil kategória nem érvényes!
+    no_right_to_edit_profile: Nem szerkesztheted a megadott id-hez tartozó felhasználó profilját!
+    no_right_to_edit_settings: Nem szerkesztheted a megadott id-hez tartozó felhasználó beállításait!
+    invalid_property: A szerkeszteni kívánt mező nem létezik!
+    no_right_to_view_friends: Nincs jogosultságod megnézni a felhasználó ismerőseit!
+    add_friend_blocked: Nem jelölheted ismerősnek ezt a felhasználót mert blokkolt!
+    not_found_friendship: Nincs létező ismerettség küzted és az adott felhasználő között!
+    accept_own_request: Nem fogadhatod el a saját ismerősnek jelölésedet! 
+    unblock_yourself: Nem oldhatod fel a saját leblokkolásodat!
+    only_pending_can_be_accepted: Csak függő ismerős bejelölést lehet elfogadni! 
+    friendship_blocked: Blokkoltad vagy blokkolva vagy a megadott felhasználó által!
+    already_declined: Ez az ismerős bejelölés már el lett utasítva!
+    friendship_not_blocked: Nem vonhatsz vissza blokkolást ha a felhasználó nem is volt blokkolva!
+    no_right_to_delete_user: Nincs jogosultságod felhasználók törlésére!
+    already_deleted: A megadott felhasználó már törölt!
+    set_enabled_yourself: Nem állíthatod a saját engedélyezett tulajdonságodat! 
+    unique_email: Ez az e-mail cím foglalt!
+    impersonating_an_admin: Admint nem lehet megszemélyesíteni!
+    cant_block_admin: Admint nem blokkolhatsz!
+    no_right_to_view_active: Nincs jogosultságod az aktív felhasználók megtekintésére!
+    no_right_to_view_all: Nincs jogosultságod az összes felhasználó megtekintésére! 
+    role:
+        not_found_role_set: Nem található a kért jogosultság összeállítás!
+        invalid_hierarchy: A megadott jogosultság hierarchia!
+        no_right_to_view_page: Nincs jogosultságod ehhez az oldalhoz!
+        no_self: Saját jogokat nem lehet szerkeszteni!
+        no_right_to_edit: Nincs jogosultságod szerkeszteni a jogokat!

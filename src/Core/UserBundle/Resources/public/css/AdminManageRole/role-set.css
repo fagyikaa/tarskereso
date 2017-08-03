@@ -1,0 +1,45 @@
+ul.ivh-treeview .ivh-treeview-toggle {
+    position: relative;
+    top: -1px;
+}
+
+ul.ivh-treeview .ivh-treeview-toggle.ivh-treeview-node-label {
+    top: -2px;
+}
+
+.ivh-treeview-node {
+    line-height: 30px;
+}
+
+.ivh-treeview-node-label {
+    margin-left: 4px;
+}
+
+table ul {
+    margin-bottom: 0;
+    padding-left: 30px;
+}
+
+ul.role-list {
+    margin-bottom: 0;
+    padding-left: 10px;
+}
+
+ul.role-list li {
+    font-size: 12px;
+    line-height: 20px;
+}
+
+.roleset-info {
+    margin: 0 3px 0 5px;
+    cursor: pointer;
+}
+
+.show-more-role {
+    margin-left: 17px; 
+    margin-top: 10px;
+}
+
+.show-more-role a:hover {
+    text-decoration: none;
+}

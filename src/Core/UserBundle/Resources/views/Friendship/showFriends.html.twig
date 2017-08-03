@@ -1,0 +1,167 @@
+<div class="page-head">
+    <div class="page-title">
+        <h1>
+            {{ '{{ $state.current.data.pageTitle }}' }}
+            <small>{{ '{{ pageSubTitle }}' }}</small>
+        </h1>
+    </div>
+</div>
+<ul class="page-breadcrumb breadcrumb">
+    <li>
+        <a href="javascript:;" ui-sref="search">{{ 'breadcrumb.search'|trans([], 'profile') }}</a><i class="fa fa-circle"></i>
+    </li>
+    <li class="active">
+        {{ 'breadcrumb.friends'|trans([], 'friendship') }}
+    </li>
+</ul>
+<div class="row" ng-init="init({{ user.id }}, {{ 'Core\\UserBundle\\Entity\\User' | constants | json_encode() }})">
+    <div class="col-md-12">
+        <div class="board profile-edit">
+            <div class="board-title">
+                <div class="caption">
+                    <span class="caption-subject">{{ 'caption.main_caption'|trans([], 'friendship') }}</span>                 
+                </div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                        <a data-target="#tab-friends-accept" data-toggle="tab" ng-click="changeStateTabParam('accepted')">
+                            {{ ('tab_titles.accepted')|trans([], 'friendship') }}
+                        </a>
+                    </li>
+                    <li ng-click="setUnseenPendingRequestsInvitedSeenAt()">
+                        <a id="tab-pending" data-target="#tab-friends-pending" data-toggle="tab" ng-click="changeStateTabParam('pending')">
+                            {{ ('tab_titles.pending')|trans([], 'friendship') }}
+                        </a>
+                    </li>
+                    <li>
+                        <a data-target="#tab-friends-blocked" data-toggle="tab" ng-click="changeStateTabParam('blocked')">
+                            {{ ('tab_titles.blocked')|trans([], 'friendship') }}
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="board-body">
+                <div>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab-friends-accept" ng-controller="ShowFriendsAcceptedController" ng-init="init({{ user.id }})">
+                            <div class="alert alert-info text-center" ng-if="distributedResult.length === 0 && {{ user.id }} === $root.userId">
+                                <span class="text text-bold">{{ 'tab_content.no_accepted' | trans([], 'friendship') }}</span>
+                            </div>
+                            <div class="alert alert-info text-center" ng-if="distributedResult.length === 0 && {{ user.id }} !== $root.userId">
+                                <span class="text text-bold">{{ 'tab_content.no_accepted_admin' | trans([], 'friendship') }}</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 name-card-container" ng-repeat="friendship in distributedResult[pagination.currentPage]">				
+                                    <div class="panel panel-default name-card">
+                                        <div class="panel-body">
+                                            <div class="row cursor-pointer" ng-click="$parent.goToProfile(friendship.userDatas.id)">
+                                                <div class="col-md-5 text-center">
+                                                    <span class="name-card-username">{{ '{{ friendship.userDatas.username }}' }}</span><br>
+                                                    <img class="img-circle margin-bottom-5" ng-src="{{ '{{ friendship.thumbnailUrl }}' }}" alt=""/>
+                                                    <span class="name-card-data">{{ '{{ $parent.getGenderString(friendship.userDatas.gender) }}' }} ({{ '{{ friendship.userDatas.age }}' }})</span>
+                                                </div>
+                                                <div class="col-md-7">	
+                                                    <span class="name-card-data">{{ '{{ $parent.getAddressString(friendship.userDatas.county, friendship.userDatas.settlement) }}' }}</span>
+                                                    <p class="name-card-motto">{{ '{{ friendship.userDatas.motto }}' }}</p>
+                                                </div>
+                                            </div>
+                                            {% if app.user == user %}
+                                                <div class="row margin-top-5">
+                                                    <div class="col-md-6">
+                                                        <button class="btn btn-user-action btn-rounded" ng-click="declineFriend(friendship.userDatas.id)"><i class="fa fa-user-times"></i> {{ 'common.user_action.remove_friend' | trans([], 'messages') }}</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button class="btn btn-user-action btn-rounded" ng-click="$parent.writeMessage(friendship.userDatas.id)"><i class="fa fa-comment"></i> {{ 'common.user_action.write_message' | trans([], 'messages') }}</button>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-center" ng-if="pagination.countOfResult > 12">
+                                <ul uib-pagination next-text="{{ '{{pagination.nextText}}' }}" previous-text="{{ '{{pagination.previousText}}' }}" total-items="pagination.countOfResult" items-per-page="pagination.resultPerPage" max-size="pagination.maxSize" boundary-link-numbers="pagination.showFirstLast" ng-model="pagination.currentPage" class="pagination"></ul>
+                            </div>
+                        </div> 
+                        <div class="tab-pane" id="tab-friends-pending" ng-controller="ShowFriendsPendingController" ng-init="init({{ user.id }})">
+                            <div class="alert alert-info text-center" ng-if="distributedResult.length === 0 && {{ user.id }} === $root.userId">
+                                <span class="text text-bold">{{ 'tab_content.no_pending' | trans([], 'friendship') }}</span>
+                            </div>
+                            <div class="alert alert-info text-center" ng-if="distributedResult.length === 0 && {{ user.id }} !== $root.userId">
+                                <span class="text text-bold">{{ 'tab_content.no_pending_admin' | trans([], 'friendship') }}</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 name-card-container" ng-repeat="friendship in distributedResult[pagination.currentPage]">				
+                                    <div class="panel panel-default name-card">
+                                        <div class="panel-body">
+                                            <div class="row cursor-pointer" ng-click="$parent.goToProfile(friendship.userDatas.id)">
+                                                <div class="col-md-5 text-center">
+                                                    <span class="name-card-username">{{ '{{ friendship.userDatas.username }}' }}</span><br>
+                                                    <img class="img-circle margin-bottom-5" ng-src="{{ '{{ friendship.thumbnailUrl }}' }}" alt=""/>
+                                                    <span class="name-card-data">{{ '{{ $parent.getGenderString(friendship.userDatas.gender) }}' }} ({{ '{{ friendship.userDatas.age }}' }})</span>
+                                                </div>
+                                                <div class="col-md-7">	
+                                                    <span class="name-card-data">{{ '{{ $parent.getAddressString(friendship.userDatas.county, friendship.userDatas.settlement) }}' }}</span>
+                                                    <p class="name-card-motto">{{ '{{ friendship.userDatas.motto }}' }}</p>
+                                                </div>
+                                            </div>
+                                            {% if app.user == user %}    
+                                                <div class="row margin-top-5">
+                                                    <div class="col-md-6">
+                                                        <button class="btn btn-user-action btn-rounded btn-bg-green" ng-click="acceptFriend(friendship.userDatas.id)"><i class="fa fa-check-circle"></i> {{ 'common.user_action.accept_friend' | trans([], 'messages') }}</button>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <button class="btn btn-user-action btn-rounded" ng-click="$parent.writeMessage(friendship.userDatas.id)"><i class="fa fa-comment"></i> {{ 'common.user_action.write_message' | trans([], 'messages') }}</button>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-center" ng-if="pagination.countOfResult > 12">
+                                <ul uib-pagination next-text="{{ '{{pagination.nextText}}' }}" previous-text="{{ '{{pagination.previousText}}' }}" total-items="pagination.countOfResult" items-per-page="pagination.resultPerPage" max-size="pagination.maxSize" boundary-link-numbers="pagination.showFirstLast" ng-model="pagination.currentPage" class="pagination"></ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab-friends-blocked" ng-controller="ShowFriendsBlockedController" ng-init="init({{ user.id }})">
+                            <div class="alert alert-info text-center" ng-if="distributedResult.length === 0 && {{ user.id }} === $root.userId">
+                                <span class="text text-bold">{{ 'tab_content.no_blocked' | trans([], 'friendship') }}</span>
+                            </div>
+                            <div class="alert alert-info text-center" ng-if="distributedResult.length === 0 && {{ user.id }} !== $root.userId">
+                                <span class="text text-bold">{{ 'tab_content.no_blocked_admin' | trans([], 'friendship') }}</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3 name-card-container" ng-repeat="friendship in distributedResult[pagination.currentPage]">				
+                                    <div class="panel panel-default name-card">
+                                        <div class="panel-body">
+                                            <div class="row cursor-pointer" ng-click="$parent.goToProfile(friendship.userDatas.id)">
+                                                <div class="col-md-5 text-center">
+                                                    <span class="name-card-username">{{ '{{ friendship.userDatas.username }}' }}</span><br>
+                                                    <img class="img-circle margin-bottom-5" ng-src="{{ '{{ friendship.thumbnailUrl }}' }}" alt=""/>
+                                                    <span class="name-card-data">{{ '{{ $parent.getGenderString(friendship.userDatas.gender) }}' }} ({{ '{{ friendship.userDatas.age }}' }})</span>
+                                                </div>
+                                                <div class="col-md-7">	
+                                                    <span class="name-card-data">{{ '{{ $parent.getAddressString(friendship.userDatas.county, friendship.userDatas.settlement) }}' }}</span>
+                                                    <p class="name-card-motto">{{ '{{ friendship.userDatas.motto }}' }}</p>
+                                                </div>
+                                            </div>
+                                            {% if app.user == user %}
+                                                <div class="row margin-top-5">
+                                                    <div class="col-md-12 text-center">
+                                                        <button class="btn btn-user-action btn-rounded" ng-click="removeBlock(friendship.userDatas.id)"><i class="fa fa-ban"></i> {{ 'common.user_action.remove_block' | trans([], 'messages') }}</button>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-center" ng-if="pagination.countOfResult > 12">
+                                <ul uib-pagination next-text="{{ '{{pagination.nextText}}' }}" previous-text="{{ '{{pagination.previousText}}' }}" total-items="pagination.countOfResult" items-per-page="pagination.resultPerPage" max-size="pagination.maxSize" boundary-link-numbers="pagination.showFirstLast" ng-model="pagination.currentPage" class="pagination"></ul>
+                            </div>
+                        </div>    
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

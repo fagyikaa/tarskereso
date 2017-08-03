@@ -1,0 +1,36 @@
+form:
+    title: Regisztráció
+    username:
+        label: Felhasználónév
+    email:
+        label: E-mail cím
+    gender:
+        label: Nem
+        male: Férfi
+        female: Nő 
+    address:
+        label: Lakhely
+    birth_date:
+        label: Születési idő
+        year: Év
+        month: Hónap
+        day: Nap
+    password:
+        first:
+            label: Jelszó
+        second:
+            label: Jelszó mégegyszer    
+    submit:
+        label: Regisztrálok
+email:
+    confirmation:
+        dear: Kedves %username%!
+        message: Kattints a linkre regisztrációd megerősítéséhez!
+        subject: Regisztráció megerősítés
+success:
+    message: Egy e-mail lett küldve a megadott címre. A benne lévő linkkel tudod megerősíteni a regisztrációdat.
+fatal:
+    message: Nem várt hiba lépett fel, kérjük próbáld meg később!
+confirmation:
+    invalid_token: A linkhez nem tartozik felhasználó!      
+    flash_bag: Sikeresen megerősítetted a regisztrácíód!

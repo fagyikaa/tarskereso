@@ -1,0 +1,39 @@
+form:
+    title: Registration
+    username:
+        label: Username
+    email:
+        label: E-mail address
+    gender:
+        label: Gender
+        male: Male
+        female: Female   
+    address:
+        label: Address
+    birth_date:
+        label: Birth date   
+        year: Year
+        month: Month
+        day: Day
+    password:
+        first:
+            label: Password
+        second:
+            label: Repeat password
+    submit:
+        label: Register    
+email:
+    confirmation:
+        dear: Dear %username%, 
+        message: Click on the link to confirm your registration!  
+        subject: Confirm registration
+success:
+    message: An e-mail has been sent to the given address. You can confirm your registration with the contained link.
+fatal:
+    message: An unexpected error has occured, please try again later!   
+confirmation:
+    invalid_token: No user was found with the link!  
+    flash_bag: You have successfully confirmed your registration!
+        
+        
+        
