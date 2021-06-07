@@ -14,7 +14,7 @@ class ApiSecurityController extends FOSRestController {
      * 
      * @param Request $request
      * @return json
-     * exceptiooooon micsoda
+     *
      */
     public function websocketAuthenticationAction(Request $request) {
         if (false === $request->request->has('authid')) {
